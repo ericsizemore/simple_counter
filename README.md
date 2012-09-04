@@ -35,17 +35,11 @@ unique hits, or all hits. (IP Based)
 	<li>Upload 'counter.php', 'index.html', and the 'logs' directory in ASCII mode.</li>
 	<li>Upload the 'images' folder in BINARY mode.</li>
 	<li>CHMOD the 'counter.txt' and 'ips.txt' files to 0666. They are located in the 'logs' folder.</li>
-</li>
+</ol>
 
 <h2>Usage</h2>
 Simple add the following code to the page where you want the counter to be shown:<br />
-<code>
-<?php
-
-include('./counter/counter.php');
-
-?>
-</code>
+<code><?php include('./counter/counter.php'); ?></code>
 <br />
 <br />
 That's pretty much it, really.
