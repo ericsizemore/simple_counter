@@ -30,7 +30,7 @@ namespace SimpleCounter;
 class Counter
 {
 	/** User Configuration **/
-	// There should be no need to edit these
+	// Log file locations/paths.
 	const COUNT_FILE  = 'counter/logs/counter.txt';
 	const IP_FILE     = 'counter/logs/ips.txt';
 
@@ -43,20 +43,34 @@ class Counter
 	// Show count as images?
 	const USE_IMAGES  = false;
 
-	// Path to the images
+	// Path to the images.
 	const IMAGE_DIR   = 'counter/images/';
 
-	// Image extension
+	// Image extension.
 	const IMAGE_EXT   = '.gif';
 	/** End User Configuration **/
 
-	//
+	/**
+	* Class instance.
+	*
+	* @var	object	\SimpleCounter\Counter()
+	*/
 	private static $instance;
 
-	//
+	/**
+	* Constructor.
+	*
+	* @param	void
+	* @return	void
+	*/
 	private function __construct() {}
 
-	//
+	/**
+	* Instantiate class instance.
+	*
+	* @param	void
+	* @return	object	\SimpleCounter\Counter()
+	*/
 	public static function getInstance()
 	{
 		if (!self::$instance)
@@ -66,7 +80,12 @@ class Counter
 		return self::$instance;
 	}
 
-	//
+	/**
+	* Return the visitor's IP address.
+	*
+	* @param	void
+	* @return	string
+	*/
 	private function getIpAddress()
 	{
 		$ip = $_SERVER['REMOTE_ADDR'];
@@ -98,12 +117,12 @@ class Counter
 	}
 
 	/**
-	* We use this function to open, read/write to files.
+	* We use this function to open and read/write to files.
 	*
-	* @param  string   Filename
-	* @param  string   Mode (r, w, a, etc..)
-	* @param  string   If writing to the file, the data to write
-	* @return mixed
+	* @param	string	$file	Filename
+	* @param	string	$mode	Mode (r, w, a, etc..)
+	* @param	string	$data	If writing to the file, the data to write
+	* @return	mixed
 	*/
 	private function readWriteFile($file, $mode, $data = '')
 	{
@@ -140,7 +159,12 @@ class Counter
 		@fclose($fp);
 	}
 
-	//
+	/**
+	* Processes the visitor (adds to count/etc. if needed) and then displays current count.
+	*
+	* @param	void
+	* @return	string	
+	*/
 	public function process()
 	{
 		$display = '';
@@ -183,10 +207,12 @@ class Counter
 		else
 		{
 			// Nope, let's just show it as plain text
-			$display = $count;
+			// Props to Roger Cusson. Adding "You are visitor #" to plain text count.
+			$display = "You are visitor #$count";
 		}
 		echo $display;
 	}
 }
 
+// Instantiate and process.
 \SimpleCounter\Counter::getInstance()->process();
