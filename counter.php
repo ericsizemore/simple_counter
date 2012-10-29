@@ -4,7 +4,7 @@
 * @author    Eric Sizemore <admin@secondversion.com>
 * @package   SV's Simple Counter
 * @link      http://www.secondversion.com
-* @version   2.0.1
+* @version   3.0.0
 * @copyright (C) 2006 - 2012 Eric Sizemore
 * @license   GNU Lesser General Public License
 *
@@ -22,180 +22,171 @@
 *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// #################### Define Important Constants ####################
-// There should be no need to edit these
-define('COUNT_FILE', 'counter/logs/counter.txt');
-define('IP_FILE', 'counter/logs/ips.txt');
-
-// ######################## USER CONFIGURATION ########################
-// Edit the following.. true = yes, false = no
-
-// Use file locking?
-define('USE_FLOCK', true);
-
-// Count only unique visitors?
-define('ONLY_UNIQUE', true);
-
-// Show count as images?
-define('USE_IMAGES', false);
-
-// Path to the images
-define('IMG_DIR', 'counter/images/');
-
-// Image extension
-define('IMG_EXT', '.gif');
-
-// ############################ Functions #############################
 /**
-* We use this function to open, read/write to files.
-*
-* @param  string   Filename
-* @param  string   Mode (r, w, a, etc..)
-* @param  string   If writing to the file, the data to write
-* @return mixed
+* Just starting to branch out to namespaces, etc. Please be gentle, this is only a start.
 */
-function fp($file, $mode, $data = '')
+namespace SimpleCounter;
+
+class Counter
 {
-	if (!file_exists($file) OR !is_writable($file))
-	{
-		die("Error: '<code>$file</code>' does not exist or is not writable.");
-	}
+	/** User Configuration **/
+	// There should be no need to edit these
+	const COUNT_FILE  = 'counter/logs/counter.txt';
+	const IP_FILE     = 'counter/logs/ips.txt';
 
-	if (!($fp = @fopen($file, $mode)))
-	{
-		die("Error: '<code>$file</code>' could not be opened.");
-	}
+	// Use file locking?
+	const USE_FLOCK   = true;
 
-	if (USE_FLOCK AND @flock($fp, LOCK_EX))
+	// Count only unique visitors?
+	const ONLY_UNIQUE = true;
+
+	// Show count as images?
+	const USE_IMAGES  = false;
+
+	// Path to the images
+	const IMAGE_DIR   = 'counter/images/';
+
+	// Image extension
+	const IMAGE_EXT   = '.gif';
+	/** End User Configuration **/
+
+	//
+	private static $instance;
+
+	//
+	private function __construct() {}
+
+	//
+	public static function getInstance()
 	{
-		if ($mode == 'r')
+		if (!self::$instance)
 		{
-			return @fread($fp, filesize($file));
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
+	//
+	private function getIpAddress()
+	{
+		$ip = $_SERVER['REMOTE_ADDR'];
+
+		if ($_SERVER['HTTP_X_FORWARDED_FOR'])
+		{
+			if (preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#s', $_SERVER['HTTP_X_FORWARDED_FOR'], $matches))
+			{
+				foreach ($matches[0] AS $match)
+				{
+					if (!preg_match('#^(10|172\.16|192\.168)\.#', $match))
+					{
+						$ip = $match;
+						break;
+					}
+				}
+				unset($matches);
+			}
+		}
+		else if ($_SERVER['HTTP_CLIENT_IP'])
+		{
+			$ip = $_SERVER['HTTP_CLIENT_IP'];
+		}
+		else if ($_SERVER['HTTP_FROM'])
+		{
+			$ip = $_SERVER['HTTP_FROM'];
+		}
+		return $ip;
+	}
+
+	/**
+	* We use this function to open, read/write to files.
+	*
+	* @param  string   Filename
+	* @param  string   Mode (r, w, a, etc..)
+	* @param  string   If writing to the file, the data to write
+	* @return mixed
+	*/
+	private function readWriteFile($file, $mode, $data = '')
+	{
+		if (!file_exists($file) OR !is_writable($file))
+		{
+			throw new \Exception("\SimpleCounter\Counter\\readWriteFile() - '$file' does not exist or is not writable.");
+		}
+
+		if (!($fp = @fopen($file, $mode)))
+		{
+			throw new \Exception("\SimpleCounter\Counter\\readWriteFile() - '$file' could not be opened.");
+		}
+
+		if (self::USE_FLOCK AND @flock($fp, LOCK_EX))
+		{
+			if ($mode == 'r')
+			{
+				return @fread($fp, @filesize($file));
+			}
+			else
+			{
+				@fwrite($fp, $data);
+			}
+			@flock($fp, LOCK_UN);
 		}
 		else
 		{
+			if ($mode == 'r')
+			{
+				return @fread($fp, filesize($file));
+			}
 			@fwrite($fp, $data);
 		}
-		@flock($fp, LOCK_UN);
+		@fclose($fp);
 	}
-	else
-	{
-		if ($mode == 'r')
-		{
-			return @fread($fp, filesize($file));
-		}
-		@fwrite($fp, $data);
-	}
-	@fclose($fp);
-}
 
-/**
-* Get the users ip address.
-*
-* @param  none
-* @return string
-*/
-function get_ip()
-{
-	$ip = my_getenv('REMOTE_ADDR');
-
-	if (my_getenv('HTTP_X_FORWARDED_FOR'))
+	//
+	public function process()
 	{
-		if (preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#s', my_getenv('HTTP_X_FORWARDED_FOR'), $matches))
+		$display = '';
+
+		$count = self::readWriteFile(self::COUNT_FILE, 'r');
+
+		// Do we only want to count 'unique' visitors?
+		if (self::ONLY_UNIQUE)
 		{
-			foreach ($matches[0] AS $match)
+			$ip = self::getIpAddress();
+
+			$ips = trim(self::readWriteFile(self::IP_FILE, 'r'));
+			$ips = preg_split("#\n#", $ips, -1, PREG_SPLIT_NO_EMPTY);
+
+			// They've not visited before
+			if (!in_array($ip, $ips))
 			{
-				if (!preg_match('#^(10|172\.16|192\.168)\.#', $match))
-				{
-					$ip = $match;
-					break;
-				}
+				self::readWriteFile(self::IP_FILE, 'a', "$ip\n");
+				self::readWriteFile(self::COUNT_FILE, 'w', $count + 1);
 			}
-			unset($matches);
+			unset($ips);
 		}
+		else
+		{
+			// No, we wish to count all visitors
+			self::readWriteFile(self::COUNT_FILE, 'w', $count + 1);
+		}
+
+		// Do we want to display the # visitors as graphics?
+		if (self::USE_IMAGES)
+		{
+			$count = preg_split("##", $count, -1, PREG_SPLIT_NO_EMPTY);
+			$length = count($count);
+
+			for ($i = 0; $i < $length; $i++)
+			{
+				$display .= '<img src="' . self::IMAGE_DIR . $count[$i] . self::IMAGE_EXT . '" border="0" alt="' . $count[$i] . '" />&nbsp;';
+			}
+		}
+		else
+		{
+			// Nope, let's just show it as plain text
+			$display = $count;
+		}
+		echo $display;
 	}
-	else if (my_getenv('HTTP_CLIENT_IP'))
-	{
-		$ip = my_getenv('HTTP_CLIENT_IP');
-	}
-	else if (my_getenv('HTTP_FROM'))
-	{
-		$ip = my_getenv('HTTP_FROM');
-	}
-	return $ip;
 }
 
-/**
-* Returns an environment variable. Based on PMA_getenv from phpMyAdmin.
-*
-* @param  string  Variable name, eg: PHP_SELF
-* @return string
-*/
-function my_getenv($varname)
-{
-	if (isset($_SERVER[$varname]))
-	{
-		return $_SERVER[$varname];
-	}
-	else if (isset($_ENV[$varname]))
-	{
-		return $_ENV[$varname];
-	}
-	else if (getenv($varname))
-	{
-		return getenv($varname);
-	}
-	return '';
-}
-
-// ######################## Start Main Script #########################
-// Get current count
-$count = fp(COUNT_FILE, 'r');
-
-// Do we only want to count 'unique' visitors?
-if (ONLY_UNIQUE)
-{
-	// Get visitor ip and check against our ip log
-	$ip = get_ip();
-
-	$ips = trim(fp(IP_FILE, 'r'));
-	$ips = preg_split("#\n#", $ips, -1, PREG_SPLIT_NO_EMPTY);
-
-	$visited = (bool)(in_array($ip, $ips));
-
-	// They've not visited before
-	if (!$visited)
-	{
-		fp(IP_FILE, 'a', "$ip\n");
-		fp(COUNT_FILE, 'w', $count + 1);
-	}
-	// Memory saving
-	unset($ips);
-}
-else
-{
-	// No, we wish to count all visitors
-	fp(COUNT_FILE, 'w', $count + 1, USE_FLOCK);
-}
-
-// Do we want to display the # visitors as graphics?
-if (USE_IMAGES)
-{
-	$count = preg_split("##", $count, -1, PREG_SPLIT_NO_EMPTY);
-	$len = count($count);
-
-	$display = '';
-
-	for ($i = 0; $i < $len; $i++)
-	{
-		$display .= '<img src="' . IMG_DIR . $count[$i] . IMG_EXT . '" border="0" alt="' . $count[$i] . '" />&nbsp;';
-	}
-	echo $display;
-}
-else
-{
-	// Nope, let's just show it as plain text
-	echo $count;
-}
-
-?>
+\SimpleCounter\Counter::getInstance()->process();

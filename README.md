@@ -3,7 +3,7 @@
 * @author    Eric Sizemore &lt;admin@secondversion.com&gt;
 * @package   SV's Simple Counter
 * @link      http://www.secondversion.com
-* @version   2.0.1
+* @version   3.0.0
 * @copyright (C) 2006 - 2012 Eric Sizemore
 * @license   GNU Lesser General Public License
 *
@@ -28,18 +28,20 @@ It is a simple PHP counter that counts your website visitors. It has the ability
 either show the count as plain text, or images; and whether or not to count only 
 unique hits, or all hits. (IP Based)
 
+PHP 5.3 is currently required due to the use of PHP 5.3+ features. It is a work in progress.
+
 <h2>Installation</h2>
 <ol>
 	<li>Open 'counter.php', configure the settings near the top of the script.</li>
 	<li>Create a new folder, named 'counter'.</li>
 	<li>Upload 'counter.php', 'index.html', and the 'logs' directory in ASCII mode.</li>
 	<li>Upload the 'images' folder in BINARY mode.</li>
-	<li>CHMOD the 'counter.txt' and 'ips.txt' files to 0666. They are located in the 'logs' folder.</li>
+	<li>CHMOD the 'counter.txt' and 'ips.txt' files to 0666 (if required). They are located in the 'logs' folder.</li>
 </ol>
 
 <h2>Usage</h2>
-Simple add the following code to the page where you want the counter to be shown:<br />
-<code><?php include('./counter/counter.php'); ?></code>
+Simply add the following code to the page where you want the counter to be shown:<br />
+<code><?php include './counter/counter.php'; ?></code>
 <br />
 <br />
 That's pretty much it, really.
