@@ -2,9 +2,9 @@
 /**
 * @author    Eric Sizemore &lt;admin@secondversion.com&gt;
 * @package   SV's Simple Counter
-* @link      http://www.secondversion.com
-* @version   3.0.1
-* @copyright (C) 2006 - 2014 Eric Sizemore
+* @link      http://www.secondversion.com/downloads/
+* @version   3.0.2
+* @copyright (C) 2006 - 2016 Eric Sizemore
 * @license   GNU Lesser General Public License
 *
 *	SV's Simple Counter is free software: you can redistribute it and/or modify

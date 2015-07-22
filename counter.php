@@ -3,9 +3,9 @@
 /**
 * @author    Eric Sizemore <admin@secondversion.com>
 * @package   SV's Simple Counter
-* @link      http://www.secondversion.com
-* @version   3.0.1
-* @copyright (C) 2006 - 2014 Eric Sizemore
+* @link      http://www.secondversion.com/downloads/
+* @version   3.0.2
+* @copyright (C) 2006 - 2016 Eric Sizemore
 * @license   GNU Lesser General Public License
 *
 *	SV's Simple Counter is free software: you can redistribute it and/or modify
@@ -112,6 +112,11 @@ class Counter
 		else if ($_SERVER['HTTP_FROM'])
 		{
 			$ip = $_SERVER['HTTP_FROM'];
+		}
+
+		if (!filter_var($ip, FILTER_VALIDATE_IP))
+		{
+			return '0.0.0.0';
 		}
 		return $ip;
 	}
