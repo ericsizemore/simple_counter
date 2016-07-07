@@ -4,7 +4,7 @@
 * @author    Eric Sizemore <admin@secondversion.com>
 * @package   SV's Simple Counter
 * @link      http://www.secondversion.com/downloads/
-* @version   3.0.2
+* @version   4.0.0
 * @copyright (C) 2006 - 2016 Eric Sizemore
 * @license   GNU Lesser General Public License
 *
@@ -21,14 +21,10 @@
 *	You should have received a copy of the GNU Lesser General Public License
 *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+namespace Esi\SimpleCounter;
 
-/**
-* Just starting to branch out to namespaces, etc. Please be gentle, this is only a start.
-*/
-namespace SimpleCounter;
-
-class Counter
-{
+/** */
+class Counter {
 	/** User Configuration **/
 	// Log file locations/paths.
 	const COUNT_FILE  = 'counter/logs/counter.txt';
@@ -71,10 +67,8 @@ class Counter
 	* @param	void
 	* @return	object	\SimpleCounter\Counter()
 	*/
-	public static function getInstance()
-	{
-		if (!self::$instance)
-		{
+	public static function getInstance() {
+		if (!self::$instance) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -83,40 +77,41 @@ class Counter
 	/**
 	* Return the visitor's IP address.
 	*
-	* @param	void
+	* @param	$trust_proxy_headers	Whether or not to trust the proxy headers HTTP_CLIENT_IP
+	*									and HTTP_X_FORWARDED_FOR.
 	* @return	string
 	*/
-	private function getIpAddress()
-	{
+	private function getIpAddress($trust_proxy_headers = false) {
 		$ip = $_SERVER['REMOTE_ADDR'];
 
-		if ($_SERVER['HTTP_X_FORWARDED_FOR'])
-		{
-			if (preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#s', $_SERVER['HTTP_X_FORWARDED_FOR'], $matches))
-			{
-				foreach ($matches[0] AS $match)
-				{
-					if (!preg_match('#^(10|172\.16|192\.168)\.#', $match))
-					{
-						$ip = $match;
-						break;
-					}
-				}
-				unset($matches);
-			}
-		}
-		else if ($_SERVER['HTTP_CLIENT_IP'])
-		{
-			$ip = $_SERVER['HTTP_CLIENT_IP'];
-		}
-		else if ($_SERVER['HTTP_FROM'])
-		{
-			$ip = $_SERVER['HTTP_FROM'];
+		if ($trust_proxy_headers === false) {
+			return $ip;
 		}
 
-		if (!filter_var($ip, FILTER_VALIDATE_IP))
+		$ips = [];
+
+		if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
 		{
-			return '0.0.0.0';
+			$ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+		}
+		else if (isset($_SERVER['HTTP_X_REAL_IP']))
+		{
+			$ips = explode(',', $_SERVER['HTTP_X_REAL_IP']);
+		}
+
+		if (!empty($ips)) {
+			foreach ($ips AS $val) {
+				$val = trim($val);
+
+				if (inet_ntop(inet_pton($val)) == $val AND !preg_match("#^(10\.|172\.(1[6-9]|2[0-9]|3[0-1])\.|192\.168\.|fe80:|fe[c-f][0-f]:|f[c-d][0-f]{2}:)#i", $val)) {
+					$ip = $val;
+					break;
+				}
+			}
+		}
+
+		if (!$ip AND isset($_SERVER['HTTP_CLIENT_IP'])) {
+			$ip = $_SERVER['HTTP_CLIENT_IP'];
 		}
 		return $ip;
 	}
@@ -129,88 +124,74 @@ class Counter
 	* @param	string	$data	If writing to the file, the data to write
 	* @return	mixed
 	*/
-	private function readWriteFile($file, $mode, $data = '')
-	{
-		if (!file_exists($file) OR !is_writable($file))
-		{
-			throw new \Exception("\SimpleCounter\Counter\\readWriteFile() - '$file' does not exist or is not writable.");
+	private function readWriteFile($file, $mode, $data = '') {
+		if (!file_exists($file) OR !is_writable($file)) {
+			throw new \Exception(__CLASS__ . "\\readWriteFile() - '$file' does not exist or is not writable.");
 		}
 
-		if (!($fp = @fopen($file, $mode)))
-		{
-			throw new \Exception("\SimpleCounter\Counter\\readWriteFile() - '$file' could not be opened.");
+		if (!($fp = fopen($file, $mode))) {
+			throw new \Exception(__CLASS__ . "\\readWriteFile() - '$file' could not be opened.");
 		}
 
-		if (self::USE_FLOCK AND @flock($fp, LOCK_EX))
-		{
-			if ($mode == 'r')
-			{
-				return @fread($fp, @filesize($file));
+		if (self::USE_FLOCK AND flock($fp, LOCK_EX)) {
+			if ($mode == 'r') {
+				return fread($fp, filesize($file));
 			}
-			else
-			{
-				@fwrite($fp, $data);
+			else {
+				fwrite($fp, $data);
 			}
-			@flock($fp, LOCK_UN);
+			flock($fp, LOCK_UN);
 		}
-		else
-		{
-			if ($mode == 'r')
-			{
-				return @fread($fp, filesize($file));
+		else {
+			if ($mode == 'r') {
+				return fread($fp, filesize($file));
 			}
-			@fwrite($fp, $data);
+			fwrite($fp, $data);
 		}
-		@fclose($fp);
+		fclose($fp);
 	}
 
 	/**
-	* Processes the visitor (adds to count/etc. if needed) and then displays current count.
+	* Processes the visitor (adds to count/etc. if needed) and 
+	* then displays current count.
 	*
 	* @param	void
 	* @return	string	
 	*/
-	public function process()
-	{
+	public function process() {
 		$display = '';
 
 		$count = self::readWriteFile(self::COUNT_FILE, 'r');
 
 		// Do we only want to count 'unique' visitors?
-		if (self::ONLY_UNIQUE)
-		{
+		if (self::ONLY_UNIQUE) {
 			$ip = self::getIpAddress();
 
 			$ips = trim(self::readWriteFile(self::IP_FILE, 'r'));
 			$ips = preg_split("#\n#", $ips, -1, PREG_SPLIT_NO_EMPTY);
 
 			// They've not visited before
-			if (!in_array($ip, $ips))
-			{
+			if (!in_array($ip, $ips)) {
 				self::readWriteFile(self::IP_FILE, 'a', "$ip\n");
 				self::readWriteFile(self::COUNT_FILE, 'w', $count + 1);
 			}
 			unset($ips);
 		}
-		else
-		{
+		else {
 			// No, we wish to count all visitors
 			self::readWriteFile(self::COUNT_FILE, 'w', $count + 1);
 		}
 
 		// Do we want to display the # visitors as graphics?
-		if (self::USE_IMAGES)
-		{
-			$count = preg_split("##", $count, -1, PREG_SPLIT_NO_EMPTY);
+		if (self::USE_IMAGES) {
+			$count = preg_split('##', $count, -1, PREG_SPLIT_NO_EMPTY);
 			$length = count($count);
 
-			for ($i = 0; $i < $length; $i++)
-			{
+			for ($i = 0; $i < $length; $i++) {
 				$display .= '<img src="' . self::IMAGE_DIR . $count[$i] . self::IMAGE_EXT . '" border="0" alt="' . $count[$i] . '" />&nbsp;';
 			}
 		}
-		else
-		{
+		else {
 			// Nope, let's just show it as plain text
 			// Props to Roger Cusson. Adding "You are visitor #" to plain text count.
 			$display = "You are visitor #$count";
@@ -220,4 +201,4 @@ class Counter
 }
 
 // Instantiate and process.
-\SimpleCounter\Counter::getInstance()->process();
+\Esi\SimpleCounter\Counter::getInstance()->process();

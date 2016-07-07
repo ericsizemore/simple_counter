@@ -3,7 +3,7 @@
 * @author    Eric Sizemore &lt;admin@secondversion.com&gt;
 * @package   SV's Simple Counter
 * @link      http://www.secondversion.com/downloads/
-* @version   3.0.2
+* @version   4.0.0
 * @copyright (C) 2006 - 2016 Eric Sizemore
 * @license   GNU Lesser General Public License
 *
@@ -28,7 +28,7 @@ It is a simple PHP counter that counts your website visitors. It has the ability
 either show the count as plain text, or images; and whether or not to count only 
 unique hits, or all hits. (IP Based)
 
-PHP 5.3 is currently required due to the use of PHP 5.3+ features. It is a work in progress.
+PHP 5.4 is currently required due to the use of PHP 5.4+ features. It is a work in progress.
 
 <h2>Installation</h2>
 <ol>
