@@ -90,12 +90,10 @@ class Counter {
 
 		$ips = [];
 
-		if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
-		{
+		if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 			$ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
 		}
-		else if (isset($_SERVER['HTTP_X_REAL_IP']))
-		{
+		else if (isset($_SERVER['HTTP_X_REAL_IP'])) {
 			$ips = explode(',', $_SERVER['HTTP_X_REAL_IP']);
 		}
 
