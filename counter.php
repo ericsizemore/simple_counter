@@ -4,8 +4,8 @@
 * @author    Eric Sizemore <admin@secondversion.com>
 * @package   SV's Simple Counter
 * @link      http://www.secondversion.com/downloads/
-* @version   4.0.1
-* @copyright (C) 2006 - 2017 Eric Sizemore
+* @version   4.0.2
+* @copyright (C) 2006 - 2018 Eric Sizemore
 * @license   GNU Lesser General Public License
 *
 *    SV's Simple Counter is free software: you can redistribute it and/or modify
@@ -71,7 +71,7 @@ class Counter
     *
     * @return  object  \SimpleCounter\Counter()
     */
-    public static function getInstance()
+    public static function getInstance(): self
     {
         if (!self::$instance) {
             self::$instance = new self();
@@ -82,11 +82,11 @@ class Counter
     /**
     * Return the visitor's IP address.
     *
-    * @param   $trustProxyHeaders  Whether or not to trust the proxy headers HTTP_CLIENT_IP
-    *                              and HTTP_X_FORWARDED_FOR.
+    * @param   bool    $trustProxyHeaders  Whether or not to trust the proxy headers HTTP_CLIENT_IP
+    *                                      and HTTP_X_FORWARDED_FOR.
     * @return  string
     */
-    private function getIpAddress($trustProxyHeaders = false)
+    private function getIpAddress(bool $trustProxyHeaders = false): string
     {
         $ip = $_SERVER['REMOTE_ADDR'];
 
@@ -130,7 +130,7 @@ class Counter
     * @param   string  $data  If writing to the file, the data to write
     * @return  mixed
     */
-    private function readWriteFile($file, $mode, $data = '')
+    private function readWriteFile(string $file, string $mode, string $data = '')
     {
         if (!file_exists($file) OR !is_writable($file)) {
             throw new \Exception(sprintf("'%s' does not exist or is not writable.", $file));
@@ -164,8 +164,6 @@ class Counter
     /**
     * Processes the visitor (adds to count/etc. if needed) and 
     * then displays current count.
-    *
-    * @return  string    
     */
     public function process()
     {
