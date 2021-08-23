@@ -45,8 +45,8 @@ Simple Counter accepts contributions of code and documentation from the communit
 These contributions can be made in the form of Issues or [Pull Requests](http://help.github.com/send-pull-requests/) 
 on the [Simple Counter repository](https://github.com/ericsizemore/simple_counter).
 
-Simple Counter is licensed under the GNU GPL v3 license. When submitting new features or patches to Simple Counter, you are 
-giving permission to license those features or patches under the GNU GPL v3 license.
+Simple Counter is licensed under the GNU LGPL v3 license. When submitting new features or patches to Simple Counter, you are 
+giving permission to license those features or patches under the GNU LGPL v3 license.
 
 #### Guidelines
 
@@ -85,4 +85,4 @@ Eric Sizemore - <admin@secondversion.com> - <http://www.secondversion.com>
 
 ### License
 
-Simple Counter is licensed under the GNU GPL v3 License - see the `LICENSE` file for details
+Simple Counter is licensed under the GNU LGPL v3 License - see the `LICENSE` file for details
