@@ -4,8 +4,8 @@
 * @author    Eric Sizemore <admin@secondversion.com>
 * @package   SV's Simple Counter
 * @link      http://www.secondversion.com/downloads/
-* @version   4.0.2
-* @copyright (C) 2006 - 2018 Eric Sizemore
+* @version   4.0.3
+* @copyright (C) 2006 - 2021 Eric Sizemore
 * @license   GNU Lesser General Public License
 *
 *    SV's Simple Counter is free software: you can redistribute it and/or modify
@@ -97,18 +97,18 @@ class Counter
         $ips = [];
 
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            $ips = \explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
         } elseif (isset($_SERVER['HTTP_X_REAL_IP'])) {
-            $ips = explode(',', $_SERVER['HTTP_X_REAL_IP']);
+            $ips = \explode(',', $_SERVER['HTTP_X_REAL_IP']);
         }
 
-        $ips = array_map('trim', $ips);
+        $ips = \array_map('trim', $ips);
 
         if (!empty($ips)) {
             foreach ($ips AS $val) {
                 if (
-                    inet_ntop(inet_pton($val)) == $val 
-                    AND !preg_match("#^(10\.|172\.(1[6-9]|2[0-9]|3[0-1])\.|192\.168\.|fe80:|fe[c-f][0-f]:|f[c-d][0-f]{2}:)#i", $val)
+                    \inet_ntop(\inet_pton($val)) == $val 
+                    AND !\preg_match("#^(10\.|172\.(1[6-9]|2[0-9]|3[0-1])\.|192\.168\.|fe80:|fe[c-f][0-f]:|f[c-d][0-f]{2}:)#i", $val)
                 ) {
                     $ip = $val;
                     break;
@@ -132,31 +132,31 @@ class Counter
     */
     private function readWriteFile(string $file, string $mode, string $data = '')
     {
-        if (!file_exists($file) OR !is_writable($file)) {
-            throw new \Exception(sprintf("'%s' does not exist or is not writable.", $file));
+        if (!\file_exists($file) OR !\is_writable($file)) {
+            throw new \Exception(\sprintf("'%s' does not exist or is not writable.", $file));
         }
 
-        if (!($fp = fopen($file, $mode))) {
-            throw new \Exception(sprintf("'%s' could not be opened.", $file));
+        if (!($fp = \fopen($file, $mode))) {
+            throw new \Exception(\sprintf("'%s' could not be opened.", $file));
         }
 
         $return = null;
 
-        if (self::USE_FLOCK AND flock($fp, LOCK_EX)) {
+        if (self::USE_FLOCK AND \flock($fp, LOCK_EX)) {
             if ($mode == 'r') {
-                $return = fread($fp, filesize($file));
+                $return = \fread($fp, \filesize($file));
             } else {
-                fwrite($fp, $data);
+                \fwrite($fp, $data);
             }
-            flock($fp, LOCK_UN);
+            \flock($fp, LOCK_UN);
         } else {
             if ($mode == 'r') {
-                $return = fread($fp, filesize($file));
+                $return = \fread($fp, \filesize($file));
             } else {
-                fwrite($fp, $data);
+                \fwrite($fp, $data);
             }
         }
-        fclose($fp);
+        \fclose($fp);
 
         return $return;
     }
@@ -175,11 +175,11 @@ class Counter
         if (self::ONLY_UNIQUE) {
             $ip = self::getIpAddress();
 
-            $ips = trim(self::readWriteFile(self::IP_FILE, 'r'));
-            $ips = preg_split("#\n#", $ips, -1, PREG_SPLIT_NO_EMPTY);
+            $ips = \trim(self::readWriteFile(self::IP_FILE, 'r'));
+            $ips = \preg_split("#\n#", $ips, -1, PREG_SPLIT_NO_EMPTY);
 
             // They've not visited before
-            if (!in_array($ip, $ips)) {
+            if (!\in_array($ip, $ips)) {
                 self::readWriteFile(self::IP_FILE, 'a', "$ip\n");
                 self::readWriteFile(self::COUNT_FILE, 'w', $count + 1);
             }
@@ -191,8 +191,8 @@ class Counter
 
         // Do we want to display the # visitors as graphics?
         if (self::USE_IMAGES) {
-            $count = preg_split('##', $count, -1, PREG_SPLIT_NO_EMPTY);
-            $length = count($count);
+            $count = \preg_split('##', $count, -1, PREG_SPLIT_NO_EMPTY);
+            $length = \count($count);
 
             for ($i = 0; $i < $length; $i++) {
                 $display .= '<img src="' . self::IMAGE_DIR . $count[$i] . self::IMAGE_EXT . '" border="0" alt="' . $count[$i] . '" />&nbsp;';
