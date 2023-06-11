@@ -28,7 +28,7 @@ Usage is fairly simple once installed. Simply add the following code to the page
 
 ### Requirements
 
-- Simple Counter works with PHP 7.0.0 or above.
+- Simple Counter works with PHP 8.0.0 or above.
 
 ### Submitting bugs and feature requests
 
@@ -81,7 +81,7 @@ branches for both of these features and send two requests.
 
 ### Author
 
-Eric Sizemore - <admin@secondversion.com> - <http://www.secondversion.com>
+Eric Sizemore - <admin@secondversion.com> - <https://www.secondversion.com>
 
 ### License
 
