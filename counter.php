@@ -6,7 +6,7 @@
  * @author    Eric Sizemore <admin@secondversion.com>
  * @package   SV's Simple Counter
  * @link      https://www.secondversion.com/
- * @version   4.0.4
+ * @version   4.0.6
  * @copyright (C) 2006 - 2023 Eric Sizemore
  * @license   GNU Lesser General Public License
  */
@@ -20,7 +20,7 @@ use Exception;
  * @author    Eric Sizemore <admin@secondversion.com>
  * @package   SV's Simple Counter
  * @link      https://www.secondversion.com/
- * @version   4.0.4
+ * @version   4.0.6
  * @copyright (C) 2006 - 2023 Eric Sizemore
  * @license   GNU Lesser General Public License
  *
@@ -126,7 +126,6 @@ class Counter
                 }
             }
         }
-        unset($ips);
 
         if (!$ip AND isset($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -179,20 +178,20 @@ class Counter
      */
     private function isPublicIp(string $ipaddress): bool
     {
-        return (bool)(!self::isPrivateIp($ipaddress) AND !self::isReservedIp($ipaddress));
+        return (!self::isPrivateIp($ipaddress) AND !self::isReservedIp($ipaddress));
     }
 
     /**
     * We use this function to open and read/write to files.
     *
     * @param   string  $file  Filename
-    * @param   string  $mode  Mode (r, w, a, etc..)
+    * @param   string  $mode  Mode (r, w, a)
     * @param   string  $data  If writing to the file, the data to write
-    * @return  mixed
+    * @return  string|false
     *
     * @throws Exception
     */
-    private function readWriteFile(string $file, string $mode, string $data = ''): mixed
+    private function readWriteFile(string $file, string $mode, string $data = ''): string|false
     {
         if (!\file_exists($file) OR !\is_writable($file)) {
             throw new Exception(\sprintf("'%s' does not exist or is not writable.", $file));
@@ -202,18 +201,43 @@ class Counter
             throw new Exception(\sprintf("'%s' could not be opened.", $file));
         }
 
-        $return = null;
+        $return = '';
 
-        if (self::USE_FLOCK AND \flock($fp, \LOCK_EX)) {
-            if ($mode == 'r') {
-                $return = \fread($fp, \filesize($file));
-            } else {
-                \fwrite($fp, $data);
+        \clearstatcache();
+
+        //
+        $filesize = \filesize($file);
+
+        if (self::USE_FLOCK) {
+            // If using file locking, we will use shared for 'r' mode or exclusive for 'w' or 'a' mode
+            switch ($mode) {
+                case 'r':
+                    // Shared lock
+                    if (\flock($fp, \LOCK_SH)) {
+                        $return = \fread($fp, $filesize);
+                    } else {
+                        throw new Exception(\sprintf("Unable to acquire lock on '%s'", $file));
+                    }
+                break;
+                case 'a':
+                case 'w':
+                    // Exclusive lock
+                    if (\flock($fp, \LOCK_EX)) {
+                        \fwrite($fp, $data);
+                    } else {
+                        throw new Exception(\sprintf("Unable to acquire lock on '%s'", $file));
+                    }
+                break;
+                default:
+                    // Invalid mode
+                    throw new Exception(\sprintf("Invalid mode '%s' specified, must be either read ('r') or write ('w'/'a')", $mode));
             }
+            // Attempt to release the lock
             \flock($fp, \LOCK_UN);
         } else {
+            // We are not using file locks
             if ($mode == 'r') {
-                $return = \fread($fp, \filesize($file));
+                $return = \fread($fp, $filesize);
             } else {
                 \fwrite($fp, $data);
             }
@@ -224,10 +248,25 @@ class Counter
     }
 
     /**
+     * Gathers a list of IPs and the number of times they occur from the ip log file.
+     *
+     * ** currently not in use, to be used for an admin page **
+     *
+     * @return  array
+     */
+    public function listIps(): array
+    {
+        $ips = \trim(self::readWriteFile(self::IP_FILE, 'r'));
+        $ips = \preg_split("# #", $ips, -1, \PREG_SPLIT_NO_EMPTY);
+
+        return \array_count_values($ips);
+    }
+
+    /**
     * Processes the visitor (adds to count/etc. if needed) and 
     * then displays current count.
     */
-    public function process()
+    public function process(): void
     {
         $display = '';
 
@@ -269,4 +308,4 @@ class Counter
 }
 
 // Instantiate and process.
-\Esi\SimpleCounter\Counter::getInstance()->process();
+Counter::getInstance()->process();
