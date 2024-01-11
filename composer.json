@@ -1,7 +1,7 @@
 {
     "name": "esi/simple_counter",
     "description": "A simple web hit counter.",
-    "license": "MIT",
+    "license": "LGPL-3.0-or-later",
     "type": "library",
     "authors": [
         {
