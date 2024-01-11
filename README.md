@@ -1,5 +1,16 @@
 # Simple Counter - A simple web hit counter.
 
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fericsizemore%2Fsimple_counter.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fericsizemore%2Fsimple_counter?ref=badge_shield)
+[![Build Status](https://scrutinizer-ci.com/g/ericsizemore/simple_counter/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ericsizemore/simple_counter/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/ericsizemore/simple_counter/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ericsizemore/simple_counter/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ericsizemore/simple_counter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ericsizemore/simple_counter/?branch=master)
+[![Tests](https://github.com/ericsizemore/simple_counter/actions/workflows/tests.yml/badge.svg)](https://github.com/ericsizemore/simple_counter/actions/workflows/tests.yml)
+[![PHPStan](https://github.com/ericsizemore/simple_counter/actions/workflows/main.yml/badge.svg)](https://github.com/ericsizemore/simple_counter/actions/workflows/main.yml)
+
+[![Latest Stable Version](https://img.shields.io/packagist/v/esi/simple_counter.svg)](https://packagist.org/packages/esi/simple_counter)
+[![Downloads per Month](https://img.shields.io/packagist/dm/esi/simple_counter.svg)](https://packagist.org/packages/esi/simple_counter)
+[![License](https://img.shields.io/packagist/l/esi/simple_counter.svg)](https://packagist.org/packages/esi/simple_counter)
+
 [Simple Counter](http://github.com/ericsizemore/simple_counter/) is a simple PHP counter that counts your website visitors. It has the ability to 
 either show the count as plain text or images; and whether to count only unique hits, or all hits. (IP Based)
 
