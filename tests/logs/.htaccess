@@ -1,0 +1,3 @@
+<FilesMatch "\.(txt|env)$">
+deny from all
+</FilesMatch>
