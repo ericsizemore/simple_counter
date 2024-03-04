@@ -6,36 +6,10 @@ declare(strict_types=1);
  * Simple Counter - A simple web hit counter.
  *
  * @author    Eric Sizemore <admin@secondversion.com>
- * @package   Simple Counter
- * @link      https://www.secondversion.com/
- * @version   5.0.0
- * @copyright (C) 2006 - 2023 Eric Sizemore
- * @license   GNU Lesser General Public License
- */
-
-namespace Esi\SimpleCounter\Tests;
-
-use Esi\SimpleCounter\Counter;
-use InvalidArgumentException;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
-use ReflectionProperty;
-
-use function dirname;
-
-use const DIRECTORY_SEPARATOR;
-
-/**
- * Simple Counter - A simple web hit counter.
- *
- * @author    Eric Sizemore <admin@secondversion.com>
- * @package   Simple Counter
- * @link      https://www.secondversion.com/
- * @version   5.0.0
- * @copyright (C) 2006 - 2023 Eric Sizemore
+ * @copyright (C) 2006 - 2024 Eric Sizemore
  * @license   GNU Lesser General Public License
  *
- * Copyright (C) 2006 - 2023 Eric Sizemore. All rights reserved.
+ * Copyright (C) 2006 - 2024 Eric Sizemore<https://www.secondversion.com/>. All rights reserved.
  *
  * SV's Simple Counter is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -51,9 +25,21 @@ use const DIRECTORY_SEPARATOR;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace Esi\SimpleCounter\Tests;
+
+use Esi\SimpleCounter\Counter;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use ReflectionProperty;
+
+use function dirname;
+
+use const DIRECTORY_SEPARATOR;
+
 /**
  * @package Esi\SimpleCounter\Tests
- * @version 5.0.0
+ * @version 5.0.1
  */
 #[CoversClass(Counter::class)]
 class CounterTest extends TestCase

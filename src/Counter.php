@@ -27,7 +27,8 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter;
 
-use Esi\Utility\Utility;
+use Esi\Utility\Environment;
+use Esi\Utility\Strings;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -59,7 +60,7 @@ use const PREG_SPLIT_NO_EMPTY;
 
 /**
  * @package Esi\SimpleCounter
- * @version 5.0.0
+ * @version 5.0.1
  */
 class Counter
 {
@@ -137,7 +138,7 @@ class Counter
 
         self::checkLogFiles();
 
-        if (!Utility::beginsWith($this->imageExt, '.')) {
+        if (!Strings::beginsWith($this->imageExt, '.')) {
             $this->imageExt = '.' . $this->imageExt;
         }
     }
@@ -172,7 +173,7 @@ class Counter
 
         // Do we only want to count 'unique' visitors?
         if ($this->countOnlyUnique) {
-            $ip = Utility::getIpAddress();
+            $ip = Environment::ipAddress();
 
             /** @var string $ips **/
             $ips = self::read($this->ipFile);
