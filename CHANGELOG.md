@@ -6,6 +6,10 @@ you can use the following url: https://github.com/ericsizemore/simple_counter/co
 
 Simply replace the version numbers depending on which set of changes you wish to see.
 
+### 5.0.1 (2024-03-04)
+
+  * Updated `Esi\Utility` to `2.0.0`
+
 ### 5.0.0 (2024-01-11)
   * NOTE: Not backwards compatible with prior SimpleCounter versions.
   * Bumped PHP version requirement to 8.2
