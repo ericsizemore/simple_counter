@@ -217,5 +217,5 @@ Eric Sizemore - <admin@secondversion.com> - <https://www.secondversion.com>
 
 ### License
 
-Simple Counter v6.0.0 and newer: licensed under the MIT License. See the `LICENSE.md` file for details.
-Simple Counter v5.0.1 and older: licensed under the GNU LGPL v3 License. See the `LICENSE-pre-v6.md` file for details.
+Simple Counter v6.0.0 and newer: licensed under the MIT License. See the [`LICENSE.md`](LICENSE.md) file for details.
+Simple Counter v5.0.1 and older: licensed under the GNU LGPL v3 License. See the [`<= 5.x LICENSE.md`](https://github.com/ericsizemore/simple_counter/blob/5.0.x/COPYING.LESSER) file for details.
