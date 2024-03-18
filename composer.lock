@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "438d7433e5e82c05a777f0e0d3d2b57b",
+    "content-hash": "53459b5e52cc999b259ee0a77b072531",
     "packages": [
         {
             "name": "esi/utility",
