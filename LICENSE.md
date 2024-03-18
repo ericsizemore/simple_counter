@@ -1,7 +1,4 @@
 The MIT License (MIT)
-=====================
-
-The MIT License (MIT)
 
 Copyright (c) 2006 - 2024 Eric Sizemore
 
