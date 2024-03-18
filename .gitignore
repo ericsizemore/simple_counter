@@ -1,14 +1,4 @@
 .idea/
-vendor/
 build/
-site/
-composer.phar
-.phpunit.result.cache
+vendor/
 .php-cs-fixer.cache
-*.iws
-out/
-.idea_modules/
-atlassian-ide-plugin.xml
-.idea/php.xml
-.idea/simple_counter.iml
-clover.xml

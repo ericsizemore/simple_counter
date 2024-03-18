@@ -1,13 +1,21 @@
 {
     "name": "esi/simple_counter",
     "description": "A simple web hit counter.",
-    "license": "LGPL-3.0-or-later",
+    "license": "MIT",
     "type": "library",
+    "keywords": [
+        "counter",
+        "flat-file",
+        "visitor-counter",
+        "file-based",
+        "hit-counter"
+    ],
     "authors": [
         {
             "name": "Eric Sizemore",
             "email": "admin@secondversion.com",
-            "homepage": "https://www.secondversion.com/"
+            "homepage": "https://www.secondversion.com/",
+            "role": "Lead Developer"
         }
     ],
     "support": {
@@ -17,18 +25,20 @@
         "security": "https://github.com/ericsizemore/simple_counter/security/policy"
     },
     "require": {
-        "php": "^8.2 <8.5",
-        "esi/utility": "^2.0"
+        "php": "^8.2 <8.4",
+        "ext-json": "*",
+        "esi/utility": "^2.0",
+        "symfony/options-resolver": "^7.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "dev-master",
-        "phpstan/phpstan": ">=1.11",
-        "phpstan/phpstan-phpunit": ">=1.4",
-        "phpstan/phpstan-strict-rules": ">=1.6",
-        "phpunit/phpunit": "^11.0",
-        "rector/rector": "^1.0"
+        "phpstan/phpstan": "^1.11",
+        "phpstan/phpstan-phpunit": "^1.4",
+        "phpstan/phpstan-strict-rules": "^1.6",
+        "phpunit/phpunit": "^11.0"
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Esi\\SimpleCounter\\": "src/"
@@ -41,13 +51,13 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.1-dev"
+            "dev-master": "6.0-dev"
         }
     },
     "scripts": {
-        "phpcs-fix": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php",
-        "phpcs-nofix": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --dry-run --diff",
+        "cs:check": "vendor/bin/php-cs-fixer check --verbose --diff",
+        "cs:fix": "vendor/bin/php-cs-fixer fix",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
-        "test": "phpunit --coverage-clover=build/logs/clover.xml --coverage-html=build/logs/coverage --display-notices --display-deprecations --display-warnings --globals-backup"
+        "test": "phpunit"
     }
 }

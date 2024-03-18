@@ -1,40 +1,42 @@
 # Simple Counter - A simple web hit counter.
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fericsizemore%2Fsimple_counter.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fericsizemore%2Fsimple_counter?ref=badge_shield)
-[![Build Status](https://scrutinizer-ci.com/g/ericsizemore/simple_counter/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ericsizemore/simple_counter/build-status/master)
-[![Code Coverage](https://scrutinizer-ci.com/g/ericsizemore/simple_counter/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ericsizemore/simple_counter/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ericsizemore/simple_counter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ericsizemore/simple_counter/?branch=master)
-[![Tests](https://github.com/ericsizemore/simple_counter/actions/workflows/tests.yml/badge.svg)](https://github.com/ericsizemore/simple_counter/actions/workflows/tests.yml)
-[![PHPStan](https://github.com/ericsizemore/simple_counter/actions/workflows/main.yml/badge.svg)](https://github.com/ericsizemore/simple_counter/actions/workflows/main.yml)
-
-[![Latest Stable Version](https://img.shields.io/packagist/v/esi/simple_counter.svg)](https://packagist.org/packages/esi/simple_counter)
-[![Downloads per Month](https://img.shields.io/packagist/dm/esi/simple_counter.svg)](https://packagist.org/packages/esi/simple_counter)
-[![License](https://img.shields.io/packagist/l/esi/simple_counter.svg)](https://packagist.org/packages/esi/simple_counter)
-
 [Simple Counter](http://github.com/ericsizemore/simple_counter/) is a simple PHP counter that counts your website visitors. It has the ability to 
 either show the count as plain text or images; and whether to count only unique hits, or all hits. (IP Based)
 
-### Small Note
-This code is many years old (first started in 2006). I am in the process of bringing it into the modern world, and that includes the 
-documentation. I am working on it, I promise. ;)
+# WARNING
 
-### If you are upgrading from v4.* to v5.0.0
+* The code in this branch (`6.x-dev`) is a development branch for the upcoming v6.0.0, a complete rewrite of this library.
+* There are many things that still need updated.
 
-* Make a backup of your current `logs` directory (and `images`, if you are using custom images).
-  * Your directories are most likely `counter/logs` and `counter/images` since that was the default way to install/setup SimpleCounter prior to v5 [^1]
-  * This is the default in v5 as well, so if you follow installation and copy the `counter` folder to your webroot, it will overwrite your old data, so backups are key. 
-* Install SimpleCounter v5 through composer.
-* Copy your `ips.txt` and `counter.txt` files that you backed up to the new locations.
-* Update your site/project on how you call the counter, see [usage](#usage).
+It is NOT recommended to use this code in production.
 
-[^1]: If you were using custom locations for the `logs` and `images` directories already, you can change how you instantiate the class to point to these locations instead. See [usage](#usage).
+## Important Note
+
+* As of v6.0.0, Simple Counter is no longer licensed under the GNU LGPLv3 license.
+* v6.0.0 is a complete rewrite of the library, and no GNU LGPLv3 licensed code remains.
+* v5.0.1 and previous are still licensed under the GNU LGPLv3 license.
+
+With that being said, it is important to read the `Upgrading` section below if you are coming from an older version.
+
+
+## Acknowledgements
+
+The icons used for the default image set (0-9 'png' images found in `counter/images/`) are licensed under the [CC BY 4.0 DEED license](https://creativecommons.org/licenses/by/4.0/), and were designed by [StreamlineHQ](https://www.streamlinehq.com/freebies/typeface).
+
+
+## Upgrading
+
+Pre-v6 -> v6 is not a simple upgrade. Several things have changed in this rewrite, and there are breaking changes.
+
+Please read [UPGRADING.md](UPGRADING.md) first before attempting an upgrade.
+
 
 ## Installation
 
 To install Simple Counter, first install via composer:
 
 ```bash
-composer require esi/simple_counter
+composer require esi/simple_counter:^6.0
 ```
 
 There are several options defined by default, however you will likely run into issues if you do not change some of them.
@@ -44,12 +46,18 @@ More information can be found in [Usage](#usage) below.
   * The `counter` directory contains the `logs` and `images` directory.
   * You can change the name of either directory if you wish, or skip using the `counter` directory all together and just move `logs` and `images` to your webroot.
     * However:
-      * The ip file and counter file must remain `ips.txt` and `counter.txt`
+      * The ip file and counter file must remain `ips.json` and `counter.json`
       * The images must be named 0-9.
-* Make sure the `ips.txt` and `counter.txt` files within your logs directory are writable.
+* Make sure the `ips.json` and `counter.json` files within your logs directory are writable.
+
 
 ## Usage
-Usage is fairly simple once installed. Simply add the following code to the page where you want the counter to be shown:
+
+**More detailed documentation is a work in progress.**
+
+Usage is fairly simple once installed. There is currently one option for the type of counter you wish to use, and that is the `JsonFileAdapter`. A `DatabaseAdapter` is slated for an upcoming release.
+
+Simply add the following code to the page where you want the counter to be shown:
 
 ```php
 <?php
@@ -58,46 +66,102 @@ Usage is fairly simple once installed. Simply add the following code to the page
 require_once 'vendor/autoload.php';
 
 use Esi\SimpleCounter\Counter;
+use Esi\SimpleCounter\Adapter\JsonFileAdapter;
+use Esi\SimpleCounter\Configuration\JsonFileConfiguration;
 
-// Options is a string => string | bool, key => value pair array.
+/**
+ * $options is an array of:
+ *
+ * array{
+ *     logDir: string,
+ *     countFile: string,
+ *     ipFile: string,
+ *     imageDir: string,
+ *     imageExt: string,
+ *     uniqueOnly: bool,
+ *     asImage: bool
+ * }
+ *
+ * Default values are:
+ *
+ * [
+ *      'logDir'     => dirname(__DIR__, 2) . '/counter/logs/',
+ *      'countFile'  => 'counter.json',
+ *      'ipFile'     => 'ips.json',
+ *      'imageDir'   => dirname(__DIR__, 2) . '/counter/images/',
+ *      'imageExt'   => '.png',
+ *      'uniqueOnly' => true,
+ *      'asImage'    => false,
+ * ] 
+ */
 // Valid options are:
 $options = [
-    'logDir'          => '/path/to/some/dir/logs',
-    'imageDir'        => '/path/to/some/dir/images',
-    'imageExt'        => '.gif', // '.png', '.jpg' etc. default images are GIF images
-    'useImages'       => true, // true = images, false = plain text
-    'useFileLocking'  => true, // recommended = true for file locking on read/write operations for the log files
-    'countOnlyUnique' => true // true = counts only unique ip's, false = counts all
+    'logDir'     => '/path/to/some/dir/logs',
+    'countFile'  => 'counter.json',
+    'ipFile'     => 'ips.json',
+    'imageDir'   => '/path/to/some/dir/images',
+    'imageExt'   => '.png', // '.png', '.jpg' etc. default images are PNG images
+    'asImage'    => true,   // true = images, false = plain text
+    'uniqueOnly' => true    // true = counts only unique ip's, false = counts all
 ];
 
-// If no options are passed, uses defaults
-$counter = Counter::getInstance();
+/**
+ * When creating the counter instance, an Adapter with a valid Configuration is required.
+ * Currently, Simple Counter ships with one Adapter and it's corresponding Configuration:
+ *
+ * \Esi\SimpleCounter\Adapter\JsonFileAdapter
+ * \Esi\SimpleCounter\Configuration\JsonFileConfiguration
+ *
+ * \Esi\SimpleCounter\Counter can be used as a wrapper, but it is not necessary. For example:
+ *
+ * $counter = new Counter(
+ *     new JsonFileAdapter(
+ *         new JsonFileConfiguration($options)
+ *     )
+ * );
+ */
+// Pass custom options
+$counter = new JsonFileAdapter(
+    new JsonFileConfiguration($options)
+);
 
-// ... or maybe custom directories
-$counter = Counter::getInstance([
-    'logDir' => '/var/www/html/hitcounter/logs',
-    'imageDir' => '/var/www/html/hitcounter/images'
-]);
+// ... or if you wish to use defaults
+$counter = new JsonFileAdapter(
+    new JsonFileConfiguration()
+);
 
-// ... or maybe defaults, but I want to use custom images and higher quality PNG images
-$counter = Counter::getInstance([
-    'imageExt' => '.png'
-]);
+// ... or maybe you only want to switch to using images, for example
+$counter = new JsonFileAdapter(
+    new JsonFileConfiguration(['asImage' => true])
+);
 
-// Finally, call process(). You can either output it directly or save it to a variable if needed
-echo $counter->process();
+// Finally, call display(). You can either output it directly or save it to a variable if needed
+echo $counter->display();
 
 // ... or ...
 
-$hitCount = $counter->process();
+$hitCount = $counter->display();
 
-// ..
-// ...
 // ... do some stuff
 echo $hitCount;
 
 ?>
 ```
+
+
+## Handling Errors
+
+Simple Counter uses Exceptions for various issues that may arise throughout its process.
+
+Currently, most exceptions fall under `\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException`.
+
+These exceptions can be thrown if:
+
+* You pass an option that is not defined.
+* A given options value type does not match the allowed types.
+* When reading/writing to a file encounters an error, since it is likely due to a file name/location issue.
+* For invalid directories or files, in terms of `logDir`, `imageDir`, `countFile`, `ipFile`
+
 
 ## About
 
@@ -118,10 +182,9 @@ Issues are the quickest way to report a bug. If you find a bug or documentation 
 
 Simple Counter accepts contributions of code and documentation from the community. These contributions can be made in the form of Issues or [Pull Requests](http://help.github.com/send-pull-requests/) on the [Simple Counter repository](https://github.com/ericsizemore/simple_counter).
 
-Simple Counter is licensed under the GNU LGPL v3 license. When submitting new features or patches to Simple Counter, you are giving permission to license those features or patches under the GNU LGPL v3 license.
+Simple Counter is licensed under the MIT license. When submitting new features or patches to Simple Counter, you are giving permission to license those features or patches under the MIT license.
 
-Simple Counter tries to adhere to PHPStan level 9 with strict rules and bleeding edge. Please ensure any 
-contributions do as well.
+Simple Counter tries to adhere to PHPStan level 9 with strict rules and bleeding edge. Please ensure any contributions do as well.
 
 #### Guidelines
 
@@ -138,8 +201,9 @@ If you change anything that requires a change to documentation then you will nee
 ##### Documenting functions/variables (PHPDoc)
 
 Please ensure all new contributions adhere to:
-  * [PSR-5 PHPDoc](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md)
-  * [PSR-19 PHPDoc Tags](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc-tags.md)
+
+* [PSR-5 PHPDoc](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md)
+* [PSR-19 PHPDoc Tags](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc-tags.md)
 
 when documenting new functions, or changing existing documentation.
 
@@ -153,4 +217,5 @@ Eric Sizemore - <admin@secondversion.com> - <https://www.secondversion.com>
 
 ### License
 
-Simple Counter is licensed under the GNU LGPL v3 License - see the `COPYING` file for details
+Simple Counter v6.0.0 and newer: licensed under the MIT License. See the `LICENSE.md` file for details.
+Simple Counter v5.0.1 and older: licensed under the GNU LGPL v3 License. See the `LICENSE-pre-v6.md` file for details.

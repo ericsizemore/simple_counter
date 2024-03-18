@@ -1,6 +1,15 @@
 <?php
 
-// Turn on all errors.
-error_reporting(E_ALL);
+declare(strict_types=1);
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+/**
+ * This file is part of Esi\SimpleCounter.
+ *
+ * (c) Eric Sizemore <https://github.com/ericsizemore>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE.md file that was distributed with this source code.
+ */
+\error_reporting(\E_ALL);
+
+require_once \dirname(__DIR__) . '/vendor/autoload.php';
