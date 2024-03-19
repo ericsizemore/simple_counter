@@ -23,6 +23,11 @@ use Esi\SimpleCounter\Interface\CounterInterface;
 readonly class Counter
 {
     /**
+     * Current Simple Counter package version.
+     */
+    public const VERSION = '6.0.0';
+
+    /**
      * $adapter should be one of the available Adapters that has already
      * been instantiated with their relevant Configuration.
      */

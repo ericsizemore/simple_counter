@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter\Interface;
 
-use Esi\SimpleCounter\Configuration\DatabaseConfiguration;
 use Esi\SimpleCounter\Configuration\JsonFileConfiguration;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;

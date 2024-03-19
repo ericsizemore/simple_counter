@@ -36,7 +36,7 @@ use function rtrim;
  *
  * @see \Esi\SimpleCounter\Tests\JsonFileAdapterTest
  */
-final class JsonFileConfiguration implements ConfigurationInterface
+final readonly class JsonFileConfiguration implements ConfigurationInterface
 {
     /**
      * @var JsonFileOptions

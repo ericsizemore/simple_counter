@@ -33,6 +33,7 @@ use const LOCK_EX;
 
 /**
  * @phpstan-import-type JsonFileOptions from JsonFileConfiguration
+ *
  * @see \Esi\SimpleCounter\Tests\JsonFileAdapterTest
  */
 final readonly class JsonFileAdapter implements CounterInterface
@@ -56,30 +57,18 @@ final readonly class JsonFileAdapter implements CounterInterface
 
     public function fetchCurrentCount(): int
     {
-        /** @var string $currentCount */
-        $currentCount = $this->readWrite('logs');
-
         /** @var stdClass $currentCount */
-        $currentCount = (object) json_decode($currentCount);
+        $currentCount = (object) json_decode((string) $this->readWrite('logs'));
 
-        /** @var int $currentCount */
-        $currentCount = (int) $currentCount->currentCount;
-
-        return $currentCount;
+        return (int) $currentCount->currentCount;
     }
 
     public function fetchCurrentIpList(): array
     {
-        /** @var string $currentIpData */
-        $currentIpData = $this->readWrite('ips');
-
         /** @var stdClass $currentIpData */
-        $currentIpData = json_decode($currentIpData);
+        $currentIpData = json_decode((string) $this->readWrite('ips'));
 
-        /** @var list<string> $currentIpData */
-        $currentIpData = $currentIpData->ipList;
-
-        return array_values(array_filter($currentIpData));
+        return array_values(array_filter($currentIpData->ipList));
     }
 
     /**

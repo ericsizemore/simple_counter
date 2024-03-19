@@ -29,6 +29,7 @@ Simply replace the version numbers depending on which set of changes you wish to
   * `Interface\CounterInterface` which defines methods that must be implemented in each adapter.
   * `Interface\ConfigurationInterface` which defines methods that must be implemented in each Adapter configuration.
   * `symonfy/options-resolver` dependency added to handle counter options.
+  * `scripts/convertFiles.php` which can be used by those moving from version <5 of the library, to convert their `*.txt` counter/ips files to json.
 
 ### Removed
 
