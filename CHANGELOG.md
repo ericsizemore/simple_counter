@@ -35,14 +35,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * Removed `0-9` `.gif` images in `counter/images/`. *See above, replaced with new icons*
 
 
-## 5.0.1 (2024-03-04)
+## [5.0.1] - 2024-03-04
 
 ### CHANGED
 
   * Updated `Esi\Utility` to `2.0.0`
 
 
-## 5.0.0 (2024-01-11)
+## [5.0.0] - 2024-01-11
 
 NOTE: Not backwards compatible with prior SimpleCounter versions.
 
