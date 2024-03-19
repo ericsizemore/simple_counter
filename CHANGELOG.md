@@ -1,12 +1,22 @@
-# CHANGELOG
-A not so exhaustive list of changes for each release.
+# Changelog
 
-For a more detailed listing of changes between each version, 
-you can use the following url: https://github.com/ericsizemore/simple_counter/compare/v5.0.1...v6.0.0. 
+All notable changes to this project will be documented in this file.
 
-Simply replace the version numbers depending on which set of changes you wish to see.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 6.0.0 (work in progress)
+## [Unreleased]
+
+### Added
+
+  * `Adapter\JsonFileAdapter` which is default, and currently only, available adapter.
+  * `Adapter\FormatterTrait` which will be used by Adapters to handle formatting the count display.
+  * `Configuration\JsonFileConfiguration` which is the default, and currently only, available Adapter configuration.
+    * Used by `Adapter\JsonFileAdapter`
+  * `Interface\CounterInterface` which defines methods that must be implemented in each adapter.
+  * `Interface\ConfigurationInterface` which defines methods that must be implemented in each Adapter configuration.
+  * `symonfy/options-resolver` dependency added to handle counter options.
+  * `scripts/convertFiles.php` which can be used by those moving from version <5 of the library, to convert their `*.txt` counter/ips files to json.
 
 ### Changed
 
@@ -20,17 +30,6 @@ Simply replace the version numbers depending on which set of changes you wish to
   * `Esi\SimpleCounter\Counter` is now just a wrapper for one of the `*Adapter` classes found in `src/Adapter/`.
   * Unit tests completely rewritten.
 
-### Added
-
-  * `Adapter\JsonFileAdapter` which is default, and currently only, available adapter.
-  * `Adapter\FormatterTrait` which will be used by Adapters to handle formatting the count display.
-  * `Configuration\JsonFileConfiguration` which is the default, and currently only, available Adapter configuration.
-    * Used by `Adapter\JsonFileAdapter`
-  * `Interface\CounterInterface` which defines methods that must be implemented in each adapter.
-  * `Interface\ConfigurationInterface` which defines methods that must be implemented in each Adapter configuration.
-  * `symonfy/options-resolver` dependency added to handle counter options.
-  * `scripts/convertFiles.php` which can be used by those moving from version <5 of the library, to convert their `*.txt` counter/ips files to json.
-
 ### Removed
 
   * Removed `0-9` `.gif` images in `counter/images/`. *See above, replaced with new icons*
@@ -38,11 +37,22 @@ Simply replace the version numbers depending on which set of changes you wish to
 
 ## 5.0.1 (2024-03-04)
 
+### CHANGED
+
   * Updated `Esi\Utility` to `2.0.0`
+
 
 ## 5.0.0 (2024-01-11)
 
 NOTE: Not backwards compatible with prior SimpleCounter versions.
+
+### Added
+
+  * Added `checkLogFiles` and `checkDirectories` as strictly helper functions, that check the log and image directories and log files on instantiation.
+  * Added PHP-CS-Fixer and Rector as dev dependencies.
+  * Added PHPStan for static analysis
+  * Added PHPUnit for unit testing.
+  * Implements #5 (https://github.com/ericsizemore/simple_counter/issues/5)
 
 ### Changed
 
@@ -54,19 +64,12 @@ NOTE: Not backwards compatible with prior SimpleCounter versions.
       * Must be set upon instantiation with `getInstance($options)`. See README.md for more information.
   * Split `readWriteFile` into `read` and `write`.
 
-### Added
-
-  * Added `checkLogFiles` and `checkDirectories` as strictly helper functions, that check the log and image directories and log files on instantiation.
-  * Added PHP-CS-Fixer and Rector as dev dependencies.
-  * Added PHPStan for static analysis
-  * Added PHPUnit for unit testing.
-  * Implements #5 (https://github.com/ericsizemore/simple_counter/issues/5)
-
-### Removed
-
-  * None
-
 
 ### Pre-5.0
 
   * Unfortunately, no changelog was kept prior to v5.0
+
+
+[unreleased]: https://github.com/ericsizemore/simple_counter/compare/5.0.x...6.x-dev
+[5.0.1]: https://github.com/ericsizemore/simple_counter/compare/v5.0.0...v5.0.1
+[5.0.0]: https://github.com/ericsizemore/simple_counter/compare/4.0.x...v5.0.0
