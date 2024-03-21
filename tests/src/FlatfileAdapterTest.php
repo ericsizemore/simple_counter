@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter\Tests;
 
-use Esi\SimpleCounter\Adapter\JsonFileAdapter;
-use Esi\SimpleCounter\Configuration\JsonFileConfiguration;
+use Esi\SimpleCounter\Adapter\FlatfileAdapter;
+use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
 use Esi\SimpleCounter\Counter;
 use Esi\Utility\Arrays;
 use Esi\Utility\Environment;
@@ -34,9 +34,9 @@ use const DIRECTORY_SEPARATOR;
 /**
  * @internal
  */
-#[CoversClass(JsonFileAdapter::class)]
-#[CoversClass(JsonFileConfiguration::class)]
-class JsonFileAdapterTest extends TestCase
+#[CoversClass(FlatfileAdapter::class)]
+#[CoversClass(FlatfileConfiguration::class)]
+class FlatfileAdapterTest extends TestCase
 {
     /**
      * @var string[]
@@ -83,10 +83,24 @@ class JsonFileAdapterTest extends TestCase
         Filesystem::fileWrite(self::$logFiles['ipFile'], '{"ipList":[""]}');
     }
 
+    #[TestDox('getOption is able to return the value of a given option.')]
+    public function testGetOption(): void
+    {
+        $counter = new FlatfileAdapter(new FlatfileConfiguration(
+            [
+                'logDir'    => self::$testDirectories['logDir'],
+                'imageDir'  => self::$testDirectories['imageDir'],
+            ]
+        ));
+
+        self::assertSame(self::$testDirectories['logDir'], $counter->getOption('logDir'));
+    }
+
+    #[TestDox('An exception of InvalidOptionsException is thrown when providing an invalid location to the count file.')]
     public function testInvalidLocationForCounterFile(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        new JsonFileAdapter(new JsonFileConfiguration(
+        new FlatfileAdapter(new FlatfileConfiguration(
             [
                 'logDir'    => self::$testDirectories['logDir'],
                 'imageDir'  => self::$testDirectories['imageDir'],
@@ -95,10 +109,11 @@ class JsonFileAdapterTest extends TestCase
         ));
     }
 
+    #[TestDox('An exception of InvalidOptionsException is thrown when providing an invalid location to the ip file.')]
     public function testInvalidLocationForIpFile(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        new JsonFileAdapter(new JsonFileConfiguration(
+        new FlatfileAdapter(new FlatfileConfiguration(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -107,11 +122,11 @@ class JsonFileAdapterTest extends TestCase
         ));
     }
 
-    #[TestDox('')]
+    #[TestDox('An exception of InvalidOptionsException is thrown when providing the wrong file extension/format for the count file.')]
     public function testInvalidOptionForCountFile(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        $counter = new JsonFileAdapter(new JsonFileConfiguration(
+        $counter = new FlatfileAdapter(new FlatfileConfiguration(
             [
                 'logDir'    => self::$testDirectories['logDir'],
                 'imageDir'  => self::$testDirectories['imageDir'],
@@ -126,7 +141,7 @@ class JsonFileAdapterTest extends TestCase
     public function testInvalidOptionForImageDirectory(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        $counter = new JsonFileAdapter(new JsonFileConfiguration(
+        $counter = new FlatfileAdapter(new FlatfileConfiguration(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testInvalidDirectories['imageDir'],
@@ -136,11 +151,11 @@ class JsonFileAdapterTest extends TestCase
         $counter->display();
     }
 
-    #[TestDox('')]
+    #[TestDox('An exception of InvalidOptionsException is thrown when providing the wrong file extension/format for the ip file.')]
     public function testInvalidOptionForIpFile(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        $counter = new JsonFileAdapter(new JsonFileConfiguration(
+        $counter = new FlatfileAdapter(new FlatfileConfiguration(
             [
                 'logDir'    => self::$testDirectories['logDir'],
                 'imageDir'  => self::$testDirectories['imageDir'],
@@ -155,7 +170,7 @@ class JsonFileAdapterTest extends TestCase
     public function testInvalidOptionForLogDirectory(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        $counter = new JsonFileAdapter(new JsonFileConfiguration(
+        $counter = new FlatfileAdapter(new FlatfileConfiguration(
             [
                 'logDir'   => self::$testInvalidDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -165,10 +180,10 @@ class JsonFileAdapterTest extends TestCase
         $counter->display();
     }
 
-    #[TestDox('')]
+    #[TestDox('Instantiating the FlatfileAdapter with default options works properly and accurately.')]
     public function testWithDefaultOptions(): void
     {
-        $counter = new JsonFileAdapter(new JsonFileConfiguration(
+        $counter = new FlatfileAdapter(new FlatfileConfiguration(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -185,10 +200,10 @@ class JsonFileAdapterTest extends TestCase
         self::assertSame($count, $countTwo);
     }
 
-    #[TestDox('')]
+    #[TestDox('Instantiating the FlatfileAdapter with a missing dot at the beginning of the imageExt adds the dot.')]
     public function testWithDefaultOptionsMissingPeriodOnImageExtension(): void
     {
-        $counter = new JsonFileAdapter(new JsonFileConfiguration(
+        $counter = new FlatfileAdapter(new FlatfileConfiguration(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -196,16 +211,18 @@ class JsonFileAdapterTest extends TestCase
             ]
         ));
 
+        self::assertSame('.png', $counter->getOption('imageExt'));
+
         $count = $counter->display();
 
         self::assertNotEmpty($count);
         self::assertMatchesRegularExpression('/([A-Za-z]+( [A-Za-z]+)+)\s#[0-9]+/i', $count);
     }
 
-    #[TestDox('')]
+    #[TestDox('A new visitor (or IP) increments the counter.')]
     public function testWithDefaultOptionsNewVisitor(): void
     {
-        $counter = new JsonFileAdapter(new JsonFileConfiguration(
+        $counter = new FlatfileAdapter(new FlatfileConfiguration(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -227,10 +244,10 @@ class JsonFileAdapterTest extends TestCase
         Arrays::set($_SERVER, 'REMOTE_ADDR', '127.0.0.1');
     }
 
-    #[TestDox('')]
+    #[TestDox('Instantiating the FlatfileAdapter with asImage set to true will display the count as images.')]
     public function testWithDefaultOptionsWithImages(): void
     {
-        $counter = new JsonFileAdapter(new JsonFileConfiguration(
+        $counter = new FlatfileAdapter(new FlatfileConfiguration(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -241,12 +258,13 @@ class JsonFileAdapterTest extends TestCase
         $count = $counter->display();
 
         self::assertNotEmpty($count);
+        self::assertTrue(\str_starts_with($count, '<img '));
     }
 
-    #[TestDox('')]
+    #[TestDox('Instantiating the FlatfileAdapter with uniqueOnly set to false properly increments the count.')]
     public function testWithDefaultOptionsWithoutUniqueOnly(): void
     {
-        $counter = new JsonFileAdapter(new JsonFileConfiguration(
+        $counter = new FlatfileAdapter(new FlatfileConfiguration(
             [
                 'logDir'     => self::$testDirectories['logDir'],
                 'imageDir'   => self::$testDirectories['imageDir'],

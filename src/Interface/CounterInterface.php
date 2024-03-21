@@ -35,4 +35,9 @@ interface CounterInterface
      * @return list<string>
      */
     public function fetchCurrentIpList(): array;
+
+    /**
+     * Returns the given option, if it exists.
+     */
+    public function getOption(string $option): string | bool | null;
 }

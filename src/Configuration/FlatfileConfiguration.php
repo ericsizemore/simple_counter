@@ -24,22 +24,15 @@ use function dirname;
 use function rtrim;
 
 /**
- * @phpstan-type JsonFileOptions = array{
- *     logDir?: string,
- *     countFile?: string,
- *     ipFile?: string,
- *     imageDir?: string,
- *     imageExt?: string,
- *     uniqueOnly?: bool,
- *     asImage?: bool
- * }|array{}
+ * @phpstan-import-type BaseAdapterOptions from \Esi\SimpleCounter\Counter
+ * @phpstan-import-type FlatfileOptions from \Esi\SimpleCounter\Counter
  *
- * @see \Esi\SimpleCounter\Tests\JsonFileAdapterTest
+ * @see \Esi\SimpleCounter\Tests\FlatfileAdapterTest
  */
-final readonly class JsonFileConfiguration implements ConfigurationInterface
+final readonly class FlatfileConfiguration implements ConfigurationInterface
 {
     /**
-     * @var JsonFileOptions
+     * @var BaseAdapterOptions&FlatfileOptions
      */
     private array $options;
 

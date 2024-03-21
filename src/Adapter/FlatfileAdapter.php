@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Esi\SimpleCounter\Adapter;
 
 use Esi\SimpleCounter\Adapter\FormatterTrait;
-use Esi\SimpleCounter\Configuration\JsonFileConfiguration;
+use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
 use Esi\SimpleCounter\Interface\CounterInterface;
 use Esi\Utility\Environment;
 use Esi\Utility\Filesystem;
@@ -32,15 +32,13 @@ use const DIRECTORY_SEPARATOR;
 use const LOCK_EX;
 
 /**
- * @phpstan-import-type JsonFileOptions from JsonFileConfiguration
- *
- * @see \Esi\SimpleCounter\Tests\JsonFileAdapterTest
+ * @see \Esi\SimpleCounter\Tests\FlatfileAdapterTest
  */
-final readonly class JsonFileAdapter implements CounterInterface
+final readonly class FlatfileAdapter implements CounterInterface
 {
     use FormatterTrait;
 
-    public function __construct(private JsonFileConfiguration $configuration)
+    public function __construct(private FlatfileConfiguration $configuration)
     {
         $this->validateLogFiles();
     }
@@ -69,6 +67,11 @@ final readonly class JsonFileAdapter implements CounterInterface
         $currentIpData = json_decode((string) $this->readWrite('ips'));
 
         return array_values(array_filter($currentIpData->ipList));
+    }
+
+    public function getOption(string $option): string | bool | null
+    {
+        return $this->configuration->getOption($option);
     }
 
     /**

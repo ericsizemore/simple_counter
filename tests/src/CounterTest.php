@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter\Tests;
 
-use Esi\SimpleCounter\Adapter\JsonFileAdapter;
-use Esi\SimpleCounter\Configuration\JsonFileConfiguration;
+use Esi\SimpleCounter\Adapter\FlatfileAdapter;
+use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
 use Esi\SimpleCounter\Counter;
 use Esi\Utility\Arrays;
 use Esi\Utility\Environment;
@@ -33,8 +33,8 @@ use const DIRECTORY_SEPARATOR;
  * @internal
  */
 #[CoversClass(Counter::class)]
-#[UsesClass(JsonFileAdapter::class)]
-#[UsesClass(JsonFileConfiguration::class)]
+#[UsesClass(FlatfileAdapter::class)]
+#[UsesClass(FlatfileConfiguration::class)]
 class CounterTest extends TestCase
 {
     private ?Counter $counter;
@@ -64,7 +64,7 @@ class CounterTest extends TestCase
             'ipFile'    => sprintf('%s%s%s', self::$testDirectories['logDir'], DIRECTORY_SEPARATOR, 'ips.json'),
         ];
 
-        $this->counter = new Counter(new JsonFileAdapter(new JsonFileConfiguration(
+        $this->counter = new Counter(new FlatfileAdapter(new FlatfileConfiguration(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -83,7 +83,7 @@ class CounterTest extends TestCase
         Filesystem::fileWrite(self::$logFiles['ipFile'], '{"ipList":[""]}');
     }
 
-    #[TestDox('')]
+    #[TestDox('fetchCurrentCount is able to return the current count data accurately.')]
     public function testFetchCurrentCount(): void
     {
         self::assertInstanceOf(Counter::class, $this->counter);
@@ -96,7 +96,7 @@ class CounterTest extends TestCase
         self::assertSame(1, $newCount);
     }
 
-    #[TestDox('')]
+    #[TestDox('fetchCurrentIpList is able to return the current ip data accurately.')]
     public function testFetchCurrentIpList(): void
     {
         self::assertInstanceOf(Counter::class, $this->counter);
@@ -105,7 +105,14 @@ class CounterTest extends TestCase
         self::assertSame(['127.0.0.1'], $this->counter->fetchCurrentIpList());
     }
 
-    #[TestDox('')]
+    #[TestDox('getOption is able to return the value of a given option.')]
+    public function testGetOption(): void
+    {
+        self::assertInstanceOf(Counter::class, $this->counter);
+        self::assertSame(self::$testDirectories['logDir'], $this->counter->getOption('logDir'));
+    }
+
+    #[TestDox('Was able to instantiate Counter with default options and retrieve count information.')]
     public function testWithDefaultOptions(): void
     {
         self::assertInstanceOf(Counter::class, $this->counter);

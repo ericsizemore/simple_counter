@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter\Interface;
 
-use Esi\SimpleCounter\Configuration\JsonFileConfiguration;
+use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @phpstan-import-type JsonFileOptions from JsonFileConfiguration
+ * @phpstan-import-type BaseAdapterOptions from \Esi\SimpleCounter\Counter
+ * @phpstan-import-type FlatfileOptions from \Esi\SimpleCounter\Counter
  */
 interface ConfigurationInterface
 {
@@ -27,7 +28,7 @@ interface ConfigurationInterface
      *
      * The allowed types for $options will be updated as new Adapters are added.
      *
-     * @param JsonFileOptions $options
+     * @param BaseAdapterOptions&FlatfileOptions $options
      */
     public function __construct(array $options);
 

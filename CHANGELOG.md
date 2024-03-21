@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-  * `Adapter\JsonFileAdapter` which is default, and currently only, available adapter.
+  * `Adapter\FlatfileAdapter` which is default, and currently only, available adapter.
   * `Adapter\FormatterTrait` which will be used by Adapters to handle formatting the count display.
-  * `Configuration\JsonFileConfiguration` which is the default, and currently only, available Adapter configuration.
-    * Used by `Adapter\JsonFileAdapter`
+  * `Configuration\FlatfileConfiguration` which is the default, and currently only, available Adapter configuration.
+    * Used by `Adapter\FlatfileAdapter`
   * `Interface\CounterInterface` which defines methods that must be implemented in each adapter.
   * `Interface\ConfigurationInterface` which defines methods that must be implemented in each Adapter configuration.
   * `symonfy/options-resolver` dependency added to handle counter options.
