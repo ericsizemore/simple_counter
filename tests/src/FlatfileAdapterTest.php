@@ -28,6 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use function dirname;
 use function sprintf;
+use function str_starts_with;
 
 use const DIRECTORY_SEPARATOR;
 
@@ -88,8 +89,8 @@ class FlatfileAdapterTest extends TestCase
     {
         $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
-                'logDir'    => self::$testDirectories['logDir'],
-                'imageDir'  => self::$testDirectories['imageDir'],
+                'logDir'   => self::$testDirectories['logDir'],
+                'imageDir' => self::$testDirectories['imageDir'],
             ]
         ));
 
@@ -172,6 +173,34 @@ class FlatfileAdapterTest extends TestCase
         ));
     }
 
+    #[TestDox('Instantiating the FlatfileAdapter with a custom visitorTextString properly displays the count with that text.')]
+    public function testWithCustomVisitorTextString(): void
+    {
+        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
+            [
+                'logDir'            => self::$testDirectories['logDir'],
+                'imageDir'          => self::$testDirectories['imageDir'],
+                'visitorTextString' => 'Count: #%s',
+            ]
+        ));
+
+        $count = $counter->display();
+        self::assertMatchesRegularExpression('/[A-Za-z]+:\s+#[0-9]+/i', $count);
+    }
+
+    #[TestDox('Instantiating the FlatfileAdapter with a custom visitorTextString not including %s throws an exception.')]
+    public function testWithCustomVisitorTextStringInvalidFormat(): void
+    {
+        $this->expectException(InvalidOptionsException::class);
+        new FlatfileAdapter(FlatfileConfiguration::initOptions(
+            [
+                'logDir'            => self::$testDirectories['logDir'],
+                'imageDir'          => self::$testDirectories['imageDir'],
+                'visitorTextString' => 'Count: #',
+            ]
+        ));
+    }
+
     #[TestDox('Instantiating the FlatfileAdapter with default options works properly and accurately.')]
     public function testWithDefaultOptions(): void
     {
@@ -250,7 +279,7 @@ class FlatfileAdapterTest extends TestCase
         $count = $counter->display();
 
         self::assertNotEmpty($count);
-        self::assertTrue(\str_starts_with($count, '<img '));
+        self::assertTrue(str_starts_with($count, '<img '));
     }
 
     #[TestDox('Instantiating the FlatfileAdapter with uniqueOnly set to false properly increments the count.')]

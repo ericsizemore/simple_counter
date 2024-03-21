@@ -55,7 +55,7 @@ final readonly class FlatfileAdapter implements AdapterInterface
 
     public function fetchCurrentCount(): int
     {
-        /** @var stdClass $currentCount */
+        /** @var \stdClass $currentCount */
         $currentCount = (object) json_decode((string) $this->readWrite('logs'));
 
         return (int) $currentCount->currentCount;
@@ -63,7 +63,7 @@ final readonly class FlatfileAdapter implements AdapterInterface
 
     public function fetchCurrentIpList(): array
     {
-        /** @var stdClass $currentIpData */
+        /** @var \stdClass $currentIpData */
         $currentIpData = json_decode((string) $this->readWrite('ips'));
 
         return array_values(array_filter($currentIpData->ipList));

@@ -10,7 +10,6 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE.md file that was distributed with this source code.
  */
-
 /**
  * Edit paths below, if needed.
  */
@@ -46,7 +45,7 @@ function convertCounterFile(string $oldCounterFile, string $newCounterFile): voi
         echo "Converting data...<br/>\n";
     }
 
-    $countData = ['currentCount' => $countData];
+    $countData = ['currentCount' => $countData, 'dailyCounts' => ['date' => \date('Y-m-d'), 'count' => $countData]];
 
     $bytesWritten = \file_put_contents($newCounterFile, \json_encode($countData), \LOCK_EX);
 

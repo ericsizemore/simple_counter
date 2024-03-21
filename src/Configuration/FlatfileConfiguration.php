@@ -47,21 +47,17 @@ final class FlatfileConfiguration implements ConfigurationInterface
         self::$options = $optionsResolver->resolve($options);
     }
 
-    public static function initOptions(array $options = []): FlatfileConfiguration
-    {
-        return new self($options);
-    }
-
     public static function configureOptions(OptionsResolver $optionsResolver): void
     {
         $optionsResolver->setDefaults([
-            'logDir'     => dirname(__DIR__, 2) . '/counter/logs/',
-            'countFile'  => 'counter.json',
-            'ipFile'     => 'ips.json',
-            'imageDir'   => dirname(__DIR__, 2) . '/counter/images/',
-            'imageExt'   => '.png',
-            'uniqueOnly' => true,
-            'asImage'    => false,
+            'logDir'            => dirname(__DIR__, 2) . '/counter/logs/',
+            'countFile'         => 'counter.json',
+            'ipFile'            => 'ips.json',
+            'imageDir'          => dirname(__DIR__, 2) . '/counter/images/',
+            'imageExt'          => '.png',
+            'uniqueOnly'        => true,
+            'asImage'           => false,
+            'visitorTextString' => 'You are visitor #%s',
         ])
             ->setAllowedTypes('logDir', 'string')
             ->setAllowedTypes('countFile', 'string')
@@ -70,10 +66,12 @@ final class FlatfileConfiguration implements ConfigurationInterface
             ->setAllowedTypes('imageExt', 'string')
             ->setAllowedTypes('uniqueOnly', 'bool')
             ->setAllowedTypes('asImage', 'bool')
+            ->setAllowedTypes('visitorTextString', 'string')
             ->setAllowedValues('logDir', static fn (string $value): bool => Filesystem::isDirectory($value))
             ->setAllowedValues('imageDir', static fn (string $value): bool => Filesystem::isDirectory($value))
             ->setAllowedValues('countFile', static fn (string $value): bool => Strings::endsWith($value, '.json'))
             ->setAllowedValues('ipFile', static fn (string $value): bool => Strings::endsWith($value, '.json'))
+            ->setAllowedValues('visitorTextString', static fn (string $value): bool => Strings::doesContain($value, '%s'))
             ->setNormalizer('logDir', static fn (Options $options, string $value): string => rtrim($value, '/\\'))
             ->setNormalizer('imageDir', static fn (Options $options, string $value): string => rtrim($value, '/\\'))
             ->setNormalizer('imageExt', static function (Options $options, string $value): string {
@@ -88,5 +86,10 @@ final class FlatfileConfiguration implements ConfigurationInterface
     public static function getOption(string $option): string | bool | null
     {
         return self::$options[$option] ?? null;
+    }
+
+    public static function initOptions(array $options = []): FlatfileConfiguration
+    {
+        return new self($options);
     }
 }

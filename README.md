@@ -79,31 +79,44 @@ use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
  *     imageDir: string,
  *     imageExt: string,
  *     uniqueOnly: bool,
- *     asImage: bool
+ *     asImage: bool,
+ *     visitorTextString?: string
  * }
  *
  * Default values are:
  *
  * [
- *      'logDir'     => dirname(__DIR__, 2) . '/counter/logs/',
- *      'countFile'  => 'counter.json',
- *      'ipFile'     => 'ips.json',
- *      'imageDir'   => dirname(__DIR__, 2) . '/counter/images/',
- *      'imageExt'   => '.png',
- *      'uniqueOnly' => true,
- *      'asImage'    => false,
+ *      'logDir'            => dirname(__DIR__, 2) . '/counter/logs/',
+ *      'countFile'         => 'counter.json',
+ *      'ipFile'            => 'ips.json',
+ *      'imageDir'          => dirname(__DIR__, 2) . '/counter/images/',
+ *      'imageExt'          => '.png',
+ *      'uniqueOnly'        => true,
+ *      'asImage'           => false,
+ *      'visitorTextString' => 'You are visitor #%s',
  * ] 
  */
 // Valid options are:
 $options = [
-    'logDir'     => '/path/to/some/dir/logs',
-    'countFile'  => 'counter.json',
-    'ipFile'     => 'ips.json',
-    'imageDir'   => '/path/to/some/dir/images',
-    'imageExt'   => '.png', // '.png', '.jpg' etc. default images are PNG images
-    'asImage'    => true,   // true = images, false = plain text
-    'uniqueOnly' => true    // true = counts only unique ip's, false = counts all
+    'logDir'            => '/path/to/some/dir/logs',
+    'countFile'         => 'counter.json',
+    'ipFile'            => 'ips.json',
+    'imageDir'          => '/path/to/some/dir/images',
+    'imageExt'          => '.png', // '.png', '.jpg' etc. default images are PNG images
+    'asImage'           => true,   // true = images, false = plain text
+    'uniqueOnly'        => true,   // true = counts only unique ip's, false = counts all,
+    'visitorTextString' => 'You are visitor #%s',
 ];
+
+/**
+ * Important note regarding the 'visitorTextString'. This is the text that is shown if 'asImage' is false.
+ *
+ * For example, by default, it would show: You are visitor #123.
+ * If you wanted to change it to something like: Counter: #123,
+ * you would set the 'visitorTextString' option to:
+ * 
+ * 'Counter: #%s'
+ */
 
 /**
  * When creating the counter instance, an Adapter with a valid Configuration is required.

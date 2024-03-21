@@ -31,9 +31,9 @@ use Esi\SimpleCounter\Interface\AdapterInterface;
  *     imageDir?: string,
  *     imageExt?: string,
  *     uniqueOnly?: bool,
- *     asImage?: bool
+ *     asImage?: bool,
+ *     visitorTextString?: string
  * }|array{}
- *
  * @phpstan-type FlatfileOptions = array{
  *     logDir?: string,
  *     countFile?: string,
