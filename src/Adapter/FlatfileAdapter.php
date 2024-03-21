@@ -15,7 +15,7 @@ namespace Esi\SimpleCounter\Adapter;
 
 use Esi\SimpleCounter\Adapter\FormatterTrait;
 use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
-use Esi\SimpleCounter\Interface\CounterInterface;
+use Esi\SimpleCounter\Interface\AdapterInterface;
 use Esi\Utility\Environment;
 use Esi\Utility\Filesystem;
 use stdClass;
@@ -34,7 +34,7 @@ use const LOCK_EX;
 /**
  * @see \Esi\SimpleCounter\Tests\FlatfileAdapterTest
  */
-final readonly class FlatfileAdapter implements CounterInterface
+final readonly class FlatfileAdapter implements AdapterInterface
 {
     use FormatterTrait;
 
@@ -71,7 +71,7 @@ final readonly class FlatfileAdapter implements CounterInterface
 
     public function getOption(string $option): string | bool | null
     {
-        return $this->configuration->getOption($option);
+        return $this->configuration::getOption($option);
     }
 
     /**
@@ -80,13 +80,13 @@ final readonly class FlatfileAdapter implements CounterInterface
     private function readWrite(string $file, ?string $data = null): string | false | int
     {
         /** @var string $logDir */
-        $logDir = $this->configuration->getOption('logDir');
+        $logDir = $this->configuration::getOption('logDir');
 
         /** @var string $countFile */
-        $countFile = $this->configuration->getOption('countFile');
+        $countFile = $this->configuration::getOption('countFile');
 
         /** @var string $ipFile */
-        $ipFile = $this->configuration->getOption('ipFile');
+        $ipFile = $this->configuration::getOption('ipFile');
 
         $filePaths = [
             'logs' => sprintf('%s%s%s', $logDir, DIRECTORY_SEPARATOR, $countFile),
@@ -110,7 +110,7 @@ final readonly class FlatfileAdapter implements CounterInterface
         $newCount = $currentCount + 1;
         $newCount = (string) json_encode(['currentCount' => (string) $newCount]);
 
-        if ($this->configuration->getOption('uniqueOnly') === true) {
+        if ($this->configuration::getOption('uniqueOnly') === true) {
             $visitorIp = Environment::ipAddress();
 
             $currentIpData = $this->fetchCurrentIpList();
@@ -137,14 +137,14 @@ final readonly class FlatfileAdapter implements CounterInterface
     private function validateLogFiles(): void
     {
         /** @var string $logDir */
-        $logDir = $this->configuration->getOption('logDir');
+        $logDir = $this->configuration::getOption('logDir');
 
         /** @var string $countFile */
-        $countFile = $this->configuration->getOption('countFile');
+        $countFile = $this->configuration::getOption('countFile');
         $countFile = sprintf('%s%s%s', $logDir, DIRECTORY_SEPARATOR, $countFile);
 
         /** @var string $ipFile */
-        $ipFile = $this->configuration->getOption('ipFile');
+        $ipFile = $this->configuration::getOption('ipFile');
         $ipFile = sprintf('%s%s%s', $logDir, DIRECTORY_SEPARATOR, $ipFile);
 
         if (!Filesystem::isFile($countFile)) {

@@ -29,22 +29,30 @@ use function rtrim;
  *
  * @see \Esi\SimpleCounter\Tests\FlatfileAdapterTest
  */
-final readonly class FlatfileConfiguration implements ConfigurationInterface
+final class FlatfileConfiguration implements ConfigurationInterface
 {
     /**
      * @var BaseAdapterOptions&FlatfileOptions
      */
-    private array $options;
+    private static array $options = [];
 
-    public function __construct(array $options = [])
+    /**
+     * @param BaseAdapterOptions&FlatfileOptions $options
+     */
+    private function __construct(array $options = [])
     {
         $optionsResolver = new OptionsResolver();
-        $this->configureOptions($optionsResolver);
+        self::configureOptions($optionsResolver);
 
-        $this->options = $optionsResolver->resolve($options);
+        self::$options = $optionsResolver->resolve($options);
     }
 
-    public function configureOptions(OptionsResolver $optionsResolver): void
+    public static function initOptions(array $options = []): FlatfileConfiguration
+    {
+        return new self($options);
+    }
+
+    public static function configureOptions(OptionsResolver $optionsResolver): void
     {
         $optionsResolver->setDefaults([
             'logDir'     => dirname(__DIR__, 2) . '/counter/logs/',
@@ -77,8 +85,8 @@ final readonly class FlatfileConfiguration implements ConfigurationInterface
             });
     }
 
-    public function getOption(string $option): string | bool | null
+    public static function getOption(string $option): string | bool | null
     {
-        return $this->options[$option] ?? null;
+        return self::$options[$option] ?? null;
     }
 }

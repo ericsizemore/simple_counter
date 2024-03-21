@@ -64,7 +64,7 @@ class CounterTest extends TestCase
             'ipFile'    => sprintf('%s%s%s', self::$testDirectories['logDir'], DIRECTORY_SEPARATOR, 'ips.json'),
         ];
 
-        $this->counter = new Counter(new FlatfileAdapter(new FlatfileConfiguration(
+        $this->counter = new Counter(new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],

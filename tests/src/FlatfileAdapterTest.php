@@ -86,7 +86,7 @@ class FlatfileAdapterTest extends TestCase
     #[TestDox('getOption is able to return the value of a given option.')]
     public function testGetOption(): void
     {
-        $counter = new FlatfileAdapter(new FlatfileConfiguration(
+        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'    => self::$testDirectories['logDir'],
                 'imageDir'  => self::$testDirectories['imageDir'],
@@ -100,7 +100,7 @@ class FlatfileAdapterTest extends TestCase
     public function testInvalidLocationForCounterFile(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        new FlatfileAdapter(new FlatfileConfiguration(
+        new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'    => self::$testDirectories['logDir'],
                 'imageDir'  => self::$testDirectories['imageDir'],
@@ -113,7 +113,7 @@ class FlatfileAdapterTest extends TestCase
     public function testInvalidLocationForIpFile(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        new FlatfileAdapter(new FlatfileConfiguration(
+        new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -126,64 +126,56 @@ class FlatfileAdapterTest extends TestCase
     public function testInvalidOptionForCountFile(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        $counter = new FlatfileAdapter(new FlatfileConfiguration(
+        new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'    => self::$testDirectories['logDir'],
                 'imageDir'  => self::$testDirectories['imageDir'],
                 'countFile' => 'counter.txt',
             ]
         ));
-
-        $counter->display();
     }
 
     #[TestDox('New instance with a non-existing directory for "imageDir" throws InvalidOptionsException')]
     public function testInvalidOptionForImageDirectory(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        $counter = new FlatfileAdapter(new FlatfileConfiguration(
+        new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testInvalidDirectories['imageDir'],
             ]
         ));
-
-        $counter->display();
     }
 
     #[TestDox('An exception of InvalidOptionsException is thrown when providing the wrong file extension/format for the ip file.')]
     public function testInvalidOptionForIpFile(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        $counter = new FlatfileAdapter(new FlatfileConfiguration(
+        new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'    => self::$testDirectories['logDir'],
                 'imageDir'  => self::$testDirectories['imageDir'],
                 'countFile' => 'ips.txt',
             ]
         ));
-
-        $counter->display();
     }
 
     #[TestDox('New instance with a non-existing directory for "logDir" throws InvalidOptionsException')]
     public function testInvalidOptionForLogDirectory(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        $counter = new FlatfileAdapter(new FlatfileConfiguration(
+        new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testInvalidDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
             ]
         ));
-
-        $counter->display();
     }
 
     #[TestDox('Instantiating the FlatfileAdapter with default options works properly and accurately.')]
     public function testWithDefaultOptions(): void
     {
-        $counter = new FlatfileAdapter(new FlatfileConfiguration(
+        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -203,7 +195,7 @@ class FlatfileAdapterTest extends TestCase
     #[TestDox('Instantiating the FlatfileAdapter with a missing dot at the beginning of the imageExt adds the dot.')]
     public function testWithDefaultOptionsMissingPeriodOnImageExtension(): void
     {
-        $counter = new FlatfileAdapter(new FlatfileConfiguration(
+        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -222,7 +214,7 @@ class FlatfileAdapterTest extends TestCase
     #[TestDox('A new visitor (or IP) increments the counter.')]
     public function testWithDefaultOptionsNewVisitor(): void
     {
-        $counter = new FlatfileAdapter(new FlatfileConfiguration(
+        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -247,7 +239,7 @@ class FlatfileAdapterTest extends TestCase
     #[TestDox('Instantiating the FlatfileAdapter with asImage set to true will display the count as images.')]
     public function testWithDefaultOptionsWithImages(): void
     {
-        $counter = new FlatfileAdapter(new FlatfileConfiguration(
+        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -264,7 +256,7 @@ class FlatfileAdapterTest extends TestCase
     #[TestDox('Instantiating the FlatfileAdapter with uniqueOnly set to false properly increments the count.')]
     public function testWithDefaultOptionsWithoutUniqueOnly(): void
     {
-        $counter = new FlatfileAdapter(new FlatfileConfiguration(
+        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
             [
                 'logDir'     => self::$testDirectories['logDir'],
                 'imageDir'   => self::$testDirectories['imageDir'],

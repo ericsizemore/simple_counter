@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter;
 
-use Esi\SimpleCounter\Interface\CounterInterface;
+use Esi\SimpleCounter\Interface\AdapterInterface;
 
 /**
  * Essentially a wrapper for a given Adapter.
@@ -52,7 +52,7 @@ readonly class Counter
      * been instantiated with their relevant Configuration.
      */
     public function __construct(
-        private CounterInterface $adapter
+        private AdapterInterface $adapter
     ) {
         //
     }

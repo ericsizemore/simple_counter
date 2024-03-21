@@ -55,7 +55,7 @@ More information can be found in [Usage](#usage) below.
 
 **More detailed documentation is a work in progress.**
 
-Usage is fairly simple once installed. There is currently one option for the type of counter you wish to use, and that is the `JsonFileAdapter`. A `DatabaseAdapter` is slated for an upcoming release.
+Usage is fairly simple once installed. There is currently one option for the type of counter you wish to use, and that is the `FlatfileAdapter`. A `DatabaseAdapter` is slated for an upcoming release.
 
 Simply add the following code to the page where you want the counter to be shown:
 
@@ -66,8 +66,8 @@ Simply add the following code to the page where you want the counter to be shown
 require_once 'vendor/autoload.php';
 
 use Esi\SimpleCounter\Counter;
-use Esi\SimpleCounter\Adapter\JsonFileAdapter;
-use Esi\SimpleCounter\Configuration\JsonFileConfiguration;
+use Esi\SimpleCounter\Adapter\FlatfileAdapter;
+use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
 
 /**
  * $options is an array of:
@@ -109,30 +109,30 @@ $options = [
  * When creating the counter instance, an Adapter with a valid Configuration is required.
  * Currently, Simple Counter ships with one Adapter and it's corresponding Configuration:
  *
- * \Esi\SimpleCounter\Adapter\JsonFileAdapter
- * \Esi\SimpleCounter\Configuration\JsonFileConfiguration
+ * \Esi\SimpleCounter\Adapter\FlatfileAdapter
+ * \Esi\SimpleCounter\Configuration\FlatfileConfiguration
  *
  * \Esi\SimpleCounter\Counter can be used as a wrapper, but it is not necessary. For example:
  *
  * $counter = new Counter(
- *     new JsonFileAdapter(
- *         new JsonFileConfiguration($options)
+ *     new FlatfileAdapter(
+ *         FlatfileConfiguration::initOptions($options)
  *     )
  * );
  */
 // Pass custom options
-$counter = new JsonFileAdapter(
-    new JsonFileConfiguration($options)
+$counter = new FlatfileAdapter(
+    FlatfileConfiguration::initOptions($options)
 );
 
 // ... or if you wish to use defaults
-$counter = new JsonFileAdapter(
-    new JsonFileConfiguration()
+$counter = new FlatfileAdapter(
+    FlatfileConfiguration::initOptions()
 );
 
 // ... or maybe you only want to switch to using images, for example
-$counter = new JsonFileAdapter(
-    new JsonFileConfiguration(['asImage' => true])
+$counter = new FlatfileAdapter(
+    FlatfileConfiguration::initOptions(['asImage' => true])
 );
 
 // Finally, call display(). You can either output it directly or save it to a variable if needed
@@ -157,7 +157,7 @@ Currently, most exceptions fall under `\Symfony\Component\OptionsResolver\Except
 These exceptions can be thrown if:
 
 * You pass an option that is not defined.
-* A given options value type does not match the allowed types.
+* A given option's value type does not match the allowed types.
 * When reading/writing to a file encounters an error, since it is likely due to a file name/location issue.
 * For invalid directories or files, in terms of `logDir`, `imageDir`, `countFile`, `ipFile`
 

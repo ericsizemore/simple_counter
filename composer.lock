@@ -889,12 +889,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "55ea22d4c654dfd0e3939de62ad3908c6a8abbd7"
+                "reference": "957f1ad0a3f21948df8c5b98cd995884958a7385"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/55ea22d4c654dfd0e3939de62ad3908c6a8abbd7",
-                "reference": "55ea22d4c654dfd0e3939de62ad3908c6a8abbd7",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/957f1ad0a3f21948df8c5b98cd995884958a7385",
+                "reference": "957f1ad0a3f21948df8c5b98cd995884958a7385",
                 "shasum": ""
             },
             "require": {
@@ -944,7 +944,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-20T10:14:28+00:00"
+            "time": "2024-03-21T13:27:37+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -1374,16 +1374,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.0.6",
+            "version": "11.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6af32d7938fc366f86e49a5f5ebb314018d1b1fb"
+                "reference": "afa8d61ba7ae78da739938c999140eb767a1ad7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6af32d7938fc366f86e49a5f5ebb314018d1b1fb",
-                "reference": "6af32d7938fc366f86e49a5f5ebb314018d1b1fb",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/afa8d61ba7ae78da739938c999140eb767a1ad7f",
+                "reference": "afa8d61ba7ae78da739938c999140eb767a1ad7f",
                 "shasum": ""
             },
             "require": {
@@ -1454,7 +1454,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.0.6"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.0.7"
             },
             "funding": [
                 {
@@ -1470,7 +1470,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-12T15:40:01+00:00"
+            "time": "2024-03-21T07:33:30+00:00"
         },
         {
             "name": "psr/container",

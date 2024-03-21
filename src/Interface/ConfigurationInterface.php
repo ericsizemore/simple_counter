@@ -20,6 +20,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @phpstan-import-type BaseAdapterOptions from \Esi\SimpleCounter\Counter
  * @phpstan-import-type FlatfileOptions from \Esi\SimpleCounter\Counter
+ *
+ * @see \Esi\SimpleCounter\Adapter\FlatfileAdapter for implementation details.
  */
 interface ConfigurationInterface
 {
@@ -30,18 +32,17 @@ interface ConfigurationInterface
      *
      * @param BaseAdapterOptions&FlatfileOptions $options
      */
-    public function __construct(array $options);
+    public static function initOptions(array $options = []): ConfigurationInterface;
 
     /**
-     * Validates and resolves the $options passed in the constructor.
+     * Validates and resolves the $options passed in initOptions().
      *
-     * @throws InvalidOptionsException If a passed option does not exist or does not meet
-     *                                 defined rules.
+     * @throws InvalidOptionsException If a passed option does not exist or does not meet defined rules.
      */
-    public function configureOptions(OptionsResolver $optionsResolver): void;
+    public static function configureOptions(OptionsResolver $optionsResolver): void;
 
     /**
      * Returns the given option, if it exists.
      */
-    public function getOption(string $option): string | bool | null;
+    public static function getOption(string $option): string | bool | null;
 }

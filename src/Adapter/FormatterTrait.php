@@ -39,12 +39,12 @@ trait FormatterTrait
     protected function formatDataForDisplay(ConfigurationInterface $configuration, int $currentCount): string
     {
         /** @var string $imageDir */
-        $imageDir = $configuration->getOption('imageDir');
+        $imageDir = $configuration::getOption('imageDir');
 
         /** @var string $imageExt */
-        $imageExt = $configuration->getOption('imageExt');
+        $imageExt = $configuration::getOption('imageExt');
 
-        if ($configuration->getOption('asImage') === true) {
+        if ($configuration::getOption('asImage') === true) {
             return implode('&nbsp;', array_map(static fn (string $number): string => sprintf(
                 '<img src="%s%d%s" alt="%2$d" />',
                 $imageDir . DIRECTORY_SEPARATOR,

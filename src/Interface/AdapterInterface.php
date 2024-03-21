@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter\Interface;
 
-interface CounterInterface
+interface AdapterInterface
 {
     /**
      * Updates the count and uses \Esi\SimpleCounter\Adapter\FormatterTrait::formatDataForDisplay()
