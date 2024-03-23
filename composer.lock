@@ -561,12 +561,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "f9d251194d68e70686351a0d3ec7c35393f13a21"
+                "reference": "e980ab222217a7efa19bcaec3c12d4a1a5592803"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/f9d251194d68e70686351a0d3ec7c35393f13a21",
-                "reference": "f9d251194d68e70686351a0d3ec7c35393f13a21",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/e980ab222217a7efa19bcaec3c12d4a1a5592803",
+                "reference": "e980ab222217a7efa19bcaec3c12d4a1a5592803",
                 "shasum": ""
             },
             "require": {
@@ -646,7 +646,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-19T21:03:05+00:00"
+            "time": "2024-03-22T15:39:09+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -889,12 +889,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "957f1ad0a3f21948df8c5b98cd995884958a7385"
+                "reference": "3d431985a953b262d58917275757ad1626c4091c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/957f1ad0a3f21948df8c5b98cd995884958a7385",
-                "reference": "957f1ad0a3f21948df8c5b98cd995884958a7385",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3d431985a953b262d58917275757ad1626c4091c",
+                "reference": "3d431985a953b262d58917275757ad1626c4091c",
                 "shasum": ""
             },
             "require": {
@@ -944,7 +944,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-21T13:27:37+00:00"
+            "time": "2024-03-22T20:43:30+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -1374,16 +1374,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.0.7",
+            "version": "11.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "afa8d61ba7ae78da739938c999140eb767a1ad7f"
+                "reference": "48ea58408879a9aad630022186398364051482fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/afa8d61ba7ae78da739938c999140eb767a1ad7f",
-                "reference": "afa8d61ba7ae78da739938c999140eb767a1ad7f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/48ea58408879a9aad630022186398364051482fc",
+                "reference": "48ea58408879a9aad630022186398364051482fc",
                 "shasum": ""
             },
             "require": {
@@ -1454,7 +1454,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.0.7"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.0.8"
             },
             "funding": [
                 {
@@ -1470,7 +1470,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-21T07:33:30+00:00"
+            "time": "2024-03-22T04:21:01+00:00"
         },
         {
             "name": "psr/container",

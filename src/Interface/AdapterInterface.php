@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter\Interface;
 
+use RuntimeException;
+
 interface AdapterInterface
 {
     /**
@@ -26,6 +28,8 @@ interface AdapterInterface
      *
      * Mostly internal use, but can be used if you need the count information without
      * triggering an update.
+     *
+     * @throws RuntimeException If, using the FlatfileAdapter, the current count cannot be obtained.
      */
     public function fetchCurrentCount(): int;
 
@@ -33,6 +37,8 @@ interface AdapterInterface
      * Returns the current IP data, if any.
      *
      * @return list<string>
+     *
+     * @throws RuntimeException If, using the FlatfileAdapter, the current ip list cannot be obtained.
      */
     public function fetchCurrentIpList(): array;
 
