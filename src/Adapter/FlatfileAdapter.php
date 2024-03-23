@@ -69,7 +69,7 @@ final readonly class FlatfileAdapter implements AdapterInterface
         $currentCount = $this->readWrite('logs');
 
         //@codeCoverageIgnoreStart
-        if ($currentCount === false) {
+        if ($currentCount === false || $currentCount === '') {
             throw new RuntimeException('Unable to retrieve current count information.');
         }
         //@codeCoverageIgnoreEnd
@@ -85,7 +85,7 @@ final readonly class FlatfileAdapter implements AdapterInterface
         $currentIpData = $this->readWrite('ips');
 
         //@codeCoverageIgnoreStart
-        if ($currentIpData === false) {
+        if ($currentIpData === false || $currentIpData === '') {
             throw new RuntimeException('Unable to retrieve current ip list information.');
         }
         //@codeCoverageIgnoreEnd
