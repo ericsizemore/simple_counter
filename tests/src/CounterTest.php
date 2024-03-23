@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter\Tests;
 
-use Esi\SimpleCounter\Adapter\FlatfileAdapter;
+use Esi\SimpleCounter\Storage\FlatfileStorage;
 use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
 use Esi\SimpleCounter\Counter;
 use Esi\Utility\Arrays;
@@ -33,7 +33,7 @@ use const DIRECTORY_SEPARATOR;
  * @internal
  */
 #[CoversClass(Counter::class)]
-#[UsesClass(FlatfileAdapter::class)]
+#[UsesClass(FlatfileStorage::class)]
 #[UsesClass(FlatfileConfiguration::class)]
 class CounterTest extends TestCase
 {
@@ -64,7 +64,7 @@ class CounterTest extends TestCase
             'ipFile'    => sprintf('%s%s%s', self::$testDirectories['logDir'], DIRECTORY_SEPARATOR, 'ips.json'),
         ];
 
-        $this->counter = new Counter(new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        $this->counter = new Counter(new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],

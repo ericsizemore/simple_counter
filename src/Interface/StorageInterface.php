@@ -15,10 +15,10 @@ namespace Esi\SimpleCounter\Interface;
 
 use RuntimeException;
 
-interface AdapterInterface
+interface StorageInterface
 {
     /**
-     * Updates the count and uses \Esi\SimpleCounter\Adapter\FormatterTrait::formatDataForDisplay()
+     * Updates the count and uses \Esi\SimpleCounter\Trait\FormatterTrait::formatDataForDisplay()
      * to format the count as text or images, depending on configuration.
      */
     public function display(): string;
@@ -29,7 +29,7 @@ interface AdapterInterface
      * Mostly internal use, but can be used if you need the count information without
      * triggering an update.
      *
-     * @throws RuntimeException If, using the FlatfileAdapter, the current count cannot be obtained.
+     * @throws RuntimeException If, using the FlatfileStorage, the current count cannot be obtained.
      */
     public function fetchCurrentCount(): int;
 
@@ -38,7 +38,7 @@ interface AdapterInterface
      *
      * @return list<string>
      *
-     * @throws RuntimeException If, using the FlatfileAdapter, the current ip list cannot be obtained.
+     * @throws RuntimeException If, using the FlatfileStorage, the current ip list cannot be obtained.
      */
     public function fetchCurrentIpList(): array;
 

@@ -11,7 +11,7 @@ declare(strict_types=1);
  * the LICENSE.md file that was distributed with this source code.
  */
 
-namespace Esi\SimpleCounter\Adapter;
+namespace Esi\SimpleCounter\Trait;
 
 use Esi\SimpleCounter\Interface\ConfigurationInterface;
 
@@ -24,7 +24,7 @@ use function str_split;
 use const DIRECTORY_SEPARATOR;
 
 /**
- * Trait used in *Adapter classes.
+ * Trait used in *Storage classes.
  */
 trait FormatterTrait
 {
@@ -34,7 +34,7 @@ trait FormatterTrait
      * If the 'asImage' option is set to true, then HTML is returned. Otherwise,
      * just plain text.
      *
-     * Normally called in the Adapter class' display() method.
+     * Normally called in the Storage class' display() method.
      */
     protected function formatDataForDisplay(ConfigurationInterface $configuration, int $currentCount): string
     {

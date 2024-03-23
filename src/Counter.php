@@ -13,21 +13,20 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter;
 
-use Esi\SimpleCounter\Interface\AdapterInterface;
+use Esi\SimpleCounter\Interface\StorageInterface;
 
 /**
- * Essentially a wrapper for a given Adapter.
+ * Essentially a wrapper for a given Storage implementation.
  *
  * @see \Esi\SimpleCounter\Tests\CounterTest
  */
 
 /**
- * PHPStan type for each options array definition, for each adapter.
+ * PHPStan type for each options array definition, for each storage implementation.
  *
- * Placed here so that it can be imported via phpstan-import-type into
- * where it is needed.
+ * Placed here so that it can be imported via phpstan-import-type into where it is needed.
  *
- * @phpstan-type BaseAdapterOptions = array{
+ * @phpstan-type BaseStorageOptions = array{
  *     imageDir?: string,
  *     imageExt?: string,
  *     uniqueOnly?: bool,
@@ -48,21 +47,21 @@ readonly class Counter
     public const VERSION = '6.0.0';
 
     /**
-     * $adapter should be one of the available Adapters that has already
+     * $storage should be one of the available Storage implementations that has already
      * been instantiated with their relevant Configuration.
      */
     public function __construct(
-        private AdapterInterface $adapter
+        private StorageInterface $storage
     ) {
         //
     }
 
     /**
-     * Updates count and formats for display, for the given Adapter.
+     * Updates count and formats for display, for the given Storage implementation.
      */
     public function display(): string
     {
-        return $this->adapter->display();
+        return $this->storage->display();
     }
 
     /**
@@ -70,7 +69,7 @@ readonly class Counter
      */
     public function fetchCurrentCount(): int
     {
-        return $this->adapter->fetchCurrentCount();
+        return $this->storage->fetchCurrentCount();
     }
 
     /**
@@ -80,7 +79,7 @@ readonly class Counter
      */
     public function fetchCurrentIpList(): array
     {
-        return $this->adapter->fetchCurrentIpList();
+        return $this->storage->fetchCurrentIpList();
     }
 
     /**
@@ -88,6 +87,6 @@ readonly class Counter
      */
     public function getOption(string $option): string | bool | null
     {
-        return $this->adapter->getOption($option);
+        return $this->storage->getOption($option);
     }
 }

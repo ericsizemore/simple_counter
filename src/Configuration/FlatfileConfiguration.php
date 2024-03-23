@@ -24,20 +24,20 @@ use function dirname;
 use function rtrim;
 
 /**
- * @phpstan-import-type BaseAdapterOptions from \Esi\SimpleCounter\Counter
+ * @phpstan-import-type BaseStorageOptions from \Esi\SimpleCounter\Counter
  * @phpstan-import-type FlatfileOptions from \Esi\SimpleCounter\Counter
  *
- * @see \Esi\SimpleCounter\Tests\FlatfileAdapterTest
+ * @see \Esi\SimpleCounter\Tests\FlatfileStorageTest
  */
 final class FlatfileConfiguration implements ConfigurationInterface
 {
     /**
-     * @var BaseAdapterOptions&FlatfileOptions
+     * @var BaseStorageOptions&FlatfileOptions
      */
     private static array $options = [];
 
     /**
-     * @param BaseAdapterOptions&FlatfileOptions $options
+     * @param BaseStorageOptions&FlatfileOptions $options
      */
     private function __construct(array $options = [])
     {

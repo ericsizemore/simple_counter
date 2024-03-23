@@ -55,7 +55,7 @@ More information can be found in [Usage](#usage) below.
 
 **More detailed documentation is a work in progress.**
 
-Usage is fairly simple once installed. There is currently one option for the type of counter you wish to use, and that is the `FlatfileAdapter`. A `DatabaseAdapter` is slated for an upcoming release.
+Usage is fairly simple once installed. There is currently one option for the type of counter you wish to use, and that is the `FlatfileStorage`. A `DatabaseStorage` is slated for an upcoming release.
 
 Simply add the following code to the page where you want the counter to be shown:
 
@@ -66,7 +66,7 @@ Simply add the following code to the page where you want the counter to be shown
 require_once 'vendor/autoload.php';
 
 use Esi\SimpleCounter\Counter;
-use Esi\SimpleCounter\Adapter\FlatfileAdapter;
+use Esi\SimpleCounter\Storage\FlatfileStorage;
 use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
 
 /**
@@ -119,32 +119,32 @@ $options = [
  */
 
 /**
- * When creating the counter instance, an Adapter with a valid Configuration is required.
- * Currently, Simple Counter ships with one Adapter and it's corresponding Configuration:
+ * When creating the counter instance, a Storage implementation with a valid Configuration is required.
+ * Currently, Simple Counter ships with one Storage implementation and it's corresponding Configuration:
  *
- * \Esi\SimpleCounter\Adapter\FlatfileAdapter
+ * \Esi\SimpleCounter\Storage\FlatfileStorage
  * \Esi\SimpleCounter\Configuration\FlatfileConfiguration
  *
  * \Esi\SimpleCounter\Counter can be used as a wrapper, but it is not necessary. For example:
  *
  * $counter = new Counter(
- *     new FlatfileAdapter(
+ *     new FlatfileStorage(
  *         FlatfileConfiguration::initOptions($options)
  *     )
  * );
  */
 // Pass custom options
-$counter = new FlatfileAdapter(
+$counter = new FlatfileStorage(
     FlatfileConfiguration::initOptions($options)
 );
 
 // ... or if you wish to use defaults
-$counter = new FlatfileAdapter(
+$counter = new FlatfileStorage(
     FlatfileConfiguration::initOptions()
 );
 
 // ... or maybe you only want to switch to using images, for example
-$counter = new FlatfileAdapter(
+$counter = new FlatfileStorage(
     FlatfileConfiguration::initOptions(['asImage' => true])
 );
 

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter\Tests;
 
-use Esi\SimpleCounter\Adapter\FlatfileAdapter;
+use Esi\SimpleCounter\Storage\FlatfileStorage;
 use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
 use Esi\SimpleCounter\Counter;
 use Esi\Utility\Arrays;
@@ -35,9 +35,9 @@ use const DIRECTORY_SEPARATOR;
 /**
  * @internal
  */
-#[CoversClass(FlatfileAdapter::class)]
+#[CoversClass(FlatfileStorage::class)]
 #[CoversClass(FlatfileConfiguration::class)]
-class FlatfileAdapterTest extends TestCase
+class FlatfileStorageTest extends TestCase
 {
     /**
      * @var string[]
@@ -87,7 +87,7 @@ class FlatfileAdapterTest extends TestCase
     #[TestDox('getOption is able to return the value of a given option.')]
     public function testGetOption(): void
     {
-        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        $counter = new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -101,7 +101,7 @@ class FlatfileAdapterTest extends TestCase
     public function testInvalidLocationForCounterFile(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'    => self::$testDirectories['logDir'],
                 'imageDir'  => self::$testDirectories['imageDir'],
@@ -114,7 +114,7 @@ class FlatfileAdapterTest extends TestCase
     public function testInvalidLocationForIpFile(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -127,7 +127,7 @@ class FlatfileAdapterTest extends TestCase
     public function testInvalidOptionForCountFile(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'    => self::$testDirectories['logDir'],
                 'imageDir'  => self::$testDirectories['imageDir'],
@@ -140,7 +140,7 @@ class FlatfileAdapterTest extends TestCase
     public function testInvalidOptionForImageDirectory(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testInvalidDirectories['imageDir'],
@@ -152,7 +152,7 @@ class FlatfileAdapterTest extends TestCase
     public function testInvalidOptionForIpFile(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'    => self::$testDirectories['logDir'],
                 'imageDir'  => self::$testDirectories['imageDir'],
@@ -165,7 +165,7 @@ class FlatfileAdapterTest extends TestCase
     public function testInvalidOptionForLogDirectory(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testInvalidDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -173,10 +173,10 @@ class FlatfileAdapterTest extends TestCase
         ));
     }
 
-    #[TestDox('Instantiating the FlatfileAdapter with a custom visitorTextString properly displays the count with that text.')]
+    #[TestDox('Instantiating the FlatfileStorage with a custom visitorTextString properly displays the count with that text.')]
     public function testWithCustomVisitorTextString(): void
     {
-        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        $counter = new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'            => self::$testDirectories['logDir'],
                 'imageDir'          => self::$testDirectories['imageDir'],
@@ -188,11 +188,11 @@ class FlatfileAdapterTest extends TestCase
         self::assertMatchesRegularExpression('/[A-Za-z]+:\s+#[0-9]+/i', $count);
     }
 
-    #[TestDox('Instantiating the FlatfileAdapter with a custom visitorTextString not including %s throws an exception.')]
+    #[TestDox('Instantiating the FlatfileStorage with a custom visitorTextString not including %s throws an exception.')]
     public function testWithCustomVisitorTextStringInvalidFormat(): void
     {
         $this->expectException(InvalidOptionsException::class);
-        new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'            => self::$testDirectories['logDir'],
                 'imageDir'          => self::$testDirectories['imageDir'],
@@ -201,10 +201,10 @@ class FlatfileAdapterTest extends TestCase
         ));
     }
 
-    #[TestDox('Instantiating the FlatfileAdapter with default options works properly and accurately.')]
+    #[TestDox('Instantiating the FlatfileStorage with default options works properly and accurately.')]
     public function testWithDefaultOptions(): void
     {
-        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        $counter = new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -221,10 +221,10 @@ class FlatfileAdapterTest extends TestCase
         self::assertSame($count, $countTwo);
     }
 
-    #[TestDox('Instantiating the FlatfileAdapter with a missing dot at the beginning of the imageExt adds the dot.')]
+    #[TestDox('Instantiating the FlatfileStorage with a missing dot at the beginning of the imageExt adds the dot.')]
     public function testWithDefaultOptionsMissingPeriodOnImageExtension(): void
     {
-        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        $counter = new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -243,7 +243,7 @@ class FlatfileAdapterTest extends TestCase
     #[TestDox('A new visitor (or IP) increments the counter.')]
     public function testWithDefaultOptionsNewVisitor(): void
     {
-        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        $counter = new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -265,10 +265,10 @@ class FlatfileAdapterTest extends TestCase
         Arrays::set($_SERVER, 'REMOTE_ADDR', '127.0.0.1');
     }
 
-    #[TestDox('Instantiating the FlatfileAdapter with asImage set to true will display the count as images.')]
+    #[TestDox('Instantiating the FlatfileStorage with asImage set to true will display the count as images.')]
     public function testWithDefaultOptionsWithImages(): void
     {
-        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        $counter = new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'   => self::$testDirectories['logDir'],
                 'imageDir' => self::$testDirectories['imageDir'],
@@ -282,10 +282,10 @@ class FlatfileAdapterTest extends TestCase
         self::assertTrue(str_starts_with($count, '<img '));
     }
 
-    #[TestDox('Instantiating the FlatfileAdapter with uniqueOnly set to false properly increments the count.')]
+    #[TestDox('Instantiating the FlatfileStorage with uniqueOnly set to false properly increments the count.')]
     public function testWithDefaultOptionsWithoutUniqueOnly(): void
     {
-        $counter = new FlatfileAdapter(FlatfileConfiguration::initOptions(
+        $counter = new FlatfileStorage(FlatfileConfiguration::initOptions(
             [
                 'logDir'     => self::$testDirectories['logDir'],
                 'imageDir'   => self::$testDirectories['imageDir'],

@@ -9,12 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-  * `Adapter\FlatfileAdapter` which is default, and currently only, available adapter.
-  * `Adapter\FormatterTrait` which will be used by Adapters to handle formatting the count display.
-  * `Configuration\FlatfileConfiguration` which is the default, and currently only, available Adapter configuration.
-    * Used by `Adapter\FlatfileAdapter`
-  * `Interface\CounterInterface` which defines methods that must be implemented in each adapter.
-  * `Interface\ConfigurationInterface` which defines methods that must be implemented in each Adapter configuration.
+  * `Storage\FlatfileStorage` which is default, and currently only, available storage implementation.
+  * `Trait\FormatterTrait` which will be used by storage implementations to handle formatting the count display.
+  * `Configuration\FlatfileConfiguration` which is the default, and currently only, available Storage implementation configuration.
+    * Used by `Storage\FlatfileStorage`
+  * `Interface\CounterInterface` which defines methods that must be implemented in each storage implementation.
+  * `Interface\ConfigurationInterface` which defines methods that must be implemented in each Storage implementation configuration.
   * `symonfy/options-resolver` dependency added to handle counter options.
   * `scripts/convertFiles.php` which can be used by those moving from version <5 of the library, to convert their `*.txt` counter/ips files to json.
 
@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * New icons for the default image set (0-9 'png' images found in `counter/images/`).
     * Licensed under the [CC BY 4.0 DEED license](https://creativecommons.org/licenses/by/4.0/)
     * Designed by [StreamlineHQ](https://www.streamlinehq.com/freebies/typeface)
-  * `Esi\SimpleCounter\Counter` is now just a wrapper for one of the `*Adapter` classes found in `src/Adapter/`.
+  * `Esi\SimpleCounter\Counter` is now just a wrapper for one of the `*Storage` classes found in `src/Storage/`.
   * Unit tests completely rewritten.
 
 ### Removed

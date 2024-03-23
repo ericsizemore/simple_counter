@@ -11,13 +11,14 @@ declare(strict_types=1);
  * the LICENSE.md file that was distributed with this source code.
  */
 
-namespace Esi\SimpleCounter\Adapter;
+namespace Esi\SimpleCounter\Storage;
 
-use Esi\SimpleCounter\Adapter\FormatterTrait;
+use Esi\SimpleCounter\Trait\FormatterTrait;
 use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
-use Esi\SimpleCounter\Interface\AdapterInterface;
+use Esi\SimpleCounter\Interface\StorageInterface;
 use Esi\Utility\Environment;
 use Esi\Utility\Filesystem;
+use Esi\Utility\Strings;
 use RuntimeException;
 use SplFileObject;
 use stdClass;
@@ -38,9 +39,9 @@ use const LOCK_SH;
 use const LOCK_UN;
 
 /**
- * @see \Esi\SimpleCounter\Tests\FlatfileAdapterTest
+ * @see \Esi\SimpleCounter\Tests\FlatfileStorageTest
  */
-final readonly class FlatfileAdapter implements AdapterInterface
+final readonly class FlatfileStorage implements StorageInterface
 {
     use FormatterTrait;
 
@@ -138,7 +139,7 @@ final readonly class FlatfileAdapter implements AdapterInterface
         }
         //@codeCoverageIgnoreEnd
 
-        $data = $fileHandle->fwrite($data);
+        $data = $fileHandle->fwrite($data, Strings::length($data));
 
         $fileHandle->flock(LOCK_UN);
         $fileHandle = null;
@@ -168,10 +169,10 @@ final readonly class FlatfileAdapter implements AdapterInterface
         ];
 
         if ($data === null) {
-            return FlatfileAdapter::fileRead($filePaths[$file]);
+            return FlatfileStorage::fileRead($filePaths[$file]);
         }
 
-        return FlatfileAdapter::fileWrite($filePaths[$file], $data);
+        return FlatfileStorage::fileWrite($filePaths[$file], $data);
     }
 
     /**
