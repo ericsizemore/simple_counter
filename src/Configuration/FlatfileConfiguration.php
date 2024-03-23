@@ -57,6 +57,7 @@ final class FlatfileConfiguration implements ConfigurationInterface
             'imageExt'          => '.png',
             'uniqueOnly'        => true,
             'asImage'           => false,
+            'honorDnt'          => false,
             'visitorTextString' => 'You are visitor #%s',
         ])
             ->setAllowedTypes('logDir', 'string')
@@ -66,6 +67,7 @@ final class FlatfileConfiguration implements ConfigurationInterface
             ->setAllowedTypes('imageExt', 'string')
             ->setAllowedTypes('uniqueOnly', 'bool')
             ->setAllowedTypes('asImage', 'bool')
+            ->setAllowedTypes('honorDnt', 'bool')
             ->setAllowedTypes('visitorTextString', 'string')
             ->setAllowedValues('logDir', static fn (string $value): bool => Filesystem::isDirectory($value))
             ->setAllowedValues('imageDir', static fn (string $value): bool => Filesystem::isDirectory($value))

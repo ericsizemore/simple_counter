@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   * `Interface\ConfigurationInterface` which defines methods that must be implemented in each Storage implementation configuration.
   * `symonfy/options-resolver` dependency added to handle counter options.
   * `scripts/convertFiles.php` which can be used by those moving from version <5 of the library, to convert their `*.txt` counter/ips files to json.
+  * Can now enable `honorDnt` within Configuration to honor a visitors Do Not Track setting.
 
 ### Changed
 

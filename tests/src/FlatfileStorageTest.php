@@ -300,4 +300,29 @@ class FlatfileStorageTest extends TestCase
         self::assertMatchesRegularExpression('/([A-Za-z]+( [A-Za-z]+)+)\s#[0-9]+/i', $count);
         self::assertMatchesRegularExpression('/([A-Za-z]+( [A-Za-z]+)+)\s#[0-9]+/i', $countTwo);
     }
+
+    public function testDoNotTrack(): void
+    {
+        $_SERVER['HTTP_DNT'] = 1;
+
+        $counter = new FlatfileStorage(FlatfileConfiguration::initOptions(
+            [
+                'logDir'   => self::$testDirectories['logDir'],
+                'imageDir' => self::$testDirectories['imageDir'],
+                'honorDnt' => true,
+            ]
+        ));
+
+        $count = $counter->display();
+        self::assertStringEndsWith('0', $count);
+
+        $counter->display();
+        $counter->display();
+        $count = $counter->display();
+        self::assertStringEndsWith('0', $count);
+
+        $_SERVER['HTTP_DNT'] = 0;
+        $count = $counter->display();
+        self::assertStringEndsWith('1', $count);
+    }
 }

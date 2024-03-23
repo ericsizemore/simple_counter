@@ -31,6 +31,7 @@ use Esi\SimpleCounter\Interface\StorageInterface;
  *     imageExt?: string,
  *     uniqueOnly?: bool,
  *     asImage?: bool,
+ *     honorDnt?: bool,
  *     visitorTextString?: string
  * }|array{}
  * @phpstan-type FlatfileOptions = array{

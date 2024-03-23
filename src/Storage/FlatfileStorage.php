@@ -127,7 +127,7 @@ final readonly class FlatfileStorage implements StorageInterface
      *
      * @throws RuntimeException If the file cannot be opened or if a lock is unable to be acquired.
      */
-    private static function fileWrite(string $file, string $data): int | false
+    private static function fileWrite(string $file, string $data): int
     {
         clearstatcache(true, $file);
 
@@ -176,13 +176,24 @@ final readonly class FlatfileStorage implements StorageInterface
     }
 
     /**
-     * Updates the count information, taking into account configuration for 'uniqueOnly'.
+     * Updates the count information, taking into account configuration for 'uniqueOnly'
+     * and 'honorDnt'.
      *
      * @throws RuntimeException If self::readWrite() cannot open the counter or ip file,
      *                          or if a file lock is unable to be acquired.
      */
     private function updateCount(): void
     {
+        // Honor the Do Not Track setting in the user's browser, if enabled.
+        $isDnt = (int) Environment::var('HTTP_DNT', 0);
+
+        /** @var bool $honorDnt */
+        $honorDnt = $this->configuration::getOption('honorDnt');
+
+        if ($honorDnt && $isDnt === 1) {
+            return;
+        }
+
         $currentCount = $this->fetchCurrentCount();
 
         $newCount = $currentCount + 1;
