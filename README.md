@@ -80,6 +80,7 @@ use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
  *     imageExt: string,
  *     uniqueOnly: bool,
  *     asImage: bool,
+ *     honorDnt: bool,
  *     visitorTextString?: string
  * }
  *
@@ -93,6 +94,7 @@ use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
  *      'imageExt'          => '.png',
  *      'uniqueOnly'        => true,
  *      'asImage'           => false,
+ *      'honorDnt'          => false,
  *      'visitorTextString' => 'You are visitor #%s',
  * ] 
  */
@@ -105,6 +107,7 @@ $options = [
     'imageExt'          => '.png', // '.png', '.jpg' etc. default images are PNG images
     'asImage'           => true,   // true = images, false = plain text
     'uniqueOnly'        => true,   // true = counts only unique ip's, false = counts all,
+    'honorDnt'          => false,
     'visitorTextString' => 'You are visitor #%s',
 ];
 
