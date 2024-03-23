@@ -19,18 +19,13 @@ use Esi\SimpleCounter\Interface\AdapterInterface;
 use Esi\Utility\Environment;
 use Esi\Utility\Filesystem;
 use RuntimeException;
+use SplFileObject;
 use stdClass;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
 use function array_filter;
 use function array_values;
 use function clearstatcache;
-use function fclose;
-use function filesize;
-use function flock;
-use function fopen;
-use function fread;
-use function fwrite;
 use function in_array;
 use function json_decode;
 use function json_encode;
@@ -74,7 +69,7 @@ final readonly class FlatfileAdapter implements AdapterInterface
         }
         //@codeCoverageIgnoreEnd
 
-        /** @var \stdClass $currentCount */
+        /** @var stdClass $currentCount */
         $currentCount = json_decode((string) $currentCount);
 
         return (int) $currentCount->currentCount;
@@ -90,7 +85,7 @@ final readonly class FlatfileAdapter implements AdapterInterface
         }
         //@codeCoverageIgnoreEnd
 
-        /** @var \stdClass $currentIpData */
+        /** @var stdClass $currentIpData */
         $currentIpData = json_decode((string) $currentIpData);
 
         return array_values(array_filter($currentIpData->ipList));
@@ -104,26 +99,24 @@ final readonly class FlatfileAdapter implements AdapterInterface
     /**
      * Performs a read operation on a given file, using file locking.
      *
-     * @throws RuntimeException If fopen cannot open the file or if flock is unable to acquire a lock.
+     * @throws RuntimeException If the file cannot be opened or if a lock is unable to be acquired.
      */
     private static function fileRead(string $file): string | false
     {
         clearstatcache(true, $file);
 
-        //@codeCoverageIgnoreStart
-        if (($fileHandle = fopen($file, 'rb')) === false) {
-            throw new RuntimeException(sprintf("Error encountered while trying to read '%s'.", $file));
-        }
+        $fileHandle = new SplFileObject($file, 'rb');
 
-        if (!flock($fileHandle, LOCK_SH | LOCK_NB)) {
+        //@codeCoverageIgnoreStart
+        if (!$fileHandle->flock(LOCK_SH | LOCK_NB)) {
             throw new RuntimeException(sprintf("Unable to acquire lock while attempting to read '%s'.", $file));
         }
         //@codeCoverageIgnoreEnd
 
-        $data = fread($fileHandle, (int) filesize($file));
+        $data = $fileHandle->fread($fileHandle->getSize());
 
-        flock($fileHandle, LOCK_UN);
-        fclose($fileHandle);
+        $fileHandle->flock(LOCK_UN);
+        $fileHandle = null;
 
         return $data;
     }
@@ -131,26 +124,24 @@ final readonly class FlatfileAdapter implements AdapterInterface
     /**
      * Performs a write operation on a given file with given $data, using file locking.
      *
-     * @throws RuntimeException If fopen cannot open the file or if flock is unable to acquire a lock.
+     * @throws RuntimeException If the file cannot be opened or if a lock is unable to be acquired.
      */
     private static function fileWrite(string $file, string $data): int | false
     {
         clearstatcache(true, $file);
 
-        //@codeCoverageIgnoreStart
-        if (($fileHandle = fopen($file, 'wb')) === false) {
-            throw new RuntimeException(sprintf("Error encountered while trying to write '%s'.", $file));
-        }
+        $fileHandle = new SplFileObject($file, 'wb');
 
-        if (!flock($fileHandle, LOCK_EX | LOCK_NB)) {
+        //@codeCoverageIgnoreStart
+        if (!$fileHandle->flock(LOCK_EX | LOCK_NB)) {
             throw new RuntimeException(sprintf("Unable to acquire lock while attempting to write '%s'.", $file));
         }
         //@codeCoverageIgnoreEnd
 
-        $data = fwrite($fileHandle, $data);
+        $data = $fileHandle->fwrite($data);
 
-        flock($fileHandle, LOCK_UN);
-        fclose($fileHandle);
+        $fileHandle->flock(LOCK_UN);
+        $fileHandle = null;
 
         return $data;
     }
@@ -158,7 +149,7 @@ final readonly class FlatfileAdapter implements AdapterInterface
     /**
      * Handles reading data from, or writing data (with given $data) to, a given file.
      *
-     * @throws RuntimeException If $file cannot be opened or if a file lock is unable to be acquired.
+     * @throws RuntimeException If the file cannot be opened or if a lock is unable to be acquired.
      */
     private function readWrite(string $file, ?string $data = null): string | false | int
     {
