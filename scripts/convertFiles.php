@@ -45,7 +45,7 @@ function convertCounterFile(string $oldCounterFile, string $newCounterFile): voi
         echo "Converting data...<br/>\n";
     }
 
-    $countData = ['currentCount' => $countData, 'dailyCounts' => ['date' => \date('Y-m-d'), 'count' => $countData]];
+    $countData = ['currentCount' => $countData];
 
     $bytesWritten = \file_put_contents($newCounterFile, \json_encode($countData), \LOCK_EX);
 
