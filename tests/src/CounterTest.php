@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter\Tests;
 
-use Esi\SimpleCounter\Storage\FlatfileStorage;
 use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
 use Esi\SimpleCounter\Counter;
+use Esi\SimpleCounter\Storage\FlatfileStorage;
 use Esi\Utility\Arrays;
 use Esi\Utility\Environment;
 use Esi\Utility\Filesystem;

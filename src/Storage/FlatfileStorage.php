@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter\Storage;
 
-use Esi\SimpleCounter\Trait\FormatterTrait;
 use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
 use Esi\SimpleCounter\Interface\StorageInterface;
+use Esi\SimpleCounter\Trait\FormatterTrait;
 use Esi\Utility\Environment;
 use Esi\Utility\Filesystem;
 use Esi\Utility\Strings;
@@ -98,68 +98,16 @@ final readonly class FlatfileStorage implements StorageInterface
     }
 
     /**
-     * Performs a read operation on a given file, using file locking.
+     * Handles reading data from, or writing data (with given $data) to, a given file; with file locking.
      *
      * @throws RuntimeException If the file cannot be opened or if a lock is unable to be acquired.
      */
-    private static function fileRead(string $file): string | false
-    {
-        clearstatcache(true, $file);
-
-        $fileHandle = new SplFileObject($file, 'rb');
-
-        //@codeCoverageIgnoreStart
-        if (!$fileHandle->flock(LOCK_SH | LOCK_NB)) {
-            throw new RuntimeException(sprintf("Unable to acquire lock while attempting to read '%s'.", $file));
-        }
-        //@codeCoverageIgnoreEnd
-
-        $data = $fileHandle->fread($fileHandle->getSize());
-
-        $fileHandle->flock(LOCK_UN);
-        $fileHandle = null;
-
-        return $data;
-    }
-
-    /**
-     * Performs a write operation on a given file with given $data, using file locking.
-     *
-     * @throws RuntimeException If the file cannot be opened or if a lock is unable to be acquired.
-     */
-    private static function fileWrite(string $file, string $data): int
-    {
-        clearstatcache(true, $file);
-
-        $fileHandle = new SplFileObject($file, 'wb');
-
-        //@codeCoverageIgnoreStart
-        if (!$fileHandle->flock(LOCK_EX | LOCK_NB)) {
-            throw new RuntimeException(sprintf("Unable to acquire lock while attempting to write '%s'.", $file));
-        }
-        //@codeCoverageIgnoreEnd
-
-        $data = $fileHandle->fwrite($data, Strings::length($data));
-
-        $fileHandle->flock(LOCK_UN);
-        $fileHandle = null;
-
-        return $data;
-    }
-
-    /**
-     * Handles reading data from, or writing data (with given $data) to, a given file.
-     *
-     * @throws RuntimeException If the file cannot be opened or if a lock is unable to be acquired.
-     */
-    private function readWrite(string $file, ?string $data = null): string | false | int
+    private function readWrite(string $file, ?string $data = null): string | int | false
     {
         /** @var string $logDir */
         $logDir = $this->configuration::getOption('logDir');
-
         /** @var string $countFile */
         $countFile = $this->configuration::getOption('countFile');
-
         /** @var string $ipFile */
         $ipFile = $this->configuration::getOption('ipFile');
 
@@ -168,11 +116,42 @@ final readonly class FlatfileStorage implements StorageInterface
             'ips'  => sprintf('%s%s%s', $logDir, DIRECTORY_SEPARATOR, $ipFile),
         ];
 
-        if ($data === null) {
-            return FlatfileStorage::fileRead($filePaths[$file]);
+        clearstatcache(true, $filePaths[$file]);
+
+        $mode  = 'rb';
+        $flags = LOCK_SH | LOCK_NB;
+
+        if ($data !== null) {
+            $mode  = 'wb';
+            $flags = LOCK_EX | LOCK_NB;
         }
 
-        return FlatfileStorage::fileWrite($filePaths[$file], $data);
+        $fileHandle = new SplFileObject($filePaths[$file], $mode);
+
+        //@codeCoverageIgnoreStart
+        $wouldBlock = null;
+
+        if (!$fileHandle->flock($flags, $wouldBlock)) {
+            $fileHandle = null;
+
+            if ($wouldBlock) {
+                return false;
+            }
+
+            throw new RuntimeException(sprintf("Unable to acquire lock on '%s'.", $file));
+        }
+        //@codeCoverageIgnoreEnd
+
+        if ($data !== null) {
+            $data = $fileHandle->fwrite($data, Strings::length($data));
+        } else {
+            $data = $fileHandle->fread($fileHandle->getSize());
+        }
+
+        $fileHandle->flock(LOCK_UN);
+        $fileHandle = null;
+
+        return $data;
     }
 
     /**
@@ -185,12 +164,10 @@ final readonly class FlatfileStorage implements StorageInterface
     private function updateCount(): void
     {
         // Honor the Do Not Track setting in the user's browser, if enabled.
-        $isDnt = (int) Environment::var('HTTP_DNT', 0);
-
-        /** @var bool $honorDnt */
-        $honorDnt = $this->configuration::getOption('honorDnt');
-
-        if ($honorDnt && $isDnt === 1) {
+        if (
+            (bool) $this->configuration::getOption('honorDnt')
+            && (int) Environment::var('HTTP_DNT', 0) === 1
+        ) {
             return;
         }
 

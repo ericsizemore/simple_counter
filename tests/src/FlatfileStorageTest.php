@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Esi\SimpleCounter\Tests;
 
-use Esi\SimpleCounter\Storage\FlatfileStorage;
 use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
 use Esi\SimpleCounter\Counter;
+use Esi\SimpleCounter\Storage\FlatfileStorage;
 use Esi\Utility\Arrays;
 use Esi\Utility\Environment;
 use Esi\Utility\Filesystem;
@@ -82,6 +82,31 @@ class FlatfileStorageTest extends TestCase
 
         Filesystem::fileWrite(self::$logFiles['countFile'], '{"currentCount":"0"}');
         Filesystem::fileWrite(self::$logFiles['ipFile'], '{"ipList":[""]}');
+    }
+
+    public function testDoNotTrack(): void
+    {
+        $_SERVER['HTTP_DNT'] = 1;
+
+        $counter = new FlatfileStorage(FlatfileConfiguration::initOptions(
+            [
+                'logDir'   => self::$testDirectories['logDir'],
+                'imageDir' => self::$testDirectories['imageDir'],
+                'honorDnt' => true,
+            ]
+        ));
+
+        $count = $counter->display();
+        self::assertStringEndsWith('0', $count);
+
+        $counter->display();
+        $counter->display();
+        $count = $counter->display();
+        self::assertStringEndsWith('0', $count);
+
+        $_SERVER['HTTP_DNT'] = 0;
+        $count               = $counter->display();
+        self::assertStringEndsWith('1', $count);
     }
 
     #[TestDox('getOption is able to return the value of a given option.')]
@@ -299,30 +324,5 @@ class FlatfileStorageTest extends TestCase
         self::assertNotSame($count, $countTwo);
         self::assertMatchesRegularExpression('/([A-Za-z]+( [A-Za-z]+)+)\s#[0-9]+/i', $count);
         self::assertMatchesRegularExpression('/([A-Za-z]+( [A-Za-z]+)+)\s#[0-9]+/i', $countTwo);
-    }
-
-    public function testDoNotTrack(): void
-    {
-        $_SERVER['HTTP_DNT'] = 1;
-
-        $counter = new FlatfileStorage(FlatfileConfiguration::initOptions(
-            [
-                'logDir'   => self::$testDirectories['logDir'],
-                'imageDir' => self::$testDirectories['imageDir'],
-                'honorDnt' => true,
-            ]
-        ));
-
-        $count = $counter->display();
-        self::assertStringEndsWith('0', $count);
-
-        $counter->display();
-        $counter->display();
-        $count = $counter->display();
-        self::assertStringEndsWith('0', $count);
-
-        $_SERVER['HTTP_DNT'] = 0;
-        $count = $counter->display();
-        self::assertStringEndsWith('1', $count);
     }
 }

@@ -1,6 +1,33 @@
 ### If you are upgrading from v5.* to v6.0.0
 
-* Still a work in progress; the upgrade notes will be updated before official release.
+* As with any upgrade, it is recommended to make a backup of your current `logs` directory (and `images`, if you are using custom images).
+* v6 uses different files (`.json` instead of `.txt`), and stores data differently (as json data instead of plain text), than versions <=5.0.1
+  * The default counter images are also different, and are PNG images instead of GIF images.
+* You can upgrade using composer, though you would need to update your `composer.json` first to change the version constraint from `^5.0` to `^6.0`. Then:
+
+```shell
+composer update
+```
+
+* A script is provided at `scripts/convertFiles.php` that can update the counter and log files to the new format.
+
+```shell
+php -f scripts/convertFiles.php
+```
+
+Before running the script, you'll need to edit it to make sure it is pointing to the proper location of the counter files:
+
+```php
+// Update the location to your current log files, if needed.
+$oldCounterFile = \dirname(__DIR__) . '/counter/counter.txt';
+$oldIpFile      = \dirname(__DIR__) . '/counter/ips.txt';
+
+// Update the location where the new files will be placed, if needed.
+$newCounterFile = \dirname(__DIR__) . '/counter/counter.json';
+$newIpFile      = \dirname(__DIR__) . '/counter/ips.json';
+```
+
+* See [Usage](README.md#usage) for more details on how to update your calls to, or instantiation of, the counter library.
 
 
 ### If you are upgrading from v4.* to v5.0.0
