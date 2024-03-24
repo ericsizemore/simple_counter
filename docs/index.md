@@ -28,7 +28,7 @@ The icons used for the default image set (0-9 'png' images found in `counter/ima
 
 Pre-v6 -> v6 is not a simple upgrade. Several things have changed in this rewrite, and there are breaking changes.
 
-Please read [UPGRADING.md](UPGRADING.md) first before attempting an upgrade.
+Please read [Upgrading](upgrading.md) first before attempting an upgrade.
 
 
 ## Installation
@@ -195,11 +195,11 @@ Issues are the quickest way to report a bug. If you find a bug or documentation 
 
 ### Contributing
 
-* See [CONTRIBUTING.md](CONTRIBUTING.md)
+* See [Contributing](contributing.md)
 
 ### Backward Compatibility Promise
 
-* See [backward-compatibility.md](backward-compatibility.md)
+* See [Backward Compatibility](backward-compatibility.md)
 
 ### Author
 
@@ -209,7 +209,7 @@ Eric Sizemore - <admin@secondversion.com> - <https://www.secondversion.com>
 
 #### Simple Counter v6.0.0 and newer
 
-* Licensed under the MIT License. See the [`LICENSE.md`](LICENSE.md) file for details.
+* Licensed under the MIT License. See the [License](license.md) file for details.
 
 #### Simple Counter v5.0.1 and older
 

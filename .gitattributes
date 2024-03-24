@@ -11,6 +11,7 @@
 /.scrutinizer.yml         export-ignore
 /tests                    export-ignore
 /composer.lock            export-ignore
+/mkdocs.yml               export-ignore
 /phpstan.neon             export-ignore
 /phpunit.xml              export-ignore
 /renovate.json            export-ignore
