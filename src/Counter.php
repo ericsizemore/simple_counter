@@ -51,11 +51,7 @@ readonly class Counter
      * $storage should be one of the available Storage implementations that has already
      * been instantiated with their relevant Configuration.
      */
-    public function __construct(
-        private StorageInterface $storage
-    ) {
-        //
-    }
+    public function __construct(private StorageInterface $storage) {}
 
     /**
      * Updates count and formats for display, for the given Storage implementation.

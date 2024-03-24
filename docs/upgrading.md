@@ -5,14 +5,14 @@
   * The default counter images are also different, and are PNG images instead of GIF images.
 * You can upgrade using composer, though you would need to update your `composer.json` first to change the version constraint from `^5.0` to `^6.0`. Then:
 
-```shell
-composer update
+```bash
+$ composer update
 ```
 
 * A script is provided at `scripts/convertFiles.php` that can update the counter and log files to the new format.
 
-```shell
-php -f scripts/convertFiles.php
+```bash
+$ php -f scripts/convertFiles.php
 ```
 
 Before running the script, you'll need to edit it to make sure it is pointing to the proper location of the counter files:

@@ -6,7 +6,14 @@ site_url: https://www.secondversion.com/docs/simple_counter
 docs_dir: docs/
 repo_name: 'ericsizemore/simple_counter'
 repo_url: 'https://github.com/ericsizemore/simple_counter'
-theme: readthedocs
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_style: 'github'
+  hljs_languages:
+    bash
+    json
+    php
 nav:
   - Home: index.md
   - Main Class:

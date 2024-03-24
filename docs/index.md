@@ -36,7 +36,7 @@ Please read [Upgrading](upgrading.md) first before attempting an upgrade.
 To install Simple Counter, first install via composer:
 
 ```bash
-composer require esi/simple_counter:^6.0
+$ composer require esi/simple_counter:^6.0
 ```
 
 There are several options defined by default, however you will likely run into issues if you do not change some of them.
