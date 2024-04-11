@@ -7,26 +7,23 @@ declare(strict_types=1);
  *
  * (c) Eric Sizemore <https://github.com/ericsizemore>
  *
- * For the full copyright and license information, please view
- * the LICENSE.md file that was distributed with this source code.
+ * This source file is subject to the MIT license. For the full copyright and
+ * license information, please view the LICENSE file that was distributed with
+ * this source code.
  */
 
 namespace Esi\SimpleCounter\Tests;
 
 use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
-use Esi\SimpleCounter\Counter;
 use Esi\SimpleCounter\Storage\FlatfileStorage;
 use Esi\Utility\Arrays;
 use Esi\Utility\Environment;
 use Esi\Utility\Filesystem;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
-use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use function dirname;
 use function sprintf;
 use function str_starts_with;
 
@@ -60,8 +57,8 @@ class FlatfileStorageTest extends TestCase
         Arrays::set($_SERVER, 'REMOTE_ADDR', '127.0.0.1');
 
         self::$testDirectories = [
-            'logDir'   => sprintf('%s%s%s', dirname(__FILE__, 2), DIRECTORY_SEPARATOR, 'logs'),
-            'imageDir' => sprintf('%s%s%s', dirname(__FILE__, 2), DIRECTORY_SEPARATOR, 'images'),
+            'logDir'   => sprintf('%s%s%s', \dirname(__FILE__, 2), DIRECTORY_SEPARATOR, 'logs'),
+            'imageDir' => sprintf('%s%s%s', \dirname(__FILE__, 2), DIRECTORY_SEPARATOR, 'images'),
         ];
 
         self::$testInvalidDirectories = [

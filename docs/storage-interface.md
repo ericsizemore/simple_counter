@@ -36,3 +36,10 @@ Defines an interface (contract) that Storage classes must implement.
      */
     public function getOption(string $option): string | bool | null;
 ```
+
+
+New `Storage` options can be added by creating a `Storage\*Storage` and `Configuration\*Configuration` (where * = name of the new storage driver/adapter).
+
+Any new driver/adapter must have both the Storage and Configuration class. The Storage class must implement this StorageInterface, while the Configuration class would need to implement [Interface\ConfigurationInterface](configuration-interface.md).
+
+See [Storage\FlatfileStorage](flatfile-storage.md) and `src/Storage/FlatfileStorage.php` for more information. 

@@ -7,8 +7,9 @@ declare(strict_types=1);
  *
  * (c) Eric Sizemore <https://github.com/ericsizemore>
  *
- * For the full copyright and license information, please view
- * the LICENSE.md file that was distributed with this source code.
+ * This source file is subject to the MIT license. For the full copyright and
+ * license information, please view the LICENSE file that was distributed with
+ * this source code.
  */
 
 namespace Esi\SimpleCounter\Configuration;
@@ -16,11 +17,9 @@ namespace Esi\SimpleCounter\Configuration;
 use Esi\SimpleCounter\Interface\ConfigurationInterface;
 use Esi\Utility\Filesystem;
 use Esi\Utility\Strings;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use function dirname;
 use function rtrim;
 
 /**
@@ -50,10 +49,10 @@ final class FlatfileConfiguration implements ConfigurationInterface
     public static function configureOptions(OptionsResolver $optionsResolver): void
     {
         $optionsResolver->setDefaults([
-            'logDir'            => dirname(__DIR__, 2) . '/counter/logs/',
+            'logDir'            => \dirname(__DIR__, 2) . '/counter/logs/',
             'countFile'         => 'counter.json',
             'ipFile'            => 'ips.json',
-            'imageDir'          => dirname(__DIR__, 2) . '/counter/images/',
+            'imageDir'          => \dirname(__DIR__, 2) . '/counter/images/',
             'imageExt'          => '.png',
             'uniqueOnly'        => true,
             'asImage'           => false,

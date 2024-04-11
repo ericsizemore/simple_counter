@@ -47,6 +47,9 @@ jobs:
       - name: Run test suite
         run: composer run-script test
 
+      - name: Coverage check
+        run: composer run-script coverage
+
       - uses: sudo-bot/action-scrutinizer@latest
         with:
            cli-args: "--format=php-clover build/logs/clover.xml"

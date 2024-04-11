@@ -7,8 +7,9 @@ declare(strict_types=1);
  *
  * (c) Eric Sizemore <https://github.com/ericsizemore>
  *
- * For the full copyright and license information, please view
- * the LICENSE.md file that was distributed with this source code.
+ * This source file is subject to the MIT license. For the full copyright and
+ * license information, please view the LICENSE file that was distributed with
+ * this source code.
  */
 
 namespace Esi\SimpleCounter\Storage;
@@ -27,7 +28,6 @@ use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use function array_filter;
 use function array_values;
 use function clearstatcache;
-use function in_array;
 use function json_decode;
 use function json_encode;
 use function sprintf;
@@ -89,7 +89,7 @@ final readonly class FlatfileStorage implements StorageInterface
         /** @var stdClass $currentIpData */
         $currentIpData = json_decode((string) $currentIpData);
 
-        return array_values(array_filter($currentIpData->ipList));
+        return array_values(array_filter($currentIpData->ipList, static fn (string $value): bool => (trim($value) !== '')));
     }
 
     public function getOption(string $option): string | bool | null
@@ -181,7 +181,7 @@ final readonly class FlatfileStorage implements StorageInterface
 
             $currentIpData = $this->fetchCurrentIpList();
 
-            if (!in_array($visitorIp, $currentIpData, true)) {
+            if (!\in_array($visitorIp, $currentIpData, true)) {
                 $currentIpData[] = $visitorIp;
 
                 $newIpList = (string) json_encode(['ipList' => $currentIpData]);

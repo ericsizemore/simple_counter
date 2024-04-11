@@ -7,8 +7,9 @@ declare(strict_types=1);
  *
  * (c) Eric Sizemore <https://github.com/ericsizemore>
  *
- * For the full copyright and license information, please view
- * the LICENSE.md file that was distributed with this source code.
+ * This source file is subject to the MIT license. For the full copyright and
+ * license information, please view the LICENSE file that was distributed with
+ * this source code.
  */
 
 namespace Esi\SimpleCounter;
@@ -18,7 +19,7 @@ use Esi\SimpleCounter\Interface\StorageInterface;
 /**
  * Essentially a wrapper for a given Storage implementation.
  *
- * @see \Esi\SimpleCounter\Tests\CounterTest
+ * @see Tests\CounterTest
  */
 
 /**

@@ -7,13 +7,13 @@ declare(strict_types=1);
  *
  * (c) Eric Sizemore <https://github.com/ericsizemore>
  *
- * For the full copyright and license information, please view
- * the LICENSE.md file that was distributed with this source code.
+ * This source file is subject to the MIT license. For the full copyright and
+ * license information, please view the LICENSE file that was distributed with
+ * this source code.
  */
 
 namespace Esi\SimpleCounter\Interface;
 
-use Esi\SimpleCounter\Configuration\FlatfileConfiguration;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -36,6 +36,7 @@ interface ConfigurationInterface
      * Returns the given option, if it exists.
      */
     public static function getOption(string $option): string | bool | null;
+
     /**
      * Takes an array of options to be used in the chosen Storage implementation.
      *
