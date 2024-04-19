@@ -52,6 +52,11 @@
             "Esi\\SimpleCounter\\Tests\\": "tests/src/"
         }
     },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-6.x-dev": "6.x-dev"

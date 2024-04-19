@@ -18,7 +18,7 @@ $config
     ->setRules([
         '@PER-CS'                                       => true,
         '@PSR12'                                        => true,
-        '@PHP81Migration'                               => true,
+        '@PHP82Migration'                               => true,
         'array_syntax'                                  => ['syntax' => 'short'],
         'php_unit_internal_class'                       => ['types' => ['normal', 'final']],
         'php_unit_expectation'                          => true,
