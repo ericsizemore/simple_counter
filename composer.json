@@ -31,8 +31,8 @@
         "symfony/options-resolver": "^7.0"
     },
     "require-dev": {
-        "esi/phpunit-coverage-check": "^1.0",
-        "friendsofphp/php-cs-fixer": "^3.53",
+        "esi/phpunit-coverage-check": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.54",
         "phpstan/extension-installer": "^1.2",
         "phpstan/phpstan": "^1.11",
         "phpstan/phpstan-deprecation-rules": "^1.2",
@@ -63,7 +63,7 @@
         }
     },
     "scripts": {
-        "coverage": "vendor/bin/coverage-check coverage:check build/logs/clover.xml 100 --ansi",
+        "coverage": "vendor/bin/coverage-check build/logs/clover.xml 100",
         "cs:check": "vendor/bin/php-cs-fixer check --verbose --diff",
         "cs:fix": "vendor/bin/php-cs-fixer fix",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
