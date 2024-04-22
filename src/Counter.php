@@ -83,7 +83,7 @@ readonly class Counter
     /**
      * Returns the given option, if it exists.
      */
-    public function getOption(string $option): string | bool | null
+    public function getOption(string $option): null|bool|string
     {
         return $this->storage->getOption($option);
     }

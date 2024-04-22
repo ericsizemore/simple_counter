@@ -35,7 +35,7 @@ interface ConfigurationInterface
     /**
      * Returns the given option, if it exists.
      */
-    public static function getOption(string $option): string | bool | null;
+    public static function getOption(string $option): null|bool|string;
 
     /**
      * Takes an array of options to be used in the chosen Storage implementation.

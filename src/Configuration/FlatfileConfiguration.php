@@ -84,7 +84,7 @@ final class FlatfileConfiguration implements ConfigurationInterface
             });
     }
 
-    public static function getOption(string $option): string | bool | null
+    public static function getOption(string $option): null|bool|string
     {
         return self::$options[$option] ?? null;
     }

@@ -37,14 +37,14 @@ interface StorageInterface
     /**
      * Returns the current IP data, if any.
      *
-     * @return list<string>
-     *
      * @throws RuntimeException If, using the FlatfileStorage, the current ip list cannot be obtained.
+     *
+     * @return list<string>
      */
     public function fetchCurrentIpList(): array;
 
     /**
      * Returns the given option, if it exists.
      */
-    public function getOption(string $option): string | bool | null;
+    public function getOption(string $option): null|bool|string;
 }

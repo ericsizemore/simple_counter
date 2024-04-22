@@ -92,7 +92,7 @@ final readonly class FlatfileStorage implements StorageInterface
         return array_values(array_filter($currentIpData->ipList, static fn (string $value): bool => (trim($value) !== '')));
     }
 
-    public function getOption(string $option): string | bool | null
+    public function getOption(string $option): null|bool|string
     {
         return $this->configuration::getOption($option);
     }
@@ -102,7 +102,7 @@ final readonly class FlatfileStorage implements StorageInterface
      *
      * @throws RuntimeException If the file cannot be opened or if a lock is unable to be acquired.
      */
-    private function readWrite(string $file, ?string $data = null): string | int | false
+    private function readWrite(string $file, ?string $data = null): false|int|string
     {
         /** @var string $logDir */
         $logDir = $this->configuration::getOption('logDir');
