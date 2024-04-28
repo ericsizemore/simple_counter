@@ -7,20 +7,107 @@
     "content-hash": "cd352009a4ad8a2ae849e44fc0b4d21d",
     "packages": [
         {
-            "name": "esi/utility",
-            "version": "v2.0.0",
+            "name": "esi/clock",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ericsizemore/utility.git",
-                "reference": "99ba718e75d554c00e2f253161c5f1afccaeffc2"
+                "url": "https://github.com/ericsizemore/clock.git",
+                "reference": "06e1669e63bb02576f0e1b7672f6401c1f087e22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ericsizemore/utility/zipball/99ba718e75d554c00e2f253161c5f1afccaeffc2",
-                "reference": "99ba718e75d554c00e2f253161c5f1afccaeffc2",
+                "url": "https://api.github.com/repos/ericsizemore/clock/zipball/06e1669e63bb02576f0e1b7672f6401c1f087e22",
+                "reference": "06e1669e63bb02576f0e1b7672f6401c1f087e22",
                 "shasum": ""
             },
             "require": {
+                "php": "^8.2 <8.5",
+                "psr/clock": "^1.0",
+                "symfony/polyfill-php83": "^1.29"
+            },
+            "provide": {
+                "psr/clock-implementation": "1.0"
+            },
+            "require-dev": {
+                "esi/phpunit-coverage-check": "^1.0",
+                "friendsofphp/php-cs-fixer": "^3.53",
+                "infection/infection": "^0.28",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "phpstan/phpstan-phpunit": "^1.4",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^11.0",
+                "psalm/plugin-phpunit": "^0.19.0",
+                "vimeo/psalm": "dev-master"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Esi\\Clock\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Sizemore",
+                    "email": "admin@secondversion.com",
+                    "homepage": "https://www.secondversion.com"
+                }
+            ],
+            "description": "Yet another PSR-20 clock implementation",
+            "keywords": [
+                "clock",
+                "clock-interface",
+                "psr-20",
+                "psr20",
+                "time"
+            ],
+            "support": {
+                "forum": "https://github.com/ericsizemore/clock/discussions",
+                "issues": "https://github.com/ericsizemore/clock/issues",
+                "security": "https://github.com/ericsizemore/clock/security/policy",
+                "source": "https://github.com/ericsizemore/clock/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://ko-fi.com/ericsizemore",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/ericsizemore",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/esi/clock",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-04-11T03:13:03+00:00"
+        },
+        {
+            "name": "esi/utility",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ericsizemore/utility.git",
+                "reference": "7fb5f0467973db8fd535d347ca31a2f737a4251a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ericsizemore/utility/zipball/7fb5f0467973db8fd535d347ca31a2f737a4251a",
+                "reference": "7fb5f0467973db8fd535d347ca31a2f737a4251a",
+                "shasum": ""
+            },
+            "require": {
+                "esi/clock": "^1.0",
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "php": "^8.2 <8.5",
@@ -28,11 +115,12 @@
                 "voku/portable-ascii": "^2.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "dev-master",
+                "esi/phpunit-coverage-check": "^2.0",
+                "friendsofphp/php-cs-fixer": "^3.54",
                 "phpstan/phpstan": "^1.11",
                 "phpstan/phpstan-phpunit": "^1.4",
                 "phpstan/phpstan-strict-rules": "^1.6",
-                "phpunit/phpunit": "^11.0"
+                "phpunit/phpunit": "^11.1"
             },
             "suggest": {
                 "ext-exif": "To be able to use Exif for guessing image types with Utility\\Image",
@@ -69,19 +157,67 @@
             },
             "funding": [
                 {
-                    "url": "https://github.com/ericsizemore",
-                    "type": "github"
+                    "url": "https://ko-fi.com/ericsizemore",
+                    "type": "custom"
                 },
                 {
-                    "url": "https://ko-fi.com/ericsizemore",
-                    "type": "ko_fi"
+                    "url": "https://github.com/ericsizemore",
+                    "type": "github"
                 },
                 {
                     "url": "https://tidelift.com/funding/github/packagist/esi/utility",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-04T04:12:50+00:00"
+            "time": "2024-04-23T04:52:15+00:00"
+        },
+        {
+            "name": "psr/clock",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/clock.git",
+                "reference": "e41a24703d4560fd0acb709162f73b8adfc3aa0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/clock/zipball/e41a24703d4560fd0acb709162f73b8adfc3aa0d",
+                "reference": "e41a24703d4560fd0acb709162f73b8adfc3aa0d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0 || ^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Clock\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for reading the clock.",
+            "homepage": "https://github.com/php-fig/clock",
+            "keywords": [
+                "clock",
+                "now",
+                "psr",
+                "psr-20",
+                "time"
+            ],
+            "support": {
+                "issues": "https://github.com/php-fig/clock/issues",
+                "source": "https://github.com/php-fig/clock/tree/1.0.0"
+            },
+            "time": "2022-11-25T14:36:26+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -260,6 +396,163 @@
                 }
             ],
             "time": "2023-08-08T10:20:21+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php80",
+            "version": "v1.29.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php80.git",
+                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
+                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php80\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ion Bazan",
+                    "email": "ion.bazan@gmail.com"
+                },
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.29.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-01-29T20:11:03+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php83",
+            "version": "v1.29.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php83.git",
+                "reference": "86fcae159633351e5fd145d1c47de6c528f8caff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php83/zipball/86fcae159633351e5fd145d1c47de6c528f8caff",
+                "reference": "86fcae159633351e5fd145d1c47de6c528f8caff",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "symfony/polyfill-php80": "^1.14"
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php83\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 8.3+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php83/tree/v1.29.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-01-29T20:11:03+00:00"
         },
         {
             "name": "voku/portable-ascii",
@@ -1025,12 +1318,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7b52251fae7e1ab8dae54b91d3a5d6f6d52390f0"
+                "reference": "86f16901a283cb11eafe6a320d6432f6c1c78b9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7b52251fae7e1ab8dae54b91d3a5d6f6d52390f0",
-                "reference": "7b52251fae7e1ab8dae54b91d3a5d6f6d52390f0",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/86f16901a283cb11eafe6a320d6432f6c1c78b9c",
+                "reference": "86f16901a283cb11eafe6a320d6432f6c1c78b9c",
                 "shasum": ""
             },
             "require": {
@@ -1076,7 +1369,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-21T14:58:44+00:00"
+            "time": "2024-04-25T07:30:07+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -1554,16 +1847,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.1.2",
+            "version": "11.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "51e342a0bc987e0ea8418105d0711f08ae116de3"
+                "reference": "d475be032238173ca3b0a516f5cc291d174708ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/51e342a0bc987e0ea8418105d0711f08ae116de3",
-                "reference": "51e342a0bc987e0ea8418105d0711f08ae116de3",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d475be032238173ca3b0a516f5cc291d174708ae",
+                "reference": "d475be032238173ca3b0a516f5cc291d174708ae",
                 "shasum": ""
             },
             "require": {
@@ -1634,7 +1927,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.1.2"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.1.3"
             },
             "funding": [
                 {
@@ -1650,7 +1943,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-14T07:13:56+00:00"
+            "time": "2024-04-24T06:34:25+00:00"
         },
         {
             "name": "psr/container",
@@ -3405,86 +3698,6 @@
             ],
             "support": {
                 "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.29.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-01-29T20:11:03+00:00"
-        },
-        {
-            "name": "symfony/polyfill-php80",
-            "version": "v1.29.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
-                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-            },
-            "type": "library",
-            "extra": {
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php80\\": ""
-                },
-                "classmap": [
-                    "Resources/stubs"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ion Bazan",
-                    "email": "ion.bazan@gmail.com"
-                },
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.29.0"
             },
             "funding": [
                 {

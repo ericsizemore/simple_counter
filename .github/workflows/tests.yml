@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+    # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
+    COMPOSER_ROOT_VERSION: "dev-6.x-dev"
+
 jobs:
   test:
     name: Run Unit Tests ${{ matrix.php }}

@@ -1,12 +1,12 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "lockFileMaintenance": {
-    "enabled": true,
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-      "schedule:daily"
-    ]
-  }
+        "config:recommended"
+    ],
+    "lockFileMaintenance": {
+        "enabled": true,
+        "extends": [
+            "schedule:weekly"
+        ]
+    }
 }
