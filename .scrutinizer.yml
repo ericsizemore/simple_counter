@@ -2,7 +2,7 @@
 build:
     image: default-bionic
     environment:
-        php: 8.2.13
+        php: 8.2.15
     nodes:
         analysis:
             dependencies:

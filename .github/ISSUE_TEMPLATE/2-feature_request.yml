@@ -1,0 +1,23 @@
+name: Feature Request
+description: I have a suggestion for a new feature (and possibly want to implement it).
+labels: [ "enhancement", "unverified" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > Before requesting a new feature, make sure your version of Simple Counter is up-to-date.
+  - type: textarea
+    id: feature-request
+    attributes:
+      label: Feature Request
+      description: Please describe the feature you would like to see implemented.
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Contribution Checks
+      options:
+        - label: I have verified whether this feature request was already discussed.
+          required: false

@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+    # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
+    COMPOSER_ROOT_VERSION: "dev-master"
+
 # Is it overkill to run PHPStan using different PHP versions? Probably :)
 jobs:
   phpstan:

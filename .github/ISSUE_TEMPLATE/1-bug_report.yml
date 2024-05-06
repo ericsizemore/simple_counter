@@ -1,0 +1,58 @@
+name: Bug Report
+description: Existing feature does not behave as expected.
+labels: [ "bug", "unverified" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before reporting a bug, make sure Simple Counter is up-to-date and the problem is/was not reported already.
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Problem description
+      description: Please describe the problem you have encountered
+    validations:
+      required: true
+  - type: textarea
+    id: minimal-reproducer
+    attributes:
+      label: Minimal Reproducer
+      description: |
+        Please provide a minimal code snippet that should be run to reproduce the problem.
+
+        If relevant, provide the expected output, the actual output and/or the error that occurred, if any.
+
+        Please use markdown syntax for each code snippet.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Library Version
+      description: Which version of Simple Counter is being run? (in X.Y.Z format)
+    validations:
+      required: true
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP version
+      description: Which PHP version is Simple Counter being run on?
+    validations:
+      required: true
+  - type: dropdown
+    id: run-method
+    attributes:
+      label: How do you run Simple Counter?
+      multiple: false
+      options:
+        - Composer package
+        - Manual installation
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Contribution Checks
+      options:
+        - label: I have verified whether this problem has already been reported.
+          required: false

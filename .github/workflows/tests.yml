@@ -6,13 +6,17 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+    # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
+    COMPOSER_ROOT_VERSION: "dev-master"
+
 jobs:
   test:
     name: Run Unit Tests ${{ matrix.php }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [ '8.2', '8.3', '8.4' ]
+        php: [ '8.2', '8.3' ]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -46,6 +50,9 @@ jobs:
 
       - name: Run test suite
         run: composer run-script test
+
+      - name: Coverage check
+        run: composer run-script coverage
 
       - uses: sudo-bot/action-scrutinizer@latest
         with:

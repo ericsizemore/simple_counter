@@ -1,0 +1,33 @@
+site_name: Esi\SimpleCounter
+site_description: 'Documentation for Simple Counter - A simple PHP counter that counts your website visitors.'
+site_author: 'Eric Sizemore'
+copyright: 'Copyright (C) 2006 - 2024 Eric Sizemore'
+site_url: https://www.secondversion.com/docs/simple_counter
+docs_dir: docs/
+repo_name: 'ericsizemore/simple_counter'
+repo_url: 'https://github.com/ericsizemore/simple_counter'
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_style: 'github'
+  hljs_languages:
+    bash
+    json
+    php
+nav:
+  - Home: index.md
+  - Main Class:
+    - Counter: counter.md
+  - Configuration:
+    - FlatfileConfiguration: flatfile-configuration.md
+  - Interfaces:
+    - ConfigurationInterface: configuration-interface.md
+    - StorageInterface: storage-interface.md
+  - Storage:
+    - FlatfileStorage: flatfile-storage.md
+  - Trait:
+    - FormatterTrait: formatter-trait.md
+  - About:
+    - License: license.md
+    - Security: security.md
+    - Upgrading: upgrading.md
