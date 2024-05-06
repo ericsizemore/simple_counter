@@ -86,7 +86,7 @@ final readonly class FlatfileStorage implements StorageInterface
         }
         //@codeCoverageIgnoreEnd
 
-        /** @var stdClass $currentIpData */
+        /** @var object{ipList: array<string>} $currentIpData */
         $currentIpData = json_decode((string) $currentIpData);
 
         return array_values(array_filter($currentIpData->ipList, static fn (string $value): bool => (trim($value) !== '')));
@@ -132,7 +132,7 @@ final readonly class FlatfileStorage implements StorageInterface
         $wouldBlock = null;
 
         if (!$fileHandle->flock($flags, $wouldBlock)) {
-            $fileHandle = null;
+            unset($fileHandle);
 
             if ($wouldBlock) {
                 return false;
@@ -149,7 +149,7 @@ final readonly class FlatfileStorage implements StorageInterface
         }
 
         $fileHandle->flock(LOCK_UN);
-        $fileHandle = null;
+        unset($fileHandle);
 
         return $data;
     }

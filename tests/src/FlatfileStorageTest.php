@@ -31,6 +31,7 @@ use const DIRECTORY_SEPARATOR;
 
 /**
  * @internal
+ * @psalm-suppress NullReference
  */
 #[CoversClass(FlatfileStorage::class)]
 #[CoversClass(FlatfileConfiguration::class)]

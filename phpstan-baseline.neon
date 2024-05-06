@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^PHPDoc tag @var above assignment does not specify variable name\\.$#"
+			count: 1
+			path: src/Configuration/FlatfileConfiguration.php

@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [6.0.0] - 2024-05-06
 
 ### Added
 
@@ -34,6 +34,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
   * Removed `0-9` `.gif` images in `counter/images/`. *See above, replaced with new icons*
+
+### TODO
+
+  * Improve on the documenation.
 
 
 ## [5.0.1] - 2024-03-04
@@ -71,6 +75,7 @@ NOTE: Not backwards compatible with prior SimpleCounter versions.
   * Unfortunately, no changelog was kept prior to v5.0
 
 
-[unreleased]: https://github.com/ericsizemore/simple_counter/compare/5.0.x...6.x-dev
-[5.0.1]: https://github.com/ericsizemore/simple_counter/compare/v5.0.0...v5.0.1
-[5.0.0]: https://github.com/ericsizemore/simple_counter/compare/4.0.x...v5.0.0
+[unreleased]: https://github.com/ericsizemore/simple_counter/tree/master
+[6.0.0]: https://github.com/ericsizemore/simple_counter/releases/tag/v6.0.0
+[5.0.1]: https://github.com/ericsizemore/simple_counter/releases/tag/v5.0.1
+[5.0.0]: https://github.com/ericsizemore/simple_counter/releases/tag/v5.0.0

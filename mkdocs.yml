@@ -28,9 +28,6 @@ nav:
   - Trait:
     - FormatterTrait: formatter-trait.md
   - About:
-    - Backward Compatibility: backward-compatibility.md
-    - Changelog: changelog.md
-    - Contributing: contributing.md
     - License: license.md
     - Security: security.md
     - Upgrading: upgrading.md

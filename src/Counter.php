@@ -21,26 +21,6 @@ use Esi\SimpleCounter\Interface\StorageInterface;
  *
  * @see Tests\CounterTest
  */
-
-/**
- * PHPStan type for each options array definition, for each storage implementation.
- *
- * Placed here so that it can be imported via phpstan-import-type into where it is needed.
- *
- * @phpstan-type BaseStorageOptions = array{
- *     imageDir?: string,
- *     imageExt?: string,
- *     uniqueOnly?: bool,
- *     asImage?: bool,
- *     honorDnt?: bool,
- *     visitorTextString?: string
- * }|array{}
- * @phpstan-type FlatfileOptions = array{
- *     logDir?: string,
- *     countFile?: string,
- *     ipFile?: string
- * }
- */
 readonly class Counter
 {
     /**

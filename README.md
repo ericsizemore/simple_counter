@@ -3,13 +3,6 @@
 [Simple Counter](https://github.com/ericsizemore/simple_counter/) is a simple PHP counter that counts your website visitors. It has the ability to 
 either show the count as plain text or images; and whether to count only unique hits, or all hits. (IP Based)
 
-# WARNING
-
-* The code in this branch (`6.x-dev`) is a development branch for the upcoming v6.0.0, a complete rewrite of this library.
-* There are many things that still need updated.
-
-It is NOT recommended to use this code in production.
-
 ## Important Note
 
 * As of v6.0.0, Simple Counter is no longer licensed under the GNU LGPLv3 license.

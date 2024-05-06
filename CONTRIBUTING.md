@@ -92,6 +92,14 @@ The configuration file can be found at `.php-cs-fixer.dist.php`, in the reposito
 $ composer run-script cs:fix
 ```
 
+#### Psalm
+
+The configuration file can be found at `psalm.xml`, in the repository, for [Psalm](https://psalm.dev/). You can use Psalm to perform static analysis (with a focus on type checking):
+
+```bash
+$ composer run-script psalm
+```
+
 #### Unit tests (via PHPUnit)
 
 The configuration file can be found at `phpunit.xml`, in the repository, for [PHPUnit](https://phpunit.de/index.html). You can run the test suite with:

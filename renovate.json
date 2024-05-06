@@ -8,5 +8,6 @@
         "extends": [
             "schedule:weekly"
         ]
-    }
+    },
+    "commitMessagePrefix": "chore(deps):"
 }

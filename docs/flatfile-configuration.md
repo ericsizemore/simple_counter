@@ -25,3 +25,19 @@ Returns the given option, if it exists.
 ## initOptions
 
 Takes an array of options to be used in the FlatfileStorage implementation.
+
+Valid options are (with their defaults):
+
+```php
+[
+    'logDir'            => \dirname(__DIR__, 2) . '/counter/logs/',
+    'countFile'         => 'counter.json',
+    'ipFile'            => 'ips.json',
+    'imageDir'          => \dirname(__DIR__, 2) . '/counter/images/',
+    'imageExt'          => '.png',
+    'uniqueOnly'        => true,
+    'asImage'           => false,
+    'honorDnt'          => false,
+    'visitorTextString' => 'You are visitor #%s',
+]
+```

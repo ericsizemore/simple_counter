@@ -18,8 +18,7 @@ use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @phpstan-import-type BaseStorageOptions from \Esi\SimpleCounter\Counter
- * @phpstan-import-type FlatfileOptions from \Esi\SimpleCounter\Counter
+ * @phpstan-import-type FlatfileOptions from \Esi\SimpleCounter\Configuration\FlatfileConfiguration
  *
  * @see \Esi\SimpleCounter\Storage\FlatfileStorage for implementation details.
  */
@@ -42,7 +41,7 @@ interface ConfigurationInterface
      *
      * The allowed types for $options will be updated as new Storage implementations are added.
      *
-     * @param BaseStorageOptions&FlatfileOptions $options
+     * @param FlatfileOptions $options
      */
     public static function initOptions(array $options = []): ConfigurationInterface;
 }

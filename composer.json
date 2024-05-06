@@ -38,7 +38,9 @@
         "phpstan/phpstan-deprecation-rules": "^1.2",
         "phpstan/phpstan-phpunit": "^1.4",
         "phpstan/phpstan-strict-rules": "^1.6",
-        "phpunit/phpunit": "^11.1"
+        "phpunit/phpunit": "^11.1",
+        "psalm/plugin-phpunit": "^0.19.0",
+        "vimeo/psalm": "dev-master"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -59,7 +61,9 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-6.x-dev": "6.x-dev"
+            "dev-master": "6.x-dev",
+            "dev-5.0.x-dev": "5.x-dev",
+            "dev-4.0.x-dev": "4.x-dev"
         }
     },
     "scripts": {
@@ -67,6 +71,8 @@
         "cs:check": "vendor/bin/php-cs-fixer check --verbose --diff",
         "cs:fix": "vendor/bin/php-cs-fixer fix",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
+        "psalm": "vendor/bin/psalm --no-diff",
+        "psalm:stats": "vendor/bin/psalm --no-diff --stats",
         "test": "phpunit"
     }
 }

@@ -23,26 +23,38 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use function rtrim;
 
 /**
- * @phpstan-import-type BaseStorageOptions from \Esi\SimpleCounter\Counter
- * @phpstan-import-type FlatfileOptions from \Esi\SimpleCounter\Counter
+ * @phpstan-type FlatfileOptions = array{
+ *     imageDir?: string,
+ *     imageExt?: string,
+ *     uniqueOnly?: bool,
+ *     asImage?: bool,
+ *     honorDnt?: bool,
+ *     visitorTextString?: string,
+ *     logDir?: string,
+ *     countFile?: string,
+ *     ipFile?: string
+ * }|array{}
  *
  * @see \Esi\SimpleCounter\Tests\FlatfileStorageTest
  */
 final class FlatfileConfiguration implements ConfigurationInterface
 {
     /**
-     * @var BaseStorageOptions&FlatfileOptions
+     * @var FlatfileOptions
      */
     private static array $options = [];
 
     /**
-     * @param BaseStorageOptions&FlatfileOptions $options
+     * @param FlatfileOptions $options
      */
     private function __construct(array $options = [])
     {
         $optionsResolver = new OptionsResolver();
         self::configureOptions($optionsResolver);
 
+        /**
+         * @psalm-var FlatfileOptions self::$options
+         */
         self::$options = $optionsResolver->resolve($options);
     }
 
