@@ -26,25 +26,12 @@ jobs:
         with:
            php-version: ${{ matrix.php }}
            extensions: mbstring
-           tools: composer:v2
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate --strict
-
-      - name: Cache Composer packages
-        id: composer-cache
-        run: |
-          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v4
+      - name: Setup Composer, install dependencies
+        uses: ramsey/composer-install@v3
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
+           composer-options: "--prefer-dist --optimize-autoloader"
+           require-lock-file: "true"
 
       - name: Run PHPStan
         run: composer run-script phpstan
