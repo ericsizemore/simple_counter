@@ -24,7 +24,7 @@
             <directory>src</directory>
         </include>
     </source>
-    <coverage cacheDirectory="build/phpunit/cache">
+    <coverage>
         <report>
             <clover outputFile="build/logs/clover.xml"/>
             <html outputDirectory="build/logs/coverage"/>
