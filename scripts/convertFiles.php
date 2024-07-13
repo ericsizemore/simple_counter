@@ -48,7 +48,7 @@ function convertCounterFile(string $oldCounterFile, string $newCounterFile): voi
 
     $countData = ['currentCount' => $countData];
 
-    $bytesWritten = file_put_contents($newCounterFile, json_encode($countData), \LOCK_EX);
+    $bytesWritten = file_put_contents($newCounterFile, json_encode($countData), LOCK_EX);
 
     if ($bytesWritten === false) {
         echo "Unable to update $newCounterFile<br/>\n";
@@ -65,7 +65,7 @@ function convertIpFile(string $oldIpFile, string $newIpFile): void
     echo "Checking ips.txt ...<br/>\n";
 
     $ipData = trim(file_get_contents($oldIpFile));
-    $ipData = preg_split("#\n#", $ipData, -1, \PREG_SPLIT_NO_EMPTY);
+    $ipData = preg_split("#\n#", $ipData, -1, PREG_SPLIT_NO_EMPTY);
 
     if ($ipData === []) {
         echo "No IP data found, creating default data...<br/>\n";
@@ -76,7 +76,7 @@ function convertIpFile(string $oldIpFile, string $newIpFile): void
 
     $ipData = ['ipList' => $ipData];
 
-    $bytesWritten = file_put_contents($newIpFile, json_encode($ipData), \LOCK_EX);
+    $bytesWritten = file_put_contents($newIpFile, json_encode($ipData), LOCK_EX);
 
     if ($bytesWritten === false) {
         echo "Unable to update $newIpFile<br/>\n";

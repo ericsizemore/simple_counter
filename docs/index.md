@@ -116,7 +116,7 @@ $options = [
 
 /**
  * When creating the counter instance, a Storage implementation with a valid Configuration is required.
- * Currently, Simple Counter ships with one Storage implementation and it's corresponding Configuration:
+ * Currently, Simple Counter ships with one Storage implementation, and it's corresponding Configuration:
  *
  * \Esi\SimpleCounter\Storage\FlatfileStorage
  * \Esi\SimpleCounter\Configuration\FlatfileConfiguration
