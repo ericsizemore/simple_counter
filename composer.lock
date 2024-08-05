@@ -894,16 +894,16 @@
         },
         {
             "name": "amphp/sync",
-            "version": "v2.2.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/sync.git",
-                "reference": "375ef5b54a0d12c38e12728dde05a55e30f2fbec"
+                "reference": "217097b785130d77cfcc58ff583cf26cd1770bf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/sync/zipball/375ef5b54a0d12c38e12728dde05a55e30f2fbec",
-                "reference": "375ef5b54a0d12c38e12728dde05a55e30f2fbec",
+                "url": "https://api.github.com/repos/amphp/sync/zipball/217097b785130d77cfcc58ff583cf26cd1770bf1",
+                "reference": "217097b785130d77cfcc58ff583cf26cd1770bf1",
                 "shasum": ""
             },
             "require": {
@@ -957,7 +957,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/sync/issues",
-                "source": "https://github.com/amphp/sync/tree/v2.2.0"
+                "source": "https://github.com/amphp/sync/tree/v2.3.0"
             },
             "funding": [
                 {
@@ -965,7 +965,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-12T01:00:01+00:00"
+            "time": "2024-08-03T19:31:26+00:00"
         },
         {
             "name": "clue/ndjson-react",
