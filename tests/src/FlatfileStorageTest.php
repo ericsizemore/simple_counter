@@ -24,7 +24,6 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
-use function sprintf;
 use function str_starts_with;
 
 use const DIRECTORY_SEPARATOR;
@@ -59,8 +58,8 @@ class FlatfileStorageTest extends TestCase
         Arrays::set($_SERVER, 'REMOTE_ADDR', '127.0.0.1');
 
         self::$testDirectories = [
-            'logDir'   => sprintf('%s%s%s', \dirname(__FILE__, 2), DIRECTORY_SEPARATOR, 'logs'),
-            'imageDir' => sprintf('%s%s%s', \dirname(__FILE__, 2), DIRECTORY_SEPARATOR, 'images'),
+            'logDir'   => \sprintf('%s%s%s', \dirname(__FILE__, 2), DIRECTORY_SEPARATOR, 'logs'),
+            'imageDir' => \sprintf('%s%s%s', \dirname(__FILE__, 2), DIRECTORY_SEPARATOR, 'images'),
         ];
 
         self::$testInvalidDirectories = [
@@ -69,8 +68,8 @@ class FlatfileStorageTest extends TestCase
         ];
 
         self::$logFiles = [
-            'countFile' => sprintf('%s%s%s', self::$testDirectories['logDir'], DIRECTORY_SEPARATOR, 'counter.json'),
-            'ipFile'    => sprintf('%s%s%s', self::$testDirectories['logDir'], DIRECTORY_SEPARATOR, 'ips.json'),
+            'countFile' => \sprintf('%s%s%s', self::$testDirectories['logDir'], DIRECTORY_SEPARATOR, 'counter.json'),
+            'ipFile'    => \sprintf('%s%s%s', self::$testDirectories['logDir'], DIRECTORY_SEPARATOR, 'ips.json'),
         ];
     }
 

@@ -30,7 +30,6 @@ use function array_values;
 use function clearstatcache;
 use function json_decode;
 use function json_encode;
-use function sprintf;
 
 use const DIRECTORY_SEPARATOR;
 use const LOCK_EX;
@@ -112,8 +111,8 @@ final readonly class FlatfileStorage implements StorageInterface
         $ipFile = $this->configuration::getOption('ipFile');
 
         $filePaths = [
-            'logs' => sprintf('%s%s%s', $logDir, DIRECTORY_SEPARATOR, $countFile),
-            'ips'  => sprintf('%s%s%s', $logDir, DIRECTORY_SEPARATOR, $ipFile),
+            'logs' => \sprintf('%s%s%s', $logDir, DIRECTORY_SEPARATOR, $countFile),
+            'ips'  => \sprintf('%s%s%s', $logDir, DIRECTORY_SEPARATOR, $ipFile),
         ];
 
         clearstatcache(true, $filePaths[$file]);
@@ -138,7 +137,7 @@ final readonly class FlatfileStorage implements StorageInterface
                 return false;
             }
 
-            throw new RuntimeException(sprintf("Unable to acquire lock on '%s'.", $file));
+            throw new RuntimeException(\sprintf("Unable to acquire lock on '%s'.", $file));
         }
         //@codeCoverageIgnoreEnd
 
@@ -207,18 +206,18 @@ final readonly class FlatfileStorage implements StorageInterface
 
         /** @var string $countFile */
         $countFile = $this->configuration::getOption('countFile');
-        $countFile = sprintf('%s%s%s', $logDir, DIRECTORY_SEPARATOR, $countFile);
+        $countFile = \sprintf('%s%s%s', $logDir, DIRECTORY_SEPARATOR, $countFile);
 
         /** @var string $ipFile */
         $ipFile = $this->configuration::getOption('ipFile');
-        $ipFile = sprintf('%s%s%s', $logDir, DIRECTORY_SEPARATOR, $ipFile);
+        $ipFile = \sprintf('%s%s%s', $logDir, DIRECTORY_SEPARATOR, $ipFile);
 
         if (!Filesystem::isFile($countFile)) {
-            throw new InvalidOptionsException(sprintf("'%s' appears to be an invalid file", $countFile));
+            throw new InvalidOptionsException(\sprintf("'%s' appears to be an invalid file", $countFile));
         }
 
         if (!Filesystem::isFile($ipFile)) {
-            throw new InvalidOptionsException(sprintf("'%s' appears to be an invalid file", $ipFile));
+            throw new InvalidOptionsException(\sprintf("'%s' appears to be an invalid file", $ipFile));
         }
     }
 }

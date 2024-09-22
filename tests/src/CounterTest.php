@@ -25,8 +25,6 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
-use function sprintf;
-
 use const DIRECTORY_SEPARATOR;
 
 /**
@@ -57,13 +55,13 @@ class CounterTest extends TestCase
         Arrays::set($_SERVER, 'REMOTE_ADDR', '127.0.0.1');
 
         self::$testDirectories = [
-            'logDir'   => sprintf('%s%s%s', \dirname(__FILE__, 2), DIRECTORY_SEPARATOR, 'logs'),
-            'imageDir' => sprintf('%s%s%s', \dirname(__FILE__, 2), DIRECTORY_SEPARATOR, 'images'),
+            'logDir'   => \sprintf('%s%s%s', \dirname(__FILE__, 2), DIRECTORY_SEPARATOR, 'logs'),
+            'imageDir' => \sprintf('%s%s%s', \dirname(__FILE__, 2), DIRECTORY_SEPARATOR, 'images'),
         ];
 
         self::$logFiles = [
-            'countFile' => sprintf('%s%s%s', self::$testDirectories['logDir'], DIRECTORY_SEPARATOR, 'counter.json'),
-            'ipFile'    => sprintf('%s%s%s', self::$testDirectories['logDir'], DIRECTORY_SEPARATOR, 'ips.json'),
+            'countFile' => \sprintf('%s%s%s', self::$testDirectories['logDir'], DIRECTORY_SEPARATOR, 'counter.json'),
+            'ipFile'    => \sprintf('%s%s%s', self::$testDirectories['logDir'], DIRECTORY_SEPARATOR, 'ips.json'),
         ];
 
         $this->counter = new Counter(new FlatfileStorage(FlatfileConfiguration::initOptions(

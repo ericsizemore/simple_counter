@@ -19,7 +19,6 @@ use Esi\SimpleCounter\Interface\ConfigurationInterface;
 use function array_map;
 use function implode;
 use function number_format;
-use function sprintf;
 use function str_split;
 
 use const DIRECTORY_SEPARATOR;
@@ -49,7 +48,7 @@ trait FormatterTrait
         $visitorTextString = $configuration::getOption('visitorTextString');
 
         if ($configuration::getOption('asImage') === true) {
-            return implode('&nbsp;', array_map(static fn (string $number): string => sprintf(
+            return implode('&nbsp;', array_map(static fn (string $number): string => \sprintf(
                 '<img src="%s%d%s" alt="%2$d" />',
                 $imageDir . DIRECTORY_SEPARATOR,
                 $number,
@@ -57,6 +56,6 @@ trait FormatterTrait
             ), str_split((string) $currentCount)));
         }
 
-        return sprintf($visitorTextString, number_format((float) $currentCount));
+        return \sprintf($visitorTextString, number_format((float) $currentCount));
     }
 }
