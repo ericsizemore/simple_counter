@@ -1416,31 +1416,32 @@
         },
         {
             "name": "esi/phpunit-coverage-check",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ericsizemore/phpunit-coverage-check.git",
-                "reference": "5a69a14178f140e8a3d9db47586029d535e47a24"
+                "reference": "513a2af73b02f5dcc858448820d75f99083c868f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ericsizemore/phpunit-coverage-check/zipball/5a69a14178f140e8a3d9db47586029d535e47a24",
-                "reference": "5a69a14178f140e8a3d9db47586029d535e47a24",
+                "url": "https://api.github.com/repos/ericsizemore/phpunit-coverage-check/zipball/513a2af73b02f5dcc858448820d75f99083c868f",
+                "reference": "513a2af73b02f5dcc858448820d75f99083c868f",
                 "shasum": ""
             },
             "require": {
                 "ext-libxml": "*",
                 "ext-simplexml": "*",
                 "php": "^8.2 <8.5",
-                "symfony/console": "^7.0"
+                "symfony/console": "^7.1"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.54",
-                "phpstan/phpstan": "^1.11",
+                "friendsofphp/php-cs-fixer": "^3.64",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.12",
                 "phpstan/phpstan-deprecation-rules": "^1.2",
                 "phpstan/phpstan-phpunit": "^1.4",
                 "phpstan/phpstan-strict-rules": "^1.6",
-                "phpunit/phpunit": "^11.0"
+                "phpunit/phpunit": "^11.4"
             },
             "bin": [
                 "coverage-check"
@@ -1504,7 +1505,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-21T06:33:41+00:00"
+            "time": "2024-10-09T22:10:07+00:00"
         },
         {
             "name": "evenement/evenement",
