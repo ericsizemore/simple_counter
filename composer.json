@@ -27,18 +27,18 @@
     "require": {
         "php": "^8.2 <8.5",
         "ext-json": "*",
-        "esi/utility": "^2.0",
-        "symfony/options-resolver": "^7.0"
+        "esi/utility": "^2.1",
+        "symfony/options-resolver": "^7.1"
     },
     "require-dev": {
         "esi/phpunit-coverage-check": "^2.0",
         "friendsofphp/php-cs-fixer": "^3.64",
         "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan": "^1.12",
-        "phpstan/phpstan-deprecation-rules": "^1.2",
-        "phpstan/phpstan-phpunit": "^1.4",
-        "phpstan/phpstan-strict-rules": "^1.6",
-        "phpunit/phpunit": "^11.3",
+        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpunit/phpunit": "^11.4",
         "psalm/plugin-phpunit": "^0.19.0",
         "vimeo/psalm": "dev-master"
     },
