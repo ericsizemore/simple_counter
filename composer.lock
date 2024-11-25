@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e9c3f421a20cd27b35137b4b9c30fdc2",
+    "content-hash": "6ff7f75e5c419ddfa3e0e99a06ae4067",
     "packages": [
         {
             "name": "esi/clock",

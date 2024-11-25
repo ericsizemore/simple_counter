@@ -32,7 +32,7 @@
     },
     "require-dev": {
         "esi/phpunit-coverage-check": "^2.0",
-        "friendsofphp/php-cs-fixer": "^3.64",
+        "friendsofphp/php-cs-fixer": "^3.65",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-deprecation-rules": "^2.0",
@@ -69,6 +69,14 @@
         "coverage": "vendor/bin/coverage-check build/logs/clover.xml 100",
         "cs:check": "vendor/bin/php-cs-fixer check --verbose --diff",
         "cs:fix": "vendor/bin/php-cs-fixer fix",
+        "cs:check:php84": [
+            "@putenv PHP_CS_FIXER_IGNORE_ENV=1",
+            "vendor/bin/php-cs-fixer check --verbose --diff"
+        ],
+        "cs:fix:php84": [
+            "@putenv PHP_CS_FIXER_IGNORE_ENV=1",
+            "vendor/bin/php-cs-fixer fix"
+        ],
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
         "psalm": "vendor/bin/psalm --no-diff",
         "psalm:stats": "vendor/bin/psalm --no-diff --stats",
