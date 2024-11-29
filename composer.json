@@ -68,11 +68,11 @@
     "scripts": {
         "coverage": "vendor/bin/coverage-check build/logs/clover.xml 100",
         "cs:check": "vendor/bin/php-cs-fixer check --verbose --diff",
-        "cs:fix": "vendor/bin/php-cs-fixer fix",
         "cs:check:php84": [
             "@putenv PHP_CS_FIXER_IGNORE_ENV=1",
             "vendor/bin/php-cs-fixer check --verbose --diff"
         ],
+        "cs:fix": "vendor/bin/php-cs-fixer fix",
         "cs:fix:php84": [
             "@putenv PHP_CS_FIXER_IGNORE_ENV=1",
             "vendor/bin/php-cs-fixer fix"
