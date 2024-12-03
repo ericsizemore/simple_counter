@@ -1417,16 +1417,16 @@
         },
         {
             "name": "esi/phpunit-coverage-check",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ericsizemore/phpunit-coverage-check.git",
-                "reference": "513a2af73b02f5dcc858448820d75f99083c868f"
+                "reference": "0428086b845733eb9d853464911923f78aa6b571"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ericsizemore/phpunit-coverage-check/zipball/513a2af73b02f5dcc858448820d75f99083c868f",
-                "reference": "513a2af73b02f5dcc858448820d75f99083c868f",
+                "url": "https://api.github.com/repos/ericsizemore/phpunit-coverage-check/zipball/0428086b845733eb9d853464911923f78aa6b571",
+                "reference": "0428086b845733eb9d853464911923f78aa6b571",
                 "shasum": ""
             },
             "require": {
@@ -1436,12 +1436,12 @@
                 "symfony/console": "^7.1"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.64",
+                "friendsofphp/php-cs-fixer": "^3.65",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^1.12",
-                "phpstan/phpstan-deprecation-rules": "^1.2",
-                "phpstan/phpstan-phpunit": "^1.4",
-                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
                 "phpunit/phpunit": "^11.4"
             },
             "bin": [
@@ -1475,6 +1475,7 @@
                 }
             ],
             "description": "Check the code coverage using the clover report of PHPUnit.",
+            "homepage": "https://github.com/ericsizemore/phpunit-coverage-check",
             "keywords": [
                 "code-coverage",
                 "code-coverage-checker",
@@ -1487,8 +1488,10 @@
                 "unit-testing"
             ],
             "support": {
+                "docs": "https://github.com/ericsizemore/phpunit-coverage-check",
                 "forum": "https://github.com/ericsizemore/phpunit-coverage-check/discussions",
                 "issues": "https://github.com/ericsizemore/phpunit-coverage-check/issues",
+                "rss": "https://github.com/ericsizemore/phpunit-coverage-check/releases.atom",
                 "security": "https://github.com/ericsizemore/phpunit-coverage-check/security/policy",
                 "source": "https://github.com/ericsizemore/phpunit-coverage-check/tree/master"
             },
@@ -1506,7 +1509,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-09T22:10:07+00:00"
+            "time": "2024-12-03T04:33:39+00:00"
         },
         {
             "name": "evenement/evenement",
