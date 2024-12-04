@@ -69,7 +69,7 @@ function convertIpFile(string $oldIpFile, string $newIpFile): void
 
     if ($ipData === []) {
         echo "No IP data found, creating default data...<br/>\n";
-        $ipData = [""];
+        $ipData = [''];
     } else {
         echo "Converting data...<br/>\n";
     }
