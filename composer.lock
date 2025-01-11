@@ -95,33 +95,39 @@
         },
         {
             "name": "esi/utility",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ericsizemore/utility.git",
-                "reference": "7fb5f0467973db8fd535d347ca31a2f737a4251a"
+                "reference": "626ed98e2cec26646b7d2a6d959db89730be5007"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ericsizemore/utility/zipball/7fb5f0467973db8fd535d347ca31a2f737a4251a",
-                "reference": "7fb5f0467973db8fd535d347ca31a2f737a4251a",
+                "url": "https://api.github.com/repos/ericsizemore/utility/zipball/626ed98e2cec26646b7d2a6d959db89730be5007",
+                "reference": "626ed98e2cec26646b7d2a6d959db89730be5007",
                 "shasum": ""
             },
             "require": {
-                "esi/clock": "^1.0",
+                "esi/clock": "^1.1",
+                "ext-filter": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "php": "^8.2 <8.5",
+                "php": "~8.2.0 || ~8.3.0 || ~8.4.1",
                 "ralouphie/getallheaders": "^3.0",
                 "voku/portable-ascii": "^2.0"
             },
             "require-dev": {
                 "esi/phpunit-coverage-check": "^2.0",
-                "friendsofphp/php-cs-fixer": "^3.54",
-                "phpstan/phpstan": "^1.11",
-                "phpstan/phpstan-phpunit": "^1.4",
-                "phpstan/phpstan-strict-rules": "^1.6",
-                "phpunit/phpunit": "^11.1"
+                "friendsofphp/php-cs-fixer": "^3.67",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^11.5",
+                "psalm/plugin-phpunit": "^0.19.0",
+                "rector/rector": "^2.0",
+                "vimeo/psalm": "dev-master"
             },
             "suggest": {
                 "ext-exif": "To be able to use Exif for guessing image types with Utility\\Image",
@@ -130,7 +136,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -150,9 +156,23 @@
                 }
             ],
             "description": "Utility - Collection of various PHP utility functions.",
+            "keywords": [
+                "arrays",
+                "dates",
+                "environment",
+                "filesystem",
+                "images",
+                "numbers",
+                "strings",
+                "tools",
+                "utilities",
+                "utility"
+            ],
             "support": {
+                "docs": "https://github.com/ericsizemore/utility/tree/master/docs",
                 "forum": "https://github.com/ericsizemore/utility/discussions",
                 "issues": "https://github.com/ericsizemore/utility/issues",
+                "rss": "https://github.com/ericsizemore/utility/releases.atom",
                 "security": "https://github.com/ericsizemore/utility/security/policy",
                 "source": "https://github.com/ericsizemore/utility/tree/master"
             },
@@ -170,7 +190,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-23T04:52:15+00:00"
+            "time": "2025-01-11T01:21:04+00:00"
         },
         {
             "name": "psr/clock",
