@@ -8,6 +8,7 @@
 [![Psalm Static analysis](https://github.com/ericsizemore/simple_counter/actions/workflows/psalm.yml/badge.svg?branch=master)](https://github.com/ericsizemore/simple_counter/actions/workflows/psalm.yml)
 [![Type Coverage](https://shepherd.dev/github/ericsizemore/simple_counter/coverage.svg)](https://shepherd.dev/github/ericsizemore/simple_counter)
 [![Psalm Level](https://shepherd.dev/github/ericsizemore/simple_counter/level.svg)](https://shepherd.dev/github/ericsizemore/simple_counter)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ericsizemore_simple_counter&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ericsizemore_simple_counter)
 [![Latest Stable Version](https://img.shields.io/packagist/v/esi/simple_counter.svg)](https://packagist.org/packages/esi/simple_counter)
 [![Downloads per Month](https://img.shields.io/packagist/dm/esi/simple_counter.svg)](https://packagist.org/packages/esi/simple_counter)
 [![License](https://img.shields.io/packagist/l/esi/simple_counter.svg)](https://packagist.org/packages/esi/simple_counter)
