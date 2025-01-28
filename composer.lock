@@ -572,16 +572,16 @@
     "packages-dev": [
         {
             "name": "amphp/amp",
-            "version": "v3.0.2",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "138801fb68cfc9c329da8a7b39d01ce7291ee4b0"
+                "reference": "7cf7fef3d667bfe4b2560bc87e67d5387a7bcde9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/138801fb68cfc9c329da8a7b39d01ce7291ee4b0",
-                "reference": "138801fb68cfc9c329da8a7b39d01ce7291ee4b0",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/7cf7fef3d667bfe4b2560bc87e67d5387a7bcde9",
+                "reference": "7cf7fef3d667bfe4b2560bc87e67d5387a7bcde9",
                 "shasum": ""
             },
             "require": {
@@ -641,7 +641,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/amp/issues",
-                "source": "https://github.com/amphp/amp/tree/v3.0.2"
+                "source": "https://github.com/amphp/amp/tree/v3.1.0"
             },
             "funding": [
                 {
@@ -649,7 +649,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-10T21:37:46+00:00"
+            "time": "2025-01-26T16:07:39+00:00"
         },
         {
             "name": "amphp/byte-stream",
@@ -3028,24 +3028,24 @@
         },
         {
             "name": "psalm/plugin-phpunit",
-            "version": "0.19.0",
+            "version": "0.19.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/psalm-plugin-phpunit.git",
-                "reference": "e344eaaa27871e79c6cb97b9efe52a735f9d1966"
+                "reference": "7b7a5cde988f83ccdbdf3ebaecd88192e01c5eb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/psalm-plugin-phpunit/zipball/e344eaaa27871e79c6cb97b9efe52a735f9d1966",
-                "reference": "e344eaaa27871e79c6cb97b9efe52a735f9d1966",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-phpunit/zipball/7b7a5cde988f83ccdbdf3ebaecd88192e01c5eb1",
+                "reference": "7b7a5cde988f83ccdbdf3ebaecd88192e01c5eb1",
                 "shasum": ""
             },
             "require": {
                 "composer/package-versions-deprecated": "^1.10",
                 "composer/semver": "^1.4 || ^2.0 || ^3.0",
                 "ext-simplexml": "*",
-                "php": "^7.4 || ^8.0",
-                "vimeo/psalm": "dev-master || ^5@beta || ^5.0"
+                "php": ">=8.1",
+                "vimeo/psalm": "dev-master || ^6"
             },
             "conflict": {
                 "phpunit/phpunit": "<7.5"
@@ -3082,9 +3082,9 @@
             "description": "Psalm plugin for PHPUnit",
             "support": {
                 "issues": "https://github.com/psalm/psalm-plugin-phpunit/issues",
-                "source": "https://github.com/psalm/psalm-plugin-phpunit/tree/0.19.0"
+                "source": "https://github.com/psalm/psalm-plugin-phpunit/tree/0.19.2"
             },
-            "time": "2024-03-15T10:43:15+00:00"
+            "time": "2025-01-26T11:39:17+00:00"
         },
         {
             "name": "psr/container",
@@ -6085,12 +6085,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "765dcbfe43002e52e4808b65561842784fe7bcc7"
+                "reference": "b8e96bb617bf59382113b1b56cef751f648a7dc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/765dcbfe43002e52e4808b65561842784fe7bcc7",
-                "reference": "765dcbfe43002e52e4808b65561842784fe7bcc7",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/b8e96bb617bf59382113b1b56cef751f648a7dc9",
+                "reference": "b8e96bb617bf59382113b1b56cef751f648a7dc9",
                 "shasum": ""
             },
             "require": {
@@ -6108,7 +6108,7 @@
                 "ext-simplexml": "*",
                 "ext-tokenizer": "*",
                 "felixfbecker/advanced-json-rpc": "^3.1",
-                "felixfbecker/language-server-protocol": "^1.5.2",
+                "felixfbecker/language-server-protocol": "^1.5.3",
                 "fidry/cpu-core-counter": "^0.4.1 || ^0.5.1 || ^1.0.0",
                 "netresearch/jsonmapper": "^1.0 || ^2.0 || ^3.0 || ^4.0",
                 "nikic/php-parser": "^5.0.0",
@@ -6133,7 +6133,7 @@
                 "phpstan/phpdoc-parser": "^1.6",
                 "phpunit/phpunit": "^9.6",
                 "psalm/plugin-mockery": "^1.1",
-                "psalm/plugin-phpunit": "^0.18",
+                "psalm/plugin-phpunit": "^0.19",
                 "slevomat/coding-standard": "^8.4",
                 "squizlabs/php_codesniffer": "^3.6",
                 "symfony/process": "^4.4 || ^5.0 || ^6.0 || ^7.0"
@@ -6157,7 +6157,8 @@
                     "dev-3.x": "3.x-dev",
                     "dev-4.x": "4.x-dev",
                     "dev-5.x": "5.x-dev",
-                    "dev-master": "6.x-dev"
+                    "dev-6.x": "6.x-dev",
+                    "dev-master": "7.x-dev"
                 }
             },
             "autoload": {
@@ -6186,7 +6187,7 @@
                 "issues": "https://github.com/vimeo/psalm/issues",
                 "source": "https://github.com/vimeo/psalm"
             },
-            "time": "2024-12-15T08:19:36+00:00"
+            "time": "2025-01-26T12:03:19+00:00"
         },
         {
             "name": "webmozart/assert",
