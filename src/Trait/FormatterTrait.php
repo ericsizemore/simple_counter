@@ -51,7 +51,7 @@ trait FormatterTrait
             return implode('&nbsp;', array_map(static fn (string $number): string => \sprintf(
                 '<img src="%s%d%s" alt="%2$d" />',
                 $imageDir . DIRECTORY_SEPARATOR,
-                $number,
+                (int) $number,
                 $imageExt,
             ), str_split((string) $currentCount)));
         }
