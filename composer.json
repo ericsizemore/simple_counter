@@ -25,7 +25,7 @@
         "security": "https://github.com/ericsizemore/simple_counter/security/policy"
     },
     "require": {
-        "php": "^8.2 <8.5",
+        "php": "<8.6",
         "ext-json": "*",
         "esi/utility": "^2.1",
         "symfony/options-resolver": "^7.1"
