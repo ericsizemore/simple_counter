@@ -28,7 +28,7 @@
         "php": "^8.2 <8.5",
         "ext-json": "*",
         "esi/utility": "^2.1",
-        "symfony/options-resolver": "^7.1"
+        "symfony/options-resolver": "^8.0"
     },
     "require-dev": {
         "esi/phpunit-coverage-check": "^2.0",
