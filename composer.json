@@ -38,7 +38,7 @@
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-strict-rules": "^2.0",
-        "phpunit/phpunit": "^11.4",
+        "phpunit/phpunit": "^13.0",
         "psalm/plugin-phpunit": "^0.19.0",
         "vimeo/psalm": "dev-master"
     },
