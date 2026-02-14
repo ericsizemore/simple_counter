@@ -71,7 +71,7 @@ final readonly class FlatfileStorage implements StorageInterface
         }
         //@codeCoverageIgnoreEnd
 
-        /** @var stdClass $currentCount */
+        /** @var object{currentCount: string} $currentCount */
         $currentCount = json_decode((string) $currentCount);
 
         return (int) $currentCount->currentCount;
