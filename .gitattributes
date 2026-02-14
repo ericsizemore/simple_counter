@@ -1,6 +1,7 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
 * text eol=lf
-
+*.md text diff=markdown
+*.php text diff=php
 *.png binary
 
 # Ignore all test and documentation with "export-ignore".

@@ -188,35 +188,41 @@ These exceptions can be thrown if:
 
 ### Requirements
 
-- Simple Counter works with PHP 8.2.0 or above.
+* PHP >= 8.2
 
-### Submitting bugs and feature requests
+### Credits
 
-Bugs and feature requests are tracked on [GitHub](https://github.com/ericsizemore/simple_counter/issues)
-
-Issues are the quickest way to report a bug. If you find a bug or documentation error, please check the following first:
-
-* That there is not an Issue already open concerning the bug
-* That the issue has not already been addressed (within closed Issues, for example)
+- [Eric Sizemore](https://github.com/ericsizemore)
+- [All Contributors](https://github.com/ericsizemore/simple_counter/contributors)
 
 ### Contributing
 
-* See [CONTRIBUTING.md](CONTRIBUTING.md)
+See [CONTRIBUTING](./CONTRIBUTING.md).
+
+Bugs and feature requests are tracked on [GitHub](https://github.com/ericsizemore/simple_counter/issues).
+
+### Contributor Covenant Code of Conduct
+
+See [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)
 
 ### Backward Compatibility Promise
 
-* See [backward-compatibility.md](backward-compatibility.md)
+See [backward-compatibility.md](./backward-compatibility.md) for more information on Backwards Compatibility.
 
-### Author
+### Changelog
 
-Eric Sizemore - <admin@secondversion.com> - <https://www.secondversion.com>
+See the [CHANGELOG](./CHANGELOG.md) for more information on what has changed recently.
 
 ### License
 
-#### Simple Counter v6.0.0 and newer
+See the [LICENSE](./LICENSE.md) for more information on the license that applies to this project.
 
-* Licensed under the MIT License. See the [`LICENSE.md`](LICENSE.md) file for details.
+#### Important Note
 
-#### Simple Counter v5.0.1 and older
+Simple Counter switched to the `MIT` license as of v6.0.
 
-* Licensed under the GNU LGPL v3 License. See the [`<= 5.x LICENSE.md`](https://github.com/ericsizemore/simple_counter/blob/5.0.x/COPYING.LESSER) file for details.
+Version 5.0.1 and older is licensed under the `GNU LGPL v3 License`. See the [`<= 5.x LICENSE.md`](https://github.com/ericsizemore/simple_counter/blob/5.0.x/COPYING.LESSER) file for details.
+
+### Security
+
+See [SECURITY](./SECURITY.md) for more information on the security disclosure process.

@@ -66,13 +66,18 @@
         }
     },
     "scripts": {
-        "coverage": "vendor/bin/coverage-check build/logs/clover.xml 100",
-        "cs:check": "vendor/bin/php-cs-fixer check --verbose --diff",
-        "cs:fix": "vendor/bin/php-cs-fixer fix",
-        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
+        "clear-build": "rm -rf ./build/*",
+        "code-coverage": "vendor/bin/coverage-check build/logs/clover.xml 100",
+        "phpcs:check": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --dry-run --diff",
+        "phpcs:fix": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php",
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon -vvv",
+        "phpunit": "vendor/bin/phpunit",
+        "phpunit:migrate": "@phpunit --migrate-configuration",
         "psalm": "vendor/bin/psalm -c psalm.xml --no-cache --show-info=true",
-        "psalm:ci": "@psalm --shepherd --report=results.sarif",
-        "psalm:stats": "@psalm --no-diff --stats",
-        "test": "phpunit"
+        "psalm:baseline": "@psalm --no-diff --set-baseline=psalm-baseline.xml",
+        "psalm:ci": "@psalm:security --shepherd --report=results.sarif",
+        "psalm:security": "@psalm --no-diff --taint-analysis",
+        "psalm:shepherd": "@psalm --no-diff --shepherd --stats",
+        "psalm:stats": "@psalm --no-diff --stats"
     }
 }
