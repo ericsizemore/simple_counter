@@ -40,10 +40,10 @@ jobs:
            dependency-versions: "highest"
 
       - name: Run test suite
-        run: composer run-script test
+        run: composer run-script phpunit
 
       - name: Coverage check
-        run: composer run-script coverage
+        run: composer run-script code-coverage
 
       - uses: sudo-bot/action-scrutinizer@latest
         with:
