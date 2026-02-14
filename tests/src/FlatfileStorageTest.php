@@ -35,7 +35,7 @@ use const DIRECTORY_SEPARATOR;
  */
 #[CoversClass(FlatfileStorage::class)]
 #[CoversClass(FlatfileConfiguration::class)]
-class FlatfileStorageTest extends TestCase
+final class FlatfileStorageTest extends TestCase
 {
     /**
      * @var string[]

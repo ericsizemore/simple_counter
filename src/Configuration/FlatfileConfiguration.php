@@ -58,6 +58,7 @@ final class FlatfileConfiguration implements ConfigurationInterface
         self::$options = $optionsResolver->resolve($options);
     }
 
+    #[\Override]
     public static function configureOptions(OptionsResolver $optionsResolver): void
     {
         $optionsResolver->setDefaults([
@@ -96,11 +97,13 @@ final class FlatfileConfiguration implements ConfigurationInterface
             });
     }
 
+    #[\Override]
     public static function getOption(string $option): null|bool|string
     {
         return self::$options[$option] ?? null;
     }
 
+    #[\Override]
     public static function initOptions(array $options = []): FlatfileConfiguration
     {
         return new self($options);

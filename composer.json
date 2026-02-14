@@ -25,22 +25,22 @@
         "security": "https://github.com/ericsizemore/simple_counter/security/policy"
     },
     "require": {
-        "php": "^8.2 <8.5",
+        "php": "^8.2",
         "ext-json": "*",
-        "esi/utility": "^2.1",
-        "symfony/options-resolver": "^7.1"
+        "esi/utility": "^2.2",
+        "symfony/options-resolver": "^7.4 || ^8.0"
     },
     "require-dev": {
-        "esi/phpunit-coverage-check": "^2.0",
-        "friendsofphp/php-cs-fixer": "^3.65",
+        "esi/phpunit-coverage-check": "^2.0 || ^3.1",
+        "friendsofphp/php-cs-fixer": "~3.94",
         "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-strict-rules": "^2.0",
-        "phpunit/phpunit": "^11.4",
+        "phpunit/phpunit": "^11.5 || ^12.5 || ^13",
         "psalm/plugin-phpunit": "^0.19.0",
-        "vimeo/psalm": "dev-master"
+        "vimeo/psalm": "^6.15"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -68,18 +68,11 @@
     "scripts": {
         "coverage": "vendor/bin/coverage-check build/logs/clover.xml 100",
         "cs:check": "vendor/bin/php-cs-fixer check --verbose --diff",
-        "cs:check:php84": [
-            "@putenv PHP_CS_FIXER_IGNORE_ENV=1",
-            "vendor/bin/php-cs-fixer check --verbose --diff"
-        ],
         "cs:fix": "vendor/bin/php-cs-fixer fix",
-        "cs:fix:php84": [
-            "@putenv PHP_CS_FIXER_IGNORE_ENV=1",
-            "vendor/bin/php-cs-fixer fix"
-        ],
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
-        "psalm": "vendor/bin/psalm --no-diff",
-        "psalm:stats": "vendor/bin/psalm --no-diff --stats",
+        "psalm": "vendor/bin/psalm -c psalm.xml --no-cache --show-info=true",
+        "psalm:ci": "@psalm --shepherd --report=results.sarif",
+        "psalm:stats": "@psalm --no-diff --stats",
         "test": "phpunit"
     }
 }

@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [ '8.2', '8.3' ]
+        php: [ '8.2', '8.3', '8.4', '8.5' ]
     steps:
       - uses: actions/checkout@v6
         with:
@@ -36,7 +36,8 @@ jobs:
         uses: ramsey/composer-install@v3
         with:
            composer-options: "--prefer-dist --optimize-autoloader"
-           require-lock-file: "true"
+           require-lock-file: "false"
+           dependency-versions: "highest"
 
       - name: Run test suite
         run: composer run-script test

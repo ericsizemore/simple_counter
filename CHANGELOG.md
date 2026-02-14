@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   * Small cleanup to markdown/docs.
   * Updated dependencies (refreshed composer lock file).
+  * Allow `symfony/options-resolver` ^7.4 or ^8.0
+  * Allow PHPUnit version 11, 12 or 13.
+  * Update workflows, change how the Psalm CI runs.
 
 
 ## [6.0.0] - 2024-05-06

@@ -35,7 +35,7 @@ use const DIRECTORY_SEPARATOR;
 #[CoversClass(Counter::class)]
 #[UsesClass(FlatfileStorage::class)]
 #[UsesClass(FlatfileConfiguration::class)]
-class CounterTest extends TestCase
+final class CounterTest extends TestCase
 {
     private ?Counter $counter;
 

@@ -49,6 +49,7 @@ final readonly class FlatfileStorage implements StorageInterface
         $this->validateLogFiles();
     }
 
+    #[\Override]
     public function display(): string
     {
         $this->updateCount();
@@ -59,6 +60,7 @@ final readonly class FlatfileStorage implements StorageInterface
         );
     }
 
+    #[\Override]
     public function fetchCurrentCount(): int
     {
         $currentCount = $this->readWrite('logs');
@@ -75,6 +77,7 @@ final readonly class FlatfileStorage implements StorageInterface
         return (int) $currentCount->currentCount;
     }
 
+    #[\Override]
     public function fetchCurrentIpList(): array
     {
         $currentIpData = $this->readWrite('ips');
@@ -91,6 +94,7 @@ final readonly class FlatfileStorage implements StorageInterface
         return array_values(array_filter($currentIpData->ipList, static fn (string $value): bool => (trim($value) !== '')));
     }
 
+    #[\Override]
     public function getOption(string $option): null|bool|string
     {
         return $this->configuration::getOption($option);
