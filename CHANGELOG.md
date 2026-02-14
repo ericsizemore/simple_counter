@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [6.0.1] - 2026-02-13
 
 ### Changed
 
@@ -93,6 +93,7 @@ NOTE: Not backwards compatible with prior SimpleCounter versions.
 
 
 [unreleased]: https://github.com/ericsizemore/simple_counter/tree/master
+[6.0.1]: https://github.com/ericsizemore/simple_counter/releases/tag/v6.0.1
 [6.0.0]: https://github.com/ericsizemore/simple_counter/releases/tag/v6.0.0
 [5.0.1]: https://github.com/ericsizemore/simple_counter/releases/tag/v5.0.1
 [5.0.0]: https://github.com/ericsizemore/simple_counter/releases/tag/v5.0.0
