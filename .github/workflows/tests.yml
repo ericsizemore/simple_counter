@@ -33,7 +33,7 @@ jobs:
         run: composer validate --strict
 
       - name: Setup Composer, install dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
         with:
            composer-options: "--prefer-dist --optimize-autoloader"
            require-lock-file: "false"
