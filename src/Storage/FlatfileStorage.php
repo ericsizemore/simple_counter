@@ -22,7 +22,6 @@ use Esi\Utility\Filesystem;
 use Esi\Utility\Strings;
 use RuntimeException;
 use SplFileObject;
-use stdClass;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
 use function array_filter;

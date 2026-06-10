@@ -53,9 +53,11 @@ final class FlatfileConfiguration implements ConfigurationInterface
         self::configureOptions($optionsResolver);
 
         /**
-         * @psalm-var FlatfileOptions self::$options
+         * @var FlatfileOptions $resolved
          */
-        self::$options = $optionsResolver->resolve($options);
+        $resolved = $optionsResolver->resolve($options);
+        
+        self::$options = $resolved;
     }
 
     #[\Override]
