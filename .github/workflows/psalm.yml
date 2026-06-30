@@ -7,7 +7,7 @@ jobs:
     name: "Psalm"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: "Install PHP 8.2"
         uses: shivammathur/setup-php@master
