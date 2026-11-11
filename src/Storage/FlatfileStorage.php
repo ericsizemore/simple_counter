@@ -136,7 +136,7 @@ final readonly class FlatfileStorage implements StorageInterface
         if (!$fileHandle->flock($flags, $wouldBlock)) {
             unset($fileHandle);
 
-            if ($wouldBlock) {
+            if ($wouldBlock === true) {
                 return false;
             }
 
